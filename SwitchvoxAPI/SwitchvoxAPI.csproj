@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2217EC62-34A3-48F5-9F63-291384D74720}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SwitchvoxAPI</RootNamespace>
+    <AssemblyName>SwitchvoxAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\SwitchvoxAPI.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SwitchvoxRequestException.cs" />
+    <Compile Include="SwitchvoxResponse.cs" />
+    <Compile Include="Switchvox\RequestMethod.cs" />
+    <Compile Include="SwitchvoxRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Switchvox\AccessControl\Add.cs" />
+    <Compile Include="Switchvox\AccessControl\GetInfo.cs" />
+    <Compile Include="Switchvox\AccessControl\GetList.cs" />
+    <Compile Include="Switchvox\AccessControl\IsAllowed.cs" />
+    <Compile Include="Switchvox\AccessControl\Remove.cs" />
+    <Compile Include="Switchvox\AccessControl\Update.cs" />
+    <Compile Include="Switchvox\AddonLicenses\GetList.cs" />
+    <Compile Include="Switchvox\Admins\AccessPermissions\GetInfo.cs" />
+    <Compile Include="Switchvox\Admins\AccessPermissions\Update.cs" />
+    <Compile Include="Switchvox\Admins\Add.cs" />
+    <Compile Include="Switchvox\Admins\GetInfo.cs" />
+    <Compile Include="Switchvox\Admins\GetList.cs" />
+    <Compile Include="Switchvox\Admins\Remove.cs" />
+    <Compile Include="Switchvox\Admins\Update.cs" />
+    <Compile Include="Switchvox\Backups\Add.cs" />
+    <Compile Include="Switchvox\Backups\Apply.cs" />
+    <Compile Include="Switchvox\Backups\Directories\GetInfo.cs" />
+    <Compile Include="Switchvox\Backups\Directories\GetList.cs" />
+    <Compile Include="Switchvox\Backups\GetList.cs" />
+    <Compile Include="Switchvox\Backups\Remove.cs" />
+    <Compile Include="Switchvox\BlockedIPs\GetInfo.cs" />
+    <Compile Include="Switchvox\BlockedIPs\GetList.cs" />
+    <Compile Include="Switchvox\BlockedIPs\Remove.cs" />
+    <Compile Include="Switchvox\BlockedIPs\Settings\GetInfo.cs" />
+    <Compile Include="Switchvox\BlockedIPs\Settings\Update.cs" />
+    <Compile Include="Switchvox\Call.cs" />
+    <Compile Include="Switchvox\CallLogs\Search.cs" />
+    <Compile Include="Switchvox\CallQueueLogs\Search.cs" />
+    <Compile Include="Switchvox\CallQueueMemberLogs\Search.cs" />
+    <Compile Include="Switchvox\CallQueueMemberReports\Search.cs" />
+    <Compile Include="Switchvox\CallQueueMissedCalls\Search.cs" />
+    <Compile Include="Switchvox\CallQueueReports\Search.cs" />
+    <Compile Include="Switchvox\CallQueues\GetCurrentStatus.cs" />
+    <Compile Include="Switchvox\CallRecordings\RecordedCalls\Remove.cs" />
+    <Compile Include="Switchvox\CallRecordings\ScheduledRecordings\Add.cs" />
+    <Compile Include="Switchvox\CallRecordings\ScheduledRecordings\GetList.cs" />
+    <Compile Include="Switchvox\CallRecordings\ScheduledRecordings\Remove.cs" />
+    <Compile Include="Switchvox\CallRecordings\ScheduledRecordings\Update.cs" />
+    <Compile Include="Switchvox\CallRecordings\Settings\GetInfo.cs" />
+    <Compile Include="Switchvox\CallRecordings\Settings\Update.cs" />
+    <Compile Include="Switchvox\CallReports\CallQueues\Search.cs" />
+    <Compile Include="Switchvox\CallReports\DID\Search.cs" />
+    <Compile Include="Switchvox\CallReports\IVRs\Search.cs" />
+    <Compile Include="Switchvox\CallReports\Phones\Search.cs" />
+    <Compile Include="Switchvox\CallReports\Providers\Search.cs" />
+    <Compile Include="Switchvox\CallReports\Search.cs" />
+    <Compile Include="Switchvox\ConvergedDevices\GetList.cs" />
+    <Compile Include="Switchvox\ConvergedDevices\Search.cs" />
+    <Compile Include="Switchvox\CurrentCalls\GetList.cs" />
+    <Compile Include="Switchvox\CurrentCalls\HangUp.cs" />
+    <Compile Include="Switchvox\Debug\ACLI\Sessions\GetInfo.cs" />
+    <Compile Include="Switchvox\Debug\ACLI\Sessions\GetList.cs" />
+    <Compile Include="Switchvox\Debug\ACLI\Sessions\GetLog.cs" />
+    <Compile Include="Switchvox\Debug\ACLI\StartSession.cs" />
+    <Compile Include="Switchvox\Debug\ACLI\StopSession.cs" />
+    <Compile Include="Switchvox\Debug\PCAP\Sessions\GetInfo.cs" />
+    <Compile Include="Switchvox\Debug\PCAP\Sessions\GetList.cs" />
+    <Compile Include="Switchvox\Debug\PCAP\Sessions\GetLog.cs" />
+    <Compile Include="Switchvox\Debug\PCAP\StartSession.cs" />
+    <Compile Include="Switchvox\Debug\PCAP\StopSession.cs" />
+    <Compile Include="Switchvox\Debug\PRI\Sessions\GetInfo.cs" />
+    <Compile Include="Switchvox\Debug\PRI\Sessions\GetList.cs" />
+    <Compile Include="Switchvox\Debug\PRI\Sessions\GetLog.cs" />
+    <Compile Include="Switchvox\Debug\PRI\StartSession.cs" />
+    <Compile Include="Switchvox\Debug\PRI\StopSession.cs" />
+    <Compile Include="Switchvox\Debug\Sessions\GetList.cs" />
+    <Compile Include="Switchvox\Debug\Sessions\GetTypes.cs" />
+    <Compile Include="Switchvox\DigiumPhones\Apps\Add.cs" />
+    <Compile Include="Switchvox\DigiumPhones\Apps\GetList.cs" />
+    <Compile Include="Switchvox\DigiumPhones\Apps\Remove.cs" />
+    <Compile Include="Switchvox\DigiumPhones\Apps\Update.cs" />
+    <Compile Include="Switchvox\DigiumPhones\Assignments\Add.cs" />
+    <Compile Include="Switchvox\DigiumPhones\Assignments\CheckConflicts.cs" />
+    <Compile Include="Switchvox\DigiumPhones\Assignments\GetInfo.cs" />
+    <Compile Include="Switchvox\DigiumPhones\Assignments\GetList.cs" />
+    <Compile Include="Switchvox\DigiumPhones\Assignments\Ignore\Add.cs" />
+    <Compile Include="Switchvox\DigiumPhones\Assignments\Ignore\Remove.cs" />
+    <Compile Include="Switchvox\DigiumPhones\Assignments\Options\GetInfo.cs" />
+    <Compile Include="Switchvox\DigiumPhones\Assignments\Options\Update.cs" />
+    <Compile Include="Switchvox\DigiumPhones\Assignments\Remove.cs" />
+    <Compile Include="Switchvox\DigiumPhones\Assignments\Update.cs" />
+    <Compile Include="Switchvox\Directories\GetExtensionList.cs" />
+    <Compile Include="Switchvox\Directories\GetInfo.cs" />
+    <Compile Include="Switchvox\Directories\Update.cs" />
+    <Compile Include="Switchvox\DistinctiveRing\Tones\Add.cs" />
+    <Compile Include="Switchvox\DistinctiveRing\Tones\GetFile.cs" />
+    <Compile Include="Switchvox\DistinctiveRing\Tones\GetList.cs" />
+    <Compile Include="Switchvox\DistinctiveRing\Tones\Remove.cs" />
+    <Compile Include="Switchvox\DistinctiveRing\Tones\Update.cs" />
+    <Compile Include="Switchvox\ExtensionGroups\Add.cs" />
+    <Compile Include="Switchvox\ExtensionGroups\GetInfo.cs" />
+    <Compile Include="Switchvox\ExtensionGroups\GetList.cs" />
+    <Compile Include="Switchvox\ExtensionGroups\Members\Add.cs" />
+    <Compile Include="Switchvox\ExtensionGroups\Members\Remove.cs" />
+    <Compile Include="Switchvox\ExtensionGroups\Members\Update.cs" />
+    <Compile Include="Switchvox\ExtensionGroups\Remove.cs" />
+    <Compile Include="Switchvox\ExtensionGroups\Update.cs" />
+    <Compile Include="Switchvox\Extensions\AgentLogIn\Add.cs" />
+    <Compile Include="Switchvox\Extensions\AgentLogIn\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\AgentLogIn\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\AgentLogIn\Update.cs" />
+    <Compile Include="Switchvox\Extensions\AgentLogOut\Add.cs" />
+    <Compile Include="Switchvox\Extensions\AgentLogOut\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\AgentLogOut\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\AgentLogOut\Update.cs" />
+    <Compile Include="Switchvox\Extensions\CallParking\Add.cs" />
+    <Compile Include="Switchvox\Extensions\CallParking\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\CallParking\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\CallParking\Update.cs" />
+    <Compile Include="Switchvox\Extensions\CallQueues\Add.cs" />
+    <Compile Include="Switchvox\Extensions\CallQueues\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\CallQueues\Members\Add.cs" />
+    <Compile Include="Switchvox\Extensions\CallQueues\Members\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\CallQueues\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\CallQueues\Update.cs" />
+    <Compile Include="Switchvox\Extensions\DialTone\Add.cs" />
+    <Compile Include="Switchvox\Extensions\DialTone\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\DialTone\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\Directory\Add.cs" />
+    <Compile Include="Switchvox\Extensions\Directory\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\Directory\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\Directory\Update.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\CallMonitoring\Add.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\CallMonitoring\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\CallMonitoring\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\CallMonitoring\Update.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\DirectedPickup\Add.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\DirectedPickup\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\DirectedPickup\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\DirectedPickup\Update.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\Fax\Add.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\Fax\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\Fax\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\Fax\Update.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\GoToVoicemail\Add.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\GoToVoicemail\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\GoToVoicemail\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\PersonalIntercom\Add.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\PersonalIntercom\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\PersonalIntercom\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\FeatureCodes\PersonalIntercom\Update.cs" />
+    <Compile Include="Switchvox\Extensions\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\GetVoicemailInfo.cs" />
+    <Compile Include="Switchvox\Extensions\GroupPickup\Add.cs" />
+    <Compile Include="Switchvox\Extensions\GroupPickup\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\GroupPickup\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\GroupPickup\Update.cs" />
+    <Compile Include="Switchvox\Extensions\Intercom\Add.cs" />
+    <Compile Include="Switchvox\Extensions\Intercom\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\Intercom\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\Intercom\Update.cs" />
+    <Compile Include="Switchvox\Extensions\IVR\Add.cs" />
+    <Compile Include="Switchvox\Extensions\IVR\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\IVR\Menus\GetList.cs" />
+    <Compile Include="Switchvox\Extensions\IVR\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\IVR\Update.cs" />
+    <Compile Include="Switchvox\Extensions\MeetMeConference\Add.cs" />
+    <Compile Include="Switchvox\Extensions\MeetMeConference\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\MeetMeConference\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\MeetMeConference\Update.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\Analog\Add.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\Analog\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\Analog\Update.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\AttachImage.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\OutgoingCallRules\Add.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\OutgoingCallRules\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\SIP\BulkUpdate.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\Bulk\Upload.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\SIP\Add.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\SIP\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\SIP\Update.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\Template\Add.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\Template\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\Template\GetList.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\Template\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\Template\Update.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\Virtual\Add.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\Virtual\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\Phones\Virtual\Update.cs" />
+    <Compile Include="Switchvox\Extensions\Search.cs" />
+    <Compile Include="Switchvox\Extensions\Settings\CustomSettings\Add.cs" />
+    <Compile Include="Switchvox\Extensions\Settings\CustomSettings\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\Settings\CustomSettings\GetList.cs" />
+    <Compile Include="Switchvox\Extensions\Settings\CustomSettings\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\Settings\CustomSettings\Update.cs" />
+    <Compile Include="Switchvox\Extensions\Settings\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\Settings\Update.cs" />
+    <Compile Include="Switchvox\Extensions\SimpleConferenceRoom\Add.cs" />
+    <Compile Include="Switchvox\Extensions\SimpleConferenceRoom\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\SimpleConferenceRoom\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\SimpleConferenceRoom\Update.cs" />
+    <Compile Include="Switchvox\Extensions\VoicemailAccess\Add.cs" />
+    <Compile Include="Switchvox\Extensions\VoicemailAccess\GetInfo.cs" />
+    <Compile Include="Switchvox\Extensions\VoicemailAccess\Remove.cs" />
+    <Compile Include="Switchvox\Extensions\VoicemailAccess\Update.cs" />
+    <Compile Include="Switchvox\ExternalContacts\GetInfo.cs" />
+    <Compile Include="Switchvox\ExternalContacts\Remove.cs" />
+    <Compile Include="Switchvox\ExternalContacts\Update.cs" />
+    <Compile Include="Switchvox\File\Add.cs" />
+    <Compile Include="Switchvox\Images\Add.cs" />
+    <Compile Include="Switchvox\Images\GetFile.cs" />
+    <Compile Include="Switchvox\Images\Remove.cs" />
+    <Compile Include="Switchvox\Images\UpdateCrop.cs" />
+    <Compile Include="Switchvox\IncomingCallerIdRules\Add.cs" />
+    <Compile Include="Switchvox\IncomingCallerIdRules\GetInfo.cs" />
+    <Compile Include="Switchvox\IncomingCallerIdRules\GetList.cs" />
+    <Compile Include="Switchvox\IncomingCallerIdRules\Remove.cs" />
+    <Compile Include="Switchvox\IncomingCallerIdRules\Search.cs" />
+    <Compile Include="Switchvox\IncomingCallerIdRules\Update.cs" />
+    <Compile Include="Switchvox\IncomingDIDRoutes\Add.cs" />
+    <Compile Include="Switchvox\IncomingDIDRoutes\GetInfo.cs" />
+    <Compile Include="Switchvox\IncomingDIDRoutes\GetList.cs" />
+    <Compile Include="Switchvox\IncomingDIDRoutes\Remove.cs" />
+    <Compile Include="Switchvox\IncomingDIDRoutes\Search.cs" />
+    <Compile Include="Switchvox\IncomingDIDRoutes\Update.cs" />
+    <Compile Include="Switchvox\Info\GetList.cs" />
+    <Compile Include="Switchvox\Info\GetMaximumConcurrentCalls.cs" />
+    <Compile Include="Switchvox\Info\GetPhoneConfigurationTokens.cs" />
+    <Compile Include="Switchvox\Info\GetSoftwareVersion.cs" />
+    <Compile Include="Switchvox\Info\GetUserExtensions.cs" />
+    <Compile Include="Switchvox\IVR\DistinctiveRingHints\Add.cs" />
+    <Compile Include="Switchvox\IVR\DistinctiveRingHints\GetList.cs" />
+    <Compile Include="Switchvox\IVR\DistinctiveRingHints\Remove.cs" />
+    <Compile Include="Switchvox\IVR\GlobalVariables\Add.cs" />
+    <Compile Include="Switchvox\IVR\GlobalVariables\GetList.cs" />
+    <Compile Include="Switchvox\IVR\GlobalVariables\Remove.cs" />
+    <Compile Include="Switchvox\IVR\GlobalVariables\Update.cs" />
+    <Compile Include="Switchvox\Localization\GetInfo.cs" />
+    <Compile Include="Switchvox\Localization\Update.cs" />
+    <Compile Include="Switchvox\Network\HostAddresses\Add.cs" />
+    <Compile Include="Switchvox\Network\HostAddresses\GetInfo.cs" />
+    <Compile Include="Switchvox\Network\HostAddresses\GetList.cs" />
+    <Compile Include="Switchvox\Network\HostAddresses\Remove.cs" />
+    <Compile Include="Switchvox\Network\HostAddresses\Update.cs" />
+    <Compile Include="Switchvox\OutgoingCallDiagnostics\GetInfo.cs" />
+    <Compile Include="Switchvox\OutgoingCallDiagnostics\Update.cs" />
+    <Compile Include="Switchvox\OutgoingCallerIdRules\Add.cs" />
+    <Compile Include="Switchvox\OutgoingCallerIdRules\GetInfo.cs" />
+    <Compile Include="Switchvox\OutgoingCallerIdRules\GetList.cs" />
+    <Compile Include="Switchvox\OutgoingCallerIdRules\Remove.cs" />
+    <Compile Include="Switchvox\OutgoingCallerIdRules\Search.cs" />
+    <Compile Include="Switchvox\OutgoingCallerIdRules\Update.cs" />
+    <Compile Include="Switchvox\OutgoingCallRules\Add.cs" />
+    <Compile Include="Switchvox\OutgoingCallRules\CheckConflicts.cs" />
+    <Compile Include="Switchvox\OutgoingCallRules\GetInfo.cs" />
+    <Compile Include="Switchvox\OutgoingCallRules\GetList.cs" />
+    <Compile Include="Switchvox\OutgoingCallRules\Remove.cs" />
+    <Compile Include="Switchvox\OutgoingCallRules\Update.cs" />
+    <Compile Include="Switchvox\ParkingLots\GetList.cs" />
+    <Compile Include="Switchvox\PhoneSetup\Options\GetInfo.cs" />
+    <Compile Include="Switchvox\PhoneSetup\Options\Update.cs" />
+    <Compile Include="Switchvox\PhoneSetup\Phones\Bulk\Update.cs" />
+    <Compile Include="Switchvox\PhoneSetup\Phones\Configured\AdditionalLines\GetList.cs" />
+    <Compile Include="Switchvox\PhoneSetup\Phones\Configured\AdditionalLines\Update.cs" />
+    <Compile Include="Switchvox\PhoneSetup\Phones\GetList.cs" />
+    <Compile Include="Switchvox\PhoneSetup\Phones\Reboot.cs" />
+    <Compile Include="Switchvox\PhoneSetup\Phones\Update.cs" />
+    <Compile Include="Switchvox\Progress\Check.cs" />
+    <Compile Include="Switchvox\Providers\GetList.cs" />
+    <Compile Include="Switchvox\ScheduledReports\CallReports\Add.cs" />
+    <Compile Include="Switchvox\ScheduledReports\CallReports\GetInfo.cs" />
+    <Compile Include="Switchvox\ScheduledReports\CallReports\GetList.cs" />
+    <Compile Include="Switchvox\ScheduledReports\CallReports\Remove.cs" />
+    <Compile Include="Switchvox\ScheduledReports\CallReports\Update.cs" />
+    <Compile Include="Switchvox\ScheduledReports\QueueMemberReports\Add.cs" />
+    <Compile Include="Switchvox\ScheduledReports\QueueMemberReports\GetInfo.cs" />
+    <Compile Include="Switchvox\ScheduledReports\QueueMemberReports\GetList.cs" />
+    <Compile Include="Switchvox\ScheduledReports\QueueMemberReports\Remove.cs" />
+    <Compile Include="Switchvox\ScheduledReports\QueueMemberReports\Update.cs" />
+    <Compile Include="Switchvox\ScheduledReports\QueueReports\Add.cs" />
+    <Compile Include="Switchvox\ScheduledReports\QueueReports\GetInfo.cs" />
+    <Compile Include="Switchvox\ScheduledReports\QueueReports\GetList.cs" />
+    <Compile Include="Switchvox\ScheduledReports\QueueReports\Remove.cs" />
+    <Compile Include="Switchvox\ScheduledReports\QueueReports\Update.cs" />
+    <Compile Include="Switchvox\Scheduler\Add.cs" />
+    <Compile Include="Switchvox\Scheduler\GetInfo.cs" />
+    <Compile Include="Switchvox\Scheduler\Remove.cs" />
+    <Compile Include="Switchvox\Scheduler\Update.cs" />
+    <Compile Include="Switchvox\SNMPSettings\GetInfo.cs" />
+    <Compile Include="Switchvox\SNMPSettings\Update.cs" />
+    <Compile Include="Switchvox\Status\Hardware\GetDiskInfo.cs" />
+    <Compile Include="Switchvox\Status\Hardware\GetList.cs" />
+    <Compile Include="Switchvox\Status\Hardware\GetLoadInfo.cs" />
+    <Compile Include="Switchvox\Status\Hardware\GetMemoryInfo.cs" />
+    <Compile Include="Switchvox\Status\Phones\GetList.cs" />
+    <Compile Include="Switchvox\Status\VoipProviders\GetList.cs" />
+    <Compile Include="Switchvox\SystemClock\GetInfo.cs" />
+    <Compile Include="Switchvox\TechSupport\Connect.cs" />
+    <Compile Include="Switchvox\TechSupport\Disconnect.cs" />
+    <Compile Include="Switchvox\TechSupport\GetConnectionStatus.cs" />
+    <Compile Include="Switchvox\Updates\Apply.cs" />
+    <Compile Include="Switchvox\Updates\Download.cs" />
+    <Compile Include="Switchvox\Updates\GetList.cs" />
+    <Compile Include="Switchvox\Updates\GetRenewalDate.cs" />
+    <Compile Include="Switchvox\Users\Call.cs" />
+    <Compile Include="Switchvox\Users\CallQueues\GetList.cs" />
+    <Compile Include="Switchvox\Users\CallQueues\GetTodaysStatus.cs" />
+    <Compile Include="Switchvox\Users\CallQueues\Login.cs" />
+    <Compile Include="Switchvox\Users\CallQueues\Logout.cs" />
+    <Compile Include="Switchvox\Users\CallQueues\Pause.cs" />
+    <Compile Include="Switchvox\Users\CallQueues\Resume.cs" />
+    <Compile Include="Switchvox\Users\CallRuleSets\GetList.cs" />
+    <Compile Include="Switchvox\Users\CallRuleSets\Remove.cs" />
+    <Compile Include="Switchvox\Users\CallRuleSets\Rules\GetList.cs" />
+    <Compile Include="Switchvox\Users\CallRuleSets\Update.cs" />
+    <Compile Include="Switchvox\Users\ConvergedDevices\Add.cs" />
+    <Compile Include="Switchvox\Users\ConvergedDevices\Authorize.cs" />
+    <Compile Include="Switchvox\Users\ConvergedDevices\Deauthorize.cs" />
+    <Compile Include="Switchvox\Users\ConvergedDevices\GetList.cs" />
+    <Compile Include="Switchvox\Users\ConvergedDevices\Remove.cs" />
+    <Compile Include="Switchvox\Users\ConvergedDevices\Update.cs" />
+    <Compile Include="Switchvox\Users\Cookies\GetPassword.cs" />
+    <Compile Include="Switchvox\Users\CurrentCalls\GetList.cs" />
+    <Compile Include="Switchvox\Users\CurrentCalls\SendToVoicemail.cs" />
+    <Compile Include="Switchvox\Users\CurrentCalls\StartRecording.cs" />
+    <Compile Include="Switchvox\Users\CurrentCalls\StopRecording.cs" />
+    <Compile Include="Switchvox\Users\DeviceStatus\GetInfo.cs" />
+    <Compile Include="Switchvox\Users\DistinctiveRing\Rules\Add.cs" />
+    <Compile Include="Switchvox\Users\DistinctiveRing\Rules\Conditions\Add.cs" />
+    <Compile Include="Switchvox\Users\DistinctiveRing\Rules\Conditions\Remove.cs" />
+    <Compile Include="Switchvox\Users\DistinctiveRing\Rules\Conditions\Update.cs" />
+    <Compile Include="Switchvox\Users\DistinctiveRing\Rules\GetList.cs" />
+    <Compile Include="Switchvox\Users\DistinctiveRing\Rules\Remove.cs" />
+    <Compile Include="Switchvox\Users\DistinctiveRing\Rules\Update.cs" />
+    <Compile Include="Switchvox\Users\DistinctiveRing\Tones\Add.cs" />
+    <Compile Include="Switchvox\Users\DistinctiveRing\Tones\GetFile.cs" />
+    <Compile Include="Switchvox\Users\DistinctiveRing\Tones\GetList.cs" />
+    <Compile Include="Switchvox\Users\DistinctiveRing\Tones\Remove.cs" />
+    <Compile Include="Switchvox\Users\DistinctiveRing\Tones\Update.cs" />
+    <Compile Include="Switchvox\Users\ExtensionGroups\GetList.cs" />
+    <Compile Include="Switchvox\Users\Extensions\GetInfo.cs" />
+    <Compile Include="Switchvox\Users\Fax\GetFile.cs" />
+    <Compile Include="Switchvox\Users\GetMyInfo.cs" />
+    <Compile Include="Switchvox\Users\Info\GetSoftwareVersion.cs" />
+    <Compile Include="Switchvox\Users\Localization\GetInfo.cs" />
+    <Compile Include="Switchvox\Users\Localization\Update.cs" />
+    <Compile Include="Switchvox\Users\ParkingLots\GetList.cs" />
+    <Compile Include="Switchvox\Users\Phonebooks\DesiStrip\GetFile.cs" />
+    <Compile Include="Switchvox\Users\Phonebooks\Entries\Add.cs" />
+    <Compile Include="Switchvox\Users\Phonebooks\Entries\GetInfo.cs" />
+    <Compile Include="Switchvox\Users\Phonebooks\GetInfo.cs" />
+    <Compile Include="Switchvox\Users\Phonebooks\GetList.cs" />
+    <Compile Include="Switchvox\Users\PhoneOptions\GetInfo.cs" />
+    <Compile Include="Switchvox\Users\PhoneOptions\Update.cs" />
+    <Compile Include="Switchvox\Users\Phones\GetList.cs" />
+    <Compile Include="Switchvox\Users\Phones\IdleScreenImages\Add.cs" />
+    <Compile Include="Switchvox\Users\Phones\IdleScreenImages\GetFile.cs" />
+    <Compile Include="Switchvox\Users\Phones\IdleScreenImages\Remove.cs" />
+    <Compile Include="Switchvox\Users\Phones\Reboot.cs" />
+    <Compile Include="Switchvox\Users\Presence\GetInfo.cs" />
+    <Compile Include="Switchvox\Users\Presence\Options\Add.cs" />
+    <Compile Include="Switchvox\Users\Presence\Options\GetList.cs" />
+    <Compile Include="Switchvox\Users\Presence\Options\Remove.cs" />
+    <Compile Include="Switchvox\Users\Presence\Options\Update.cs" />
+    <Compile Include="Switchvox\Users\Presence\Update.cs" />
+    <Compile Include="Switchvox\Users\Profile\ExtraNumbers\Add.cs" />
+    <Compile Include="Switchvox\Users\Profile\ExtraNumbers\GetList.cs" />
+    <Compile Include="Switchvox\Users\Profile\ExtraNumbers\Remove.cs" />
+    <Compile Include="Switchvox\Users\Profile\ExtraNumbers\Update.cs" />
+    <Compile Include="Switchvox\Users\Profile\Images\Add.cs" />
+    <Compile Include="Switchvox\Users\Profile\Images\Attach.cs" />
+    <Compile Include="Switchvox\Users\Profile\Images\GetFile.cs" />
+    <Compile Include="Switchvox\Users\Profile\Images\Remove.cs" />
+    <Compile Include="Switchvox\Users\Profile\Images\UpdateCrop.cs" />
+    <Compile Include="Switchvox\Users\Timezone\GetInfo.cs" />
+    <Compile Include="Switchvox\Users\VoicemailGreetings\Add.cs" />
+    <Compile Include="Switchvox\Users\VoicemailGreetings\GetFile.cs" />
+    <Compile Include="Switchvox\Users\VoicemailGreetings\GetList.cs" />
+    <Compile Include="Switchvox\Users\VoicemailGreetings\GetSettings.cs" />
+    <Compile Include="Switchvox\Users\VoicemailGreetings\Remove.cs" />
+    <Compile Include="Switchvox\Users\VoicemailGreetings\Update.cs" />
+    <Compile Include="Switchvox\Users\VoicemailGreetings\UpdateSettings.cs" />
+    <Compile Include="Switchvox\Users\VoicemailGreetingTypes\Activate.cs" />
+    <Compile Include="Switchvox\Users\VoicemailGreetingTypes\GetList.cs" />
+    <Compile Include="Switchvox\Users\Voicemail\Forward.cs" />
+    <Compile Include="Switchvox\Users\Voicemail\GetFile.cs" />
+    <Compile Include="Switchvox\Users\Voicemail\GetFolderList.cs" />
+    <Compile Include="Switchvox\Users\Voicemail\GetList.cs" />
+    <Compile Include="Switchvox\Users\Voicemail\GetQuota.cs" />
+    <Compile Include="Switchvox\Users\Voicemail\GetUsedSpace.cs" />
+    <Compile Include="Switchvox\Users\Voicemail\MarkRead.cs" />
+    <Compile Include="Switchvox\Users\Voicemail\MarkUnread.cs" />
+    <Compile Include="Switchvox\Users\Voicemail\Move.cs" />
+    <Compile Include="Switchvox\Users\Voicemail\Play.cs" />
+    <Compile Include="Switchvox\Users\Voicemail\Remove.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
