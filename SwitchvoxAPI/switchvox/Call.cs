@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using System.Xml.Linq;
 
 namespace Switchvox
@@ -19,12 +16,12 @@ namespace Switchvox
         /// <param name="dialFirst">The number to ring first; this number will then appear "dial" the second number</param>
         /// <param name="dialSecond">The second number to ring. When the call to the first number is answered, the PBX will dial the second number (then connect both parties together)</param>
         /// <param name="dialAsAccountId">The Account ID of the account whose Call Rules and API settings should be used to place the calls. When dialFirst is an extension, this is typically that extension's Account ID</param>
-        /// <param name="ignoreUserApiSettings"></param>
+        /// <param name="ignoreUserApiSettings">Whether the Call API Settings (digits to prepend, etc) of dialAsAccountId should be ignored</param>
         /// <param name="callerIdName"></param>
         /// <param name="ignoreUserCallRules"></param>
-        /// <param name="timeout"></param>
-        /// <param name="timeoutSecondCall"></param>
-        /// <param name="autoAnswerFirstCall"></param>
+        /// <param name="timeout">How long, in seconds, the phone system should attempt to ring dialFirst without being answered before giving up</param>
+        /// <param name="timeoutSecondCall">How long, in seconds, the phone system should attempt to ring dialSecond without being answered before giving up</param>
+        /// <param name="autoAnswerFirstCall">Whether dialFirst should automatically answer the call</param>
         /// <param name="variables"></param>
         public Call(string dialFirst, string dialSecond, string dialAsAccountId, bool ignoreUserApiSettings = false, string callerIdName = "PBX", bool ignoreUserCallRules = false, int timeout = 30, int timeoutSecondCall = 30, bool autoAnswerFirstCall = false, string[] variables = null) : base("switchvox.call")
         {

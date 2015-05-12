@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Switchvox.Extensions.Intercom
+﻿namespace Switchvox.Extensions.Intercom
 {
     class Add
     {

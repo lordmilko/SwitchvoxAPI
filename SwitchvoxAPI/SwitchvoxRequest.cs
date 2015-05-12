@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.Xml.Linq;
 using System.Net;
 using System.Net.Security;
 using System.Web.Configuration;
-
+using System.Xml;
+using System.Xml.Linq;
 using Switchvox;
 
 namespace SwitchvoxAPI
@@ -148,7 +144,7 @@ namespace SwitchvoxAPI
             
             using(var response = (HttpWebResponse)request.GetResponse())
             {
-                var tempDoc = new System.Xml.XmlDocument();
+                var tempDoc = new XmlDocument();
                 tempDoc.Load(response.GetResponseStream());
 
                 doc = XDocument.Parse(tempDoc.InnerXml);

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using System.Xml.Linq;
 using SwitchvoxAPI;
 
@@ -79,7 +76,15 @@ namespace Switchvox.CallQueueLogs
             /// Calls that were successfully answered by a member of the call queue.
             /// </summary>
             CompletedCalls,
+
+            /// <summary>
+            /// Calls that were abandoned before they could be completed (i.e. the caller hung up).
+            /// </summary>
             AbandonedCalls,
+
+            /// <summary>
+            /// Calls that were somehow redirected out of the call queue, potentially to another call queue.
+            /// </summary>
             RedirectedCalls
         }
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Text;
 using System.Xml.Linq;
 
 namespace Switchvox
@@ -27,7 +22,7 @@ namespace Switchvox
         }
 
         /// <summary>
-        /// Convert the Xml this API Request to its equivalent byte representation
+        /// Convert the Xml of this API Request to its equivalent byte representation
         /// </summary>
         /// <returns>The byte representation of this Xml API Request</returns>
         public byte[] ToBytes()
