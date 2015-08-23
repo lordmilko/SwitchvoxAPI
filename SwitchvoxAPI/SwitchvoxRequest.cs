@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net;
 using System.Net.Security;
+using System.Text;
 using System.Web.Configuration;
 using System.Xml;
 using System.Xml.Linq;
@@ -10,44 +11,13 @@ using Switchvox;
 namespace SwitchvoxAPI
 {
     /// <summary>
-    /// Specifies the type of identifier being used to represent an Extension.
-    /// </summary>
-    public enum ExtensionIdentifier
-    {
-        /// <summary>
-        /// An Extension Number.
-        /// </summary>
-        Extension,
-
-        /// <summary>
-        /// The Account ID associated with an Extension Number.
-        /// </summary>
-        AccountID
-    }
-
-    /// <summary>
-    /// The order in which the returned elements should be sorted.
-    /// </summary>
-    public enum SortOrder
-    {
-        /// <summary>
-        /// Sort in ascending order.
-        /// </summary>
-        Asc,
-
-        /// <summary>
-        /// Sort in descending order.
-        /// </summary>
-        Desc
-    }
-
-    /// <summary>
-    /// Perform XML Requests against a Digium Switchvox Phone System
+    /// Makes API requests against a Digium Switchvox Phone System.
     /// </summary>
     public class SwitchvoxRequest
     {
-        readonly string serverUrl;
-        readonly string username;
+        public string Server { get; }
+        public string Username { get; }
+
         readonly string password;
 
         /// <summary>
@@ -68,8 +38,8 @@ namespace SwitchvoxAPI
             if(pass == null)
                 throw new InvalidOperationException("Your web.config file does not have a \"Password\" property in its AppSettings");
 
-            serverUrl = url;
-            username = name;
+            Server = url;
+            Username = name;
             password = pass;
         }
 
@@ -81,22 +51,40 @@ namespace SwitchvoxAPI
         /// <param name="password">Password for the username.</param>
         public SwitchvoxRequest(string serverUrl, string username, string password)
         {
-            this.serverUrl = serverUrl;
-            this.username = username;
+            Server = serverUrl;
+            Username = username;
             this.password = password;
         }
 
         /// <summary>
-        /// Execute a request against the Phone System
+        /// Execute a custom request against the phone system.
+        /// </summary>
+        /// <param name="xml">Custom generated XML containing a The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods </param>
+        /// <param name="validateResponse">Validate the phone system did not return an error in the SwitchvoxResponse</param>
+        /// <returns>A <see cref="T:SwitchvoxAPI.SwitchvoxResponse"/> encapsulating the XML returned by the phone system.</returns>
+        public SwitchvoxResponse Execute(XDocument xml, bool validateResponse = true)
+        {
+            byte[] xmlRequestBytes = Encoding.ASCII.GetBytes(xml.ToString());
+
+            return ExecuteRequest(xmlRequestBytes, validateResponse);
+        }
+
+        /// <summary>
+        /// Execute a request against the phone system.
         /// </summary>
         /// <param name="method">The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods </param>
         /// <param name="validateResponse">Validate the phone system did not return an error in the SwitchvoxResponse</param>
         /// <returns>A <see cref="T:SwitchvoxAPI.SwitchvoxResponse"/> encapsulating the XML returned by the phone system.</returns>
         public SwitchvoxResponse Execute(RequestMethod method, bool validateResponse = true)
         {
-            IgnoreSSLCertificateProblems();
-
             var xmlRequestBytes = method.ToBytes();
+
+            return ExecuteRequest(xmlRequestBytes, validateResponse);
+        }
+
+        private SwitchvoxResponse ExecuteRequest(byte[] xmlRequestBytes, bool validateResponse)
+        {
+            IgnoreSSLCertificateProblems();
 
             var request = CreateHttpRequest(xmlRequestBytes);
 
@@ -120,9 +108,9 @@ namespace SwitchvoxAPI
 
         private HttpWebRequest CreateHttpRequest(byte[] xmlRequestBytes)
         {
-            var request = (HttpWebRequest)WebRequest.Create(serverUrl + "/xml");
+            var request = (HttpWebRequest)WebRequest.Create(Server + "/xml");
             request.Proxy = null;
-            request.Credentials = new NetworkCredential(username, password);
+            request.Credentials = new NetworkCredential(Username, password);
             request.ContentType = "text/xml; encoding='utf8'";
             request.Method = "POST";
             request.ContentLength = (long)(xmlRequestBytes.Length);

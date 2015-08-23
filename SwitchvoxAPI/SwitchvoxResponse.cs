@@ -9,7 +9,10 @@ namespace SwitchvoxAPI
     /// </summary>
     public class SwitchvoxResponse
     {
-        private readonly XDocument xml;
+        /// <summary>
+        /// The XML returned from the phone system.
+        /// </summary>
+        public XDocument Xml { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.SwitchvoxResponse"/> class.
@@ -17,7 +20,7 @@ namespace SwitchvoxAPI
         /// <param name="xml">The XML to be contained in the response.</param>
         public SwitchvoxResponse(XDocument xml)
         {
-            this.xml = xml;
+            Xml = xml;
         }
 
         /// <summary>
@@ -27,7 +30,7 @@ namespace SwitchvoxAPI
         /// <returns>An enumeration of <see cref="T:System.Xml.Linq.XElement"/>s with the specified name</returns>
         public IEnumerable<XElement> GetElements(string name)
         {
-            return xml.Descendants(name);
+            return Xml.Descendants(name);
         }
         
         /// <summary>
@@ -38,7 +41,7 @@ namespace SwitchvoxAPI
         /// <returns>The value of the attribute</returns>
         public string GetAttribute(string element, string attribute)
         {
-            var attrib = xml.Descendants(element).Single().Attribute(attribute).Value;
+            var attrib = Xml.Descendants(element).Single().Attribute(attribute).Value;
 
             return attrib;
         }
@@ -51,7 +54,7 @@ namespace SwitchvoxAPI
         /// <returns>A string array containing the value of specified attribute of each specified element</returns>
         public string[] GetAttributes(string element, string attribute)
         {
-            var attribs = xml.Descendants(element).Select(e => e.Attribute(attribute).Value);
+            var attribs = Xml.Descendants(element).Select(e => e.Attribute(attribute).Value);
 
             return attribs.ToArray();
         }

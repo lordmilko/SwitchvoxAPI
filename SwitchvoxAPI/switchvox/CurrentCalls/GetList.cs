@@ -1,7 +1,7 @@
 ﻿namespace Switchvox.CurrentCalls
 {
     /// <summary>
-    /// Get a list of all current calls in the system
+    /// Get a list of all current calls in the system.
     /// </summary>
     public class GetList : RequestMethod
     {

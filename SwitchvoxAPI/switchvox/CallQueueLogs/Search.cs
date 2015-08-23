@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using SwitchvoxAPI;
 
 namespace Switchvox.CallQueueLogs
 {
@@ -22,7 +21,7 @@ namespace Switchvox.CallQueueLogs
             StartTime,
 
             /// <summary>
-            /// Sort each record returned by its <see cref="Switchvox.CallQueueLogs.Search.CallTypes">"type"</see> attribute.
+            /// Sort each record returned by its <see cref="Switchvox.CallTypes">"type"</see> attribute.
             /// </summary>
             Type,
 
@@ -68,33 +67,39 @@ namespace Switchvox.CallQueueLogs
         }
 
         /// <summary>
-        /// Specifies the type of calls that can searched for.
+        /// Initializes a new instance of the <see cref="T:Switchvox.CallQueueLogs.Search"/> class to be executed against a single call queue
         /// </summary>
-        public enum CallTypes
+        /// <param name="startDate">The minimum date to search from.</param>
+        /// <param name="endDate">The maximum date to search to.</param>
+        /// <param name="queueAccountId">The Call Queue Account ID to retrieve data for.</param>
+        /// <param name="callTypes">A combination of flags indicating the type of calls to include in the search results.</param>
+        /// <param name="ignoreWeekends">Whether weekends should be excluded from the search results.</param>
+        /// <param name="itemsPerPage">The number of results to return in this request. Additional items can be retrieved by making additional requests and incrementing the pageNumber parameter</param>
+        /// <param name="pageNumber">The page of results to return in this request. Used in conjunction with the itemsPerPage parameter.</param>
+        /// <param name="sortOrder">How the search results will be sorted.</param>
+        /// <param name="sortField">The field of the search results to sort on</param>
+        public Search(DateTime startDate, DateTime endDate, string queueAccountId, CallTypes callTypes, bool ignoreWeekends = false, int itemsPerPage = 50, int pageNumber = 1, SortOrder sortOrder = SortOrder.Asc, SortField sortField = SortField.StartTime)
+            : this(startDate, endDate, new[] {  queueAccountId }, callTypes, ignoreWeekends, itemsPerPage, pageNumber, sortOrder, sortField)
         {
-            /// <summary>
-            /// Calls that were successfully answered by a member of the call queue.
-            /// </summary>
-            CompletedCalls,
-
-            /// <summary>
-            /// Calls that were abandoned before they could be completed (i.e. the caller hung up).
-            /// </summary>
-            AbandonedCalls,
-
-            /// <summary>
-            /// Calls that were somehow redirected out of the call queue, potentially to another call queue.
-            /// </summary>
-            RedirectedCalls
+            
         }
 
-        public Search(DateTime startDate, DateTime endDate, string[] queueAccountIds, CallTypes[] callTypes, bool ignoreWeekends = false, int itemsPerPage = 50, int pageNumber = 1, SortOrder sortOrder = SortOrder.Asc, SortField sortField = SortField.StartTime) : base("switchvox.callQueueLogs.search")
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Switchvox.CallQueueLogs.Search"/> class to be executed against one or more call queues
+        /// </summary>
+        /// <param name="startDate">The minimum date to search from.</param>
+        /// <param name="endDate">The maximum date to search to.</param>
+        /// <param name="queueAccountIds">A list of Call Queue Account IDs to retrieve data for. At least 1 Account ID must be specified.</param>
+        /// <param name="callTypes">A combination of flags indicating the type of calls to include in the search results.</param>
+        /// <param name="ignoreWeekends">Whether weekends should be excluded from the search results.</param>
+        /// <param name="itemsPerPage">The number of results to return in this request. Additional items can be retrieved by making additional requests and incrementing the pageNumber parameter</param>
+        /// <param name="pageNumber">The page of results to return in this request. Used in conjunction with the itemsPerPage parameter.</param>
+        /// <param name="sortOrder">How the search results will be sorted.</param>
+        /// <param name="sortField">The field of the search results to sort on</param>
+        public Search(DateTime startDate, DateTime endDate, string[] queueAccountIds, CallTypes callTypes, bool ignoreWeekends = false, int itemsPerPage = 50, int pageNumber = 1, SortOrder sortOrder = SortOrder.Asc, SortField sortField = SortField.StartTime) : base("switchvox.callQueueLogs.search")
         {
             if (queueAccountIds.Length == 0)
-                throw new NotImplementedException();
-
-            if (callTypes.Length == 0)
-                throw new NotImplementedException();
+                throw new ArgumentException();
 
             List<XElement> xml = new List<XElement>
             {
@@ -117,30 +122,21 @@ namespace Switchvox.CallQueueLogs
             return accountIds.Select(accountId => new XElement("queue_account_id", accountId)).ToList();
         }
 
-        private List<XElement> CreateCallTypeElms(CallTypes[] callTypes)
+        private List<XElement> CreateCallTypeElms(CallTypes callTypes)
         {
             List<XElement> xml = new List<XElement>();
 
-            foreach (CallTypes callType in callTypes)
+            if ((callTypes & CallTypes.AbandonedCalls) == CallTypes.AbandonedCalls)
             {
-                string xmlVal = string.Empty;
-
-                if (callType == CallTypes.AbandonedCalls)
-                {
-                    xmlVal = "abandoned_calls";
-                }
-                else if (callType == CallTypes.CompletedCalls)
-                {
-                    xmlVal = "completed_calls";
-                }
-                else if (callType == CallTypes.RedirectedCalls)
-                {
-                    xmlVal = "redirected_calls";
-                }
-                else
-                    throw new NotImplementedException();
-
-                xml.Add(new XElement("call_type", xmlVal));
+                xml.Add(new XElement("call_type", "abandoned_calls"));
+            }
+            if ((callTypes & CallTypes.CompletedCalls) == CallTypes.CompletedCalls)
+            {
+                xml.Add(new XElement("call_type", "completed_calls"));
+            }
+            if ((callTypes & CallTypes.RedirectedCalls) == CallTypes.RedirectedCalls)
+            {
+                xml.Add(new XElement("call_type", "redirected_calls"));
             }
 
             return xml;
@@ -193,7 +189,7 @@ namespace Switchvox.CallQueueLogs
                     break;
 
                 default:
-                    throw new NotImplementedException();
+                    throw new NotImplementedException("No handler for the value " + sortField.ToString() + " has been implemented.");
             }
 
             return val;
