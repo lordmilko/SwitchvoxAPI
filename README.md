@@ -8,7 +8,7 @@ var request = new SwitchvoxRequest("https://phones.mycoolsite.com", "username", 
 var response = request.Execute(new Switchvox.Extensions.GetInfo());
 ```
 
-If you wish to access the [User API](http://developers.digium.com/switchvox/wiki/index.php/WebService_methods#User_Section), you will need to pass a user's extension details to `SwitchvoxRequest` instead.
+If you wish to access the [User API](http://developers.digium.com/switchvox/wiki/index.php/WebService_methods#User_Section), you will need to pass a user's extension details to `SwitchvoxRequest`. Otherwise, enter a set of admin credentials.
 
 Methods that contain a number of optional parameters (such as [`switchvox.call`](http://developers.digium.com/switchvox/wiki/index.php/Switchvox.call)) can also be invoked with as many or few arguments as you like:
 
