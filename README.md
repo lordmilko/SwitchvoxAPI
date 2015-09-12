@@ -4,9 +4,12 @@ SwitchvoxAPI is a C# library that abstracts away the complexity of interfacing w
 All [Methods](http://developers.digium.com/switchvox/wiki/index.php/WebService_methods) supported by Switchvox are represented as objects derived from a common class, `RequestMethod`. All `RequestMethod` objects are stored under a namespace path matching the method names used in the actual API Requests (e.g. [`switchvox.extensions.getInfo`](http://developers.digium.com/switchvox/wiki/index.php/Switchvox.extensions.getInfo)). This makes it easy to cross reference between existing documentation and SwitchvoxAPI.
 
 ```c#
-var request = new SwitchvoxRequest();
+var request = new SwitchvoxRequest("https://phones.mycoolsite.com", "username", "password");
 var response = request.Execute(new Switchvox.Extensions.GetInfo());
 ```
+
+If you wish to access the [User API](http://developers.digium.com/switchvox/wiki/index.php/WebService_methods#User_Section), you will need to pass a user's extension details to `SwitchvoxRequest` instead.
+
 Methods that contain a number of optional parameters (such as [`switchvox.call`](http://developers.digium.com/switchvox/wiki/index.php/Switchvox.call)) can also be invoked with as many or few arguments as you like:
 
 ```c#
