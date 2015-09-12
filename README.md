@@ -20,7 +20,7 @@ request.Execute(new Switchvox.Call("12345678", "100", "1000");
 request.Execute(new Switchvox.Call("12345678", "100", "1000", timeout: 100, callerIdName: "Mom");
 ```
   
-  `SwitchvoxResponse` objects primarily serve as loose wrappers around an underlying `XDocument`, implementing a number of helpful methods that wrap common LINQ queries including retrieving elements with a certain tag, or retrieving certain tag attributes.
+  `SwitchvoxResponse` objects primarily serve as loose wrappers around an underlying `XDocument`, implementing a number of helper methods that wrap common LINQ queries including retrieving elements with a certain tag, or retrieving certain tag attributes.
   
 ```c#
 var name = response.GetAttribute("extension", "first_name")
