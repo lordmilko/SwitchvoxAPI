@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using SwitchvoxAPI;
 
 namespace Switchvox.CallQueueLogs
 {
@@ -21,7 +22,7 @@ namespace Switchvox.CallQueueLogs
             StartTime,
 
             /// <summary>
-            /// Sort each record returned by its <see cref="Switchvox.CallTypes">"type"</see> attribute.
+            /// Sort each record returned by its <see cref="SwitchvoxAPI.CallTypes">"type"</see> attribute.
             /// </summary>
             Type,
 

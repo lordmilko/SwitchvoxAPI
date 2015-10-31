@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-using System.Net.Security;
 using System.Text;
 using System.Web.Configuration;
 using System.Xml;
@@ -15,7 +14,19 @@ namespace SwitchvoxAPI
     /// </summary>
     public class SwitchvoxRequest
     {
-        public string Server { get; }
+        /// <summary>
+        /// The address of the phone server API requests will be made against.
+        /// </summary>
+        public string Server
+        {
+            get { return server.AbsoluteUri; }
+            private set { server = new UriBuilder("https", value).Uri; }
+        } 
+        private Uri server;
+
+        /// <summary>
+        /// Username that will be used to make API requests.
+        /// </summary>
         public string Username { get; }
 
         readonly string password;
@@ -47,7 +58,7 @@ namespace SwitchvoxAPI
         /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.SwitchvoxRequest"/> class.
         /// </summary>
         /// <param name="serverUrl">URL of the Phone Server</param>
-        /// <param name="username">Username of an account with sufficient permissions to make API Requests. Username can be of an Admin (to access the Admin API) or a User (Phone Extension) (to access the User API)</param>
+        /// <param name="username">Case sensitive username of an account with sufficient permissions to make API Requests. Username can be of an Admin (to access the Admin API) or a User (Phone Extension) (to access the User API).</param>
         /// <param name="password">Password for the username.</param>
         public SwitchvoxRequest(string serverUrl, string username, string password)
         {
@@ -100,15 +111,12 @@ namespace SwitchvoxAPI
 
         private void IgnoreSSLCertificateProblems()
         {
-            var defaultValidationCallback = ServicePointManager.ServerCertificateValidationCallback;
-            var customValidationCallback = new RemoteCertificateValidationCallback((sender, certificate, chain, errors) => { return true; }); //Completely ignore the bad certificate on the PBX
-
-            ServicePointManager.ServerCertificateValidationCallback = Delegate.Combine(defaultValidationCallback, customValidationCallback) as RemoteCertificateValidationCallback;
+            ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
         }
 
         private HttpWebRequest CreateHttpRequest(byte[] xmlRequestBytes)
         {
-            var request = (HttpWebRequest)WebRequest.Create(Server + "/xml");
+            var request = (HttpWebRequest)WebRequest.Create(server + "/xml");
             request.Proxy = null;
             request.Credentials = new NetworkCredential(Username, password);
             request.ContentType = "text/xml; encoding='utf8'";
@@ -129,13 +137,26 @@ namespace SwitchvoxAPI
         private XDocument GetResponse(HttpWebRequest request)
         {
             XDocument doc;
-            
-            using(var response = (HttpWebResponse)request.GetResponse())
-            {
-                var tempDoc = new XmlDocument();
-                tempDoc.Load(response.GetResponseStream());
 
-                doc = XDocument.Parse(tempDoc.InnerXml);
+            try
+            {
+                using (var response = (HttpWebResponse) request.GetResponse())
+                {
+                    var tempDoc = new XmlDocument();
+                    tempDoc.Load(response.GetResponseStream());
+
+                    doc = XDocument.Parse(tempDoc.InnerXml);
+                }
+
+            }
+            catch (WebException ex)
+            {
+                using (var response = (HttpWebResponse)ex.Response)
+                {
+                    if (response.StatusCode == HttpStatusCode.Forbidden)
+                        throw new UnauthorizedRequestException("The Phone Server refused your request, either due to an ACL restriction or bad username and password.", ex);
+                    throw;
+                }
             }
 
             return doc;

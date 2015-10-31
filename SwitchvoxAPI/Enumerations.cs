@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 //Global enumerations that can apply to a wide variety of Switchvox Request Methods
 
-namespace Switchvox
+namespace SwitchvoxAPI
 {
     /// <summary>
     /// Specifies the type of identifier being used to represent an Extension.

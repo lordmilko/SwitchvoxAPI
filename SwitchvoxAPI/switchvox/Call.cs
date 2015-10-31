@@ -13,7 +13,7 @@ namespace Switchvox
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Switchvox.Call"/> class.
         /// </summary>
-        /// <param name="dialFirst">The number to ring first; this number will then appear "dial" the second number</param>
+        /// <param name="dialFirst">The number to ring first; this number will then appear to "dial" the second number</param>
         /// <param name="dialSecond">The second number to ring. When the call to the first number is answered, the PBX will dial the second number (then connect both parties together)</param>
         /// <param name="dialAsAccountId">The Account ID of the account whose Call Rules and API settings should be used to place the calls. When dialFirst is an extension, this is typically that extension's Account ID</param>
         /// <param name="ignoreUserApiSettings">Whether the Call API Settings (digits to prepend, etc) of dialAsAccountId should be ignored</param>
