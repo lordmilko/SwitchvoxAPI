@@ -7,7 +7,7 @@ namespace Switchvox
     /// <summary>
     /// Serves as the base class for all Switchvox API XML requests.
     /// </summary>
-    public abstract class RequestMethod
+    public class RequestMethod
     {
         /// <summary>
         /// The XML to be sent to the phone system.
@@ -26,6 +26,12 @@ namespace Switchvox
         protected RequestMethod(string method)
         {
             Name = method;
+        }
+
+        public RequestMethod(string method, object xml)
+        {
+            Name = method;
+            SetXml(xml);
         }
 
         /// <summary>

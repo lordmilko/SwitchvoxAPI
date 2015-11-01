@@ -14,6 +14,8 @@ namespace SwitchvoxAPI
     /// </summary>
     public class SwitchvoxRequest
     {
+        public Extensions Extensions;
+
         /// <summary>
         /// The address of the phone server API requests will be made against.
         /// </summary>
@@ -52,6 +54,8 @@ namespace SwitchvoxAPI
             Server = url;
             Username = name;
             password = pass;
+
+            Extensions = new Extensions(this);
         }
 
         /// <summary>
@@ -65,6 +69,8 @@ namespace SwitchvoxAPI
             Server = serverUrl;
             Username = username;
             this.password = password;
+
+            Extensions = new Extensions(this);
         }
 
         /// <summary>

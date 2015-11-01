@@ -2,24 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 using SwitchvoxAPI;
 
-namespace Switchvox.Extensions
+namespace SwitchvoxAPI
 {
-    /// <summary>
-    /// Fetch basic information about the extensions on a phone system.
-    /// </summary>
-    public class GetInfo : RequestMethod
+    public partial class Extensions
     {
         private string tagGroup;
         private string tagInstance;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Switchvox.Extensions.GetInfo"/> class with one or more Extension Account ID or Extension Number values.
-        /// </summary>
-        /// <param name="identifier">A <see cref="T:Switchvox.ExtensionIdentifier"/> value indicating whether Extension numbers or Account IDs will be used to get info for the extensions on your system</param>
-        /// <param name="values">A list of Extension Account IDs or Extension Numbers to get information for</param>
-        public GetInfo(ExtensionIdentifier identifier, params string[] values) : base("switchvox.extensions.getInfo")
+        public List<Extension> GetInfo(ExtensionIdentifier identifier, params string[] values)
         {
             if (values.Length == 0)
                 throw new ArgumentException("At least one Extension Account ID or Extension Number must be specified.");
@@ -30,7 +23,9 @@ namespace Switchvox.Extensions
 
             var xml = new XElement(tagGroup, valuesList);
 
-            SetXml(xml);
+            var response = request.Execute(new Switchvox.RequestMethod("switchvox.extensions.getInfo", xml));
+
+            return response.Deserialize("extensions").Extensions; ;
         }
 
         private void SetTagTypes(ExtensionIdentifier identifier)
