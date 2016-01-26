@@ -14,6 +14,8 @@ namespace SwitchvoxAPI
     /// </summary>
     public class SwitchvoxRequest
     {
+        //Methods
+
         public Extensions Extensions;
 
         /// <summary>
@@ -79,7 +81,7 @@ namespace SwitchvoxAPI
         /// <param name="xml">Custom generated XML containing a The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods </param>
         /// <param name="validateResponse">Validate the phone system did not return an error in the SwitchvoxResponse</param>
         /// <returns>A <see cref="T:SwitchvoxAPI.SwitchvoxResponse"/> encapsulating the XML returned by the phone system.</returns>
-        public SwitchvoxResponse Execute(XDocument xml, bool validateResponse = true)
+        internal SwitchvoxResponse Execute(XDocument xml, bool validateResponse = true)
         {
             byte[] xmlRequestBytes = Encoding.ASCII.GetBytes(xml.ToString());
 
@@ -92,7 +94,7 @@ namespace SwitchvoxAPI
         /// <param name="method">The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods </param>
         /// <param name="validateResponse">Validate the phone system did not return an error in the SwitchvoxResponse</param>
         /// <returns>A <see cref="T:SwitchvoxAPI.SwitchvoxResponse"/> encapsulating the XML returned by the phone system.</returns>
-        public SwitchvoxResponse Execute(RequestMethod method, bool validateResponse = true)
+        internal SwitchvoxResponse Execute(RequestMethod method, bool validateResponse = true)
         {
             var xmlRequestBytes = method.ToBytes();
 
