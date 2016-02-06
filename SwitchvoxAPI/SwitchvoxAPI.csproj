@@ -42,11 +42,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\SwitchvoxRequestException.cs" />
-    <Compile Include="SwitchvoxAPI\DeserializationLayers\IntermediateDeserializationLayer1.cs" />
-    <Compile Include="SwitchvoxAPI\Responses\Extension.cs" />
+    <Compile Include="SwitchvoxAPI\ConvertExtensions.cs" />
+    <Compile Include="SwitchvoxAPI\ListDeserializationLayer.cs" />
+    <Compile Include="SwitchvoxAPI\Methods\CallLogs\_CallLogs.cs" />
+    <Compile Include="SwitchvoxAPI\Methods\CallQueueLogs\_CallQueueLogs.cs" />
+    <Compile Include="SwitchvoxAPI\Methods\Extensions\Settings\_Settings.cs" />
+    <Compile Include="SwitchvoxAPI\Responses\CallLogs\CallLog.cs" />
+    <Compile Include="SwitchvoxAPI\Responses\CallLogs\CallLogEvent.cs" />
+    <Compile Include="SwitchvoxAPI\Responses\CallLogs\CallLogs.cs" />
+    <Compile Include="SwitchvoxAPI\Responses\CallQueueLogs\CallQueueLog.cs" />
+    <Compile Include="SwitchvoxAPI\Responses\Users\CallQueues\CallQueueStatus.cs" />
+    <Compile Include="SwitchvoxAPI\Responses\Users\CallQueues\CallQueueStatusCallsWaiting.cs" />
+    <Compile Include="SwitchvoxAPI\Responses\Users\CallQueues\CallQueueStatusDetails.cs" />
+    <Compile Include="SwitchvoxAPI\Responses\Users\CallQueues\CallQueueStatusMembers.cs" />
+    <Compile Include="SwitchvoxAPI\Responses\Users\CallQueues\CallQueueStatusOverview.cs" />
+    <Compile Include="SwitchvoxAPI\Responses\Users\CallQueues\CallQueueStatusStatus.cs" />
+    <Compile Include="SwitchvoxAPI\Responses\Extensions\Extension.cs" />
+    <Compile Include="SwitchvoxAPI\Responses\Extensions\ExtensionSettings.cs" />
     <Compile Include="SwitchvoxAPI\SwitchvoxResponse.cs" />
     <Compile Include="SwitchvoxAPI\Enumerations.cs" />
-    <Compile Include="Switchvox\Extensions\Extensions.cs" />
+    <Compile Include="SwitchvoxAPI\Methods\Extensions\_Extensions.cs" />
+    <Compile Include="SwitchvoxAPI\Methods\Users\CallQueues\_CallQueues.cs" />
+    <Compile Include="SwitchvoxAPI\Methods\Users\_Users.cs" />
     <Compile Include="Switchvox\RequestMethod.cs" />
     <Compile Include="SwitchvoxAPI\SwitchvoxRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,9 +92,9 @@
     <Compile Include="Switchvox\_Unimplemented\BlockedIPs\Remove.cs" />
     <Compile Include="Switchvox\_Unimplemented\BlockedIPs\Settings\GetInfo.cs" />
     <Compile Include="Switchvox\_Unimplemented\BlockedIPs\Settings\Update.cs" />
-    <Compile Include="Switchvox\Call.cs" />
-    <Compile Include="Switchvox\CallLogs\Search.cs" />
-    <Compile Include="Switchvox\CallQueueLogs\Search.cs" />
+    <Compile Include="SwitchvoxAPI\Call.cs" />
+    <Compile Include="SwitchvoxAPI\Methods\CallLogs\Search.cs" />
+    <Compile Include="SwitchvoxAPI\Methods\CallQueueLogs\Search.cs" />
     <Compile Include="Switchvox\_Unimplemented\CallQueueMemberLogs\Search.cs" />
     <Compile Include="Switchvox\_Unimplemented\CallQueueMemberReports\Search.cs" />
     <Compile Include="Switchvox\_Unimplemented\CallQueueMissedCalls\Search.cs" />
@@ -191,7 +208,7 @@
     <Compile Include="Switchvox\Extensions\FeatureCodes\PersonalIntercom\GetInfo.cs" />
     <Compile Include="Switchvox\Extensions\FeatureCodes\PersonalIntercom\Remove.cs" />
     <Compile Include="Switchvox\Extensions\FeatureCodes\PersonalIntercom\Update.cs" />
-    <Compile Include="Switchvox\Extensions\GetInfo.cs" />
+    <Compile Include="SwitchvoxAPI\Methods\Extensions\GetInfo.cs" />
     <Compile Include="Switchvox\Extensions\GetVoicemailInfo.cs" />
     <Compile Include="Switchvox\Extensions\GroupPickup\Add.cs" />
     <Compile Include="Switchvox\Extensions\GroupPickup\GetInfo.cs" />
@@ -236,7 +253,7 @@
     <Compile Include="Switchvox\Extensions\Settings\CustomSettings\GetList.cs" />
     <Compile Include="Switchvox\Extensions\Settings\CustomSettings\Remove.cs" />
     <Compile Include="Switchvox\Extensions\Settings\CustomSettings\Update.cs" />
-    <Compile Include="Switchvox\Extensions\Settings\GetInfo.cs" />
+    <Compile Include="SwitchvoxAPI\Methods\Extensions\Settings\GetInfo.cs" />
     <Compile Include="Switchvox\Extensions\Settings\Update.cs" />
     <Compile Include="Switchvox\Extensions\SimpleConferenceRoom\Add.cs" />
     <Compile Include="Switchvox\Extensions\SimpleConferenceRoom\GetInfo.cs" />
@@ -347,7 +364,7 @@
     <Compile Include="Switchvox\_Unimplemented\Updates\GetRenewalDate.cs" />
     <Compile Include="Switchvox\Users\Call.cs" />
     <Compile Include="Switchvox\Users\CallQueues\GetList.cs" />
-    <Compile Include="Switchvox\Users\CallQueues\GetTodaysStatus.cs" />
+    <Compile Include="SwitchvoxAPI\Methods\Users\CallQueues\GetTodaysStatus.cs" />
     <Compile Include="Switchvox\Users\CallQueues\Login.cs" />
     <Compile Include="Switchvox\Users\CallQueues\Logout.cs" />
     <Compile Include="Switchvox\Users\CallQueues\Pause.cs" />
@@ -438,7 +455,10 @@
     <Compile Include="Switchvox\Users\Voicemail\Remove.cs" />
     <Compile Include="Exceptions\UnauthorizedRequestException.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Switchvox\CallLogs\" />
+    <Folder Include="Switchvox\CallQueueLogs\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

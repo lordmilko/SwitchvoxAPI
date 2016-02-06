@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Switchvox
+namespace SwitchvoxAPI
 {
     /// <summary>
     /// Generate a call between two numbers using the phone system.
     /// </summary>
-    public class Call : RequestMethod
+    public partial class SwitchvoxRequest
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Switchvox.Call"/> class.
+        /// Generate a call between two numbers using the phone system.
         /// </summary>
         /// <param name="dialFirst">The number to ring first; this number will then appear to "dial" the second number</param>
         /// <param name="dialSecond">The second number to ring. When the call to the first number is answered, the PBX will dial the second number (then connect both parties together)</param>
@@ -23,7 +23,7 @@ namespace Switchvox
         /// <param name="timeoutSecondCall">How long, in seconds, the phone system should attempt to ring dialSecond without being answered before giving up</param>
         /// <param name="autoAnswerFirstCall">Whether dialFirst should automatically answer the call</param>
         /// <param name="variables">A dictionary of variables to update in your IVR. The key is the variable name and the value is the value to set it to.</param>
-        public Call(string dialFirst, string dialSecond, string dialAsAccountId, bool ignoreUserApiSettings = false, string callerIdName = "PBX", bool ignoreUserCallRules = false, int timeout = 30, int timeoutSecondCall = 30, bool autoAnswerFirstCall = false, Dictionary<string, string> variables = null) : base("switchvox.call")
+        public void Call(string dialFirst, string dialSecond, string dialAsAccountId, bool ignoreUserApiSettings = false, string callerIdName = "PBX", bool ignoreUserCallRules = false, int timeout = 30, int timeoutSecondCall = 30, bool autoAnswerFirstCall = false, Dictionary<string, string> variables = null)
         {
             List<XElement> vars = new List<XElement>
             {
@@ -45,7 +45,7 @@ namespace Switchvox
                 vars.Add(new XElement("variables", variableList));
             }
 
-            SetXml(vars);
+            var response = Execute(new Switchvox.RequestMethod("switchvox.call", vars));
         }
     }
 }

@@ -4,69 +4,13 @@ using System.Linq;
 using System.Xml.Linq;
 using SwitchvoxAPI;
 
-namespace Switchvox.CallQueueLogs
+namespace SwitchvoxAPI
 {
     /// <summary>
     /// Search the call queue logs on the phone system of one or more queues.
     /// </summary>
-    public class Search : RequestMethod
+    public partial class CallQueueLogs
     {
-        /// <summary>
-        /// Specifies how the search response should be sorted.
-        /// </summary>
-        public enum SortField
-        {
-            /// <summary>
-            /// Sort each record returned by its "Start Time" attribute
-            /// </summary>
-            StartTime,
-
-            /// <summary>
-            /// Sort each record returned by its <see cref="SwitchvoxAPI.CallTypes">"type"</see> attribute.
-            /// </summary>
-            Type,
-
-            /// <summary>
-            /// Sort each record returned by its "Queue Account ID" attribute.
-            /// </summary>
-            QueueAccountId,
-
-            /// <summary>
-            /// Sort each record returned by its "Caller ID Number" attribute.
-            /// </summary>
-            CallerIdNumber,
-
-            /// <summary>
-            /// Sort each record returned by its "Wait Time" attribute.
-            /// </summary>
-            WaitTime,
-
-            /// <summary>
-            /// Sort each record returned by its "Talk Time" attribute.
-            /// </summary>
-            TalkTime,
-
-            /// <summary>
-            /// Sort each record returned by its "Member Account ID" attribute.
-            /// </summary>
-            MemberAccountId,
-
-            /// <summary>
-            /// Sort each record returned by its "Enter Position" attribute.
-            /// </summary>
-            EnterPosition,
-
-            /// <summary>
-            /// Sort each record returned by its "Exit Position" attribute.
-            /// </summary>
-            ExitPosition,
-
-            /// <summary>
-            /// Sort each record returned by its "Abandon Position" attribute.
-            /// </summary>
-            AbandonPosition
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Switchvox.CallQueueLogs.Search"/> class to be executed against a single call queue
         /// </summary>
@@ -79,10 +23,9 @@ namespace Switchvox.CallQueueLogs
         /// <param name="pageNumber">The page of results to return in this request. Used in conjunction with the itemsPerPage parameter.</param>
         /// <param name="sortOrder">How the search results will be sorted.</param>
         /// <param name="sortField">The field of the search results to sort on</param>
-        public Search(DateTime startDate, DateTime endDate, string queueAccountId, CallTypes callTypes, bool ignoreWeekends = false, int itemsPerPage = 50, int pageNumber = 1, SortOrder sortOrder = SortOrder.Asc, SortField sortField = SortField.StartTime)
-            : this(startDate, endDate, new[] {  queueAccountId }, callTypes, ignoreWeekends, itemsPerPage, pageNumber, sortOrder, sortField)
+        public CallLogs<CallQueueLog> Search(DateTime startDate, DateTime endDate, string queueAccountId, CallTypes callTypes, bool ignoreWeekends = false, int itemsPerPage = 50, int pageNumber = 1, SortOrder sortOrder = SortOrder.Asc, CallQueueLogSortField sortField = CallQueueLogSortField.StartTime)
         {
-            
+            return Search(startDate, endDate, new[] { queueAccountId }, callTypes, ignoreWeekends, itemsPerPage, pageNumber, sortOrder, sortField);
         }
 
         /// <summary>
@@ -97,7 +40,7 @@ namespace Switchvox.CallQueueLogs
         /// <param name="pageNumber">The page of results to return in this request. Used in conjunction with the itemsPerPage parameter.</param>
         /// <param name="sortOrder">How the search results will be sorted.</param>
         /// <param name="sortField">The field of the search results to sort on</param>
-        public Search(DateTime startDate, DateTime endDate, string[] queueAccountIds, CallTypes callTypes, bool ignoreWeekends = false, int itemsPerPage = 50, int pageNumber = 1, SortOrder sortOrder = SortOrder.Asc, SortField sortField = SortField.StartTime) : base("switchvox.callQueueLogs.search")
+        public CallLogs<CallQueueLog> Search(DateTime startDate, DateTime endDate, string[] queueAccountIds, CallTypes callTypes, bool ignoreWeekends = false, int itemsPerPage = 50, int pageNumber = 1, SortOrder sortOrder = SortOrder.Asc, CallQueueLogSortField sortField = CallQueueLogSortField.StartTime)
         {
             if (queueAccountIds.Length == 0)
                 throw new ArgumentException();
@@ -115,7 +58,9 @@ namespace Switchvox.CallQueueLogs
                 new XElement("page_number", pageNumber)
             };
 
-            SetXml(xml);
+            var response = request.Execute(new Switchvox.RequestMethod("switchvox.callQueueLogs.search", xml));
+
+            return response.Deserialize<CallLogs<CallQueueLog>>("calls");
         }
 
         private List<XElement> CreateAccountIdElms(string[] accountIds)
@@ -143,49 +88,49 @@ namespace Switchvox.CallQueueLogs
             return xml;
         }
 
-        private string GetSortField(SortField sortField)
+        private string GetSortField(CallQueueLogSortField sortField)
         {
             string val = string.Empty;
 
             switch (sortField)
             {
-                case SortField.StartTime:
+                case CallQueueLogSortField.StartTime:
                     val = "start_time";
                     break;
 
-                case SortField.Type:
+                case CallQueueLogSortField.Type:
                     val = "type";
                     break;
 
-                case SortField.QueueAccountId:
+                case CallQueueLogSortField.QueueAccountId:
                     val = "queue_account_id";
                     break;
 
-                case SortField.CallerIdNumber:
+                case CallQueueLogSortField.CallerIdNumber:
                     val = "caller_id_number";
                     break;
 
-                case SortField.WaitTime:
+                case CallQueueLogSortField.WaitTime:
                     val = "wait_time";
                     break;
 
-                case SortField.TalkTime:
+                case CallQueueLogSortField.TalkTime:
                     val = "talk_time";
                     break;
 
-                case SortField.MemberAccountId:
+                case CallQueueLogSortField.MemberAccountId:
                     val = "member_account_id";
                     break;
 
-                case SortField.EnterPosition:
+                case CallQueueLogSortField.EnterPosition:
                     val = "enter_position";
                     break;
 
-                case SortField.ExitPosition:
+                case CallQueueLogSortField.ExitPosition:
                     val = "exit_position";
                     break;
 
-                case SortField.AbandonPosition:
+                case CallQueueLogSortField.AbandonPosition:
                     val = "abandon_position";
                     break;
 

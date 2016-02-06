@@ -12,11 +12,14 @@ namespace SwitchvoxAPI
     /// <summary>
     /// Makes API requests against a Digium Switchvox Phone System.
     /// </summary>
-    public class SwitchvoxRequest
+    public partial class SwitchvoxRequest
     {
         //Methods
 
         public Extensions Extensions;
+        public Users Users;
+        public CallLogs CallLogs;
+        public CallQueueLogs CallQueueLogs;
 
         /// <summary>
         /// The address of the phone server API requests will be made against.
@@ -24,7 +27,22 @@ namespace SwitchvoxAPI
         public string Server
         {
             get { return server.AbsoluteUri; }
-            private set { server = new UriBuilder("https", value).Uri; }
+            private set
+            {
+                if (value.StartsWith("http"))
+                {
+                    if (value.StartsWith("https"))
+                    {
+                        server = new UriBuilder(value).Uri;
+                    }
+
+                    //Else we assume you know what you're doing
+                }
+                else
+                {
+                    server = new UriBuilder("https", value).Uri;
+                }
+            }
         } 
         private Uri server;
 
@@ -57,7 +75,7 @@ namespace SwitchvoxAPI
             Username = name;
             password = pass;
 
-            Extensions = new Extensions(this);
+            InitializeMethodMembers();
         }
 
         /// <summary>
@@ -72,7 +90,15 @@ namespace SwitchvoxAPI
             Username = username;
             this.password = password;
 
+            InitializeMethodMembers();
+        }
+
+        private void InitializeMethodMembers()
+        {
             Extensions = new Extensions(this);
+            Users = new Users(this);
+            CallLogs = new CallLogs(this);
+            CallQueueLogs = new CallQueueLogs(this);
         }
 
         /// <summary>
