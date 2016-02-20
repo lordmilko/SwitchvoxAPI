@@ -9,6 +9,57 @@ using System.Xml.Serialization;
 
 namespace SwitchvoxAPI
 {
+    public enum CurrentCallState
+    {
+        [XmlEnum("agent_login")]
+        AgentLogin,
+
+        [XmlEnum("agent_logout")]
+        AgentLogout,
+
+        [XmlEnum("checking_voicemail")]
+        CheckingVoicemail,
+
+        [XmlEnum("conference")]
+        Conference,
+
+        [XmlEnum("directory")]
+        Directory,
+
+        [XmlEnum("faxing")]
+        Faxing,
+
+        [XmlEnum("intercom")]
+        Intercom,
+
+        [XmlEnum("ivr")]
+        IVR,
+
+        [XmlEnum("leaving_voicemail")]
+        LeavingVoicemail,
+
+        [XmlEnum("monitoring")]
+        Monitoring,
+
+        [XmlEnum("parked")]
+        Parked,
+
+        [XmlEnum("queued")]
+        Queued,
+
+        [XmlEnum("receiving_fax")]
+        ReceivingFax,
+
+        [XmlEnum("ringing")]
+        Ringing,
+
+        [XmlEnum("talking")]
+        Talking,
+
+        [XmlEnum("unknown")]
+        Unknown
+    }
+
     public enum CallOrigination
     {
         [XmlEnum("incoming")]
@@ -48,7 +99,19 @@ namespace SwitchvoxAPI
         Internal,
 
         [XmlEnum("ASSISTED_TRANSFEREE")]
-        AssistedTransferee
+        AssistedTransferee,
+
+        [XmlEnum("STATUS")]
+        Status,
+
+        [XmlEnum("BLIND_TRANSFERER")]
+        BlindTransferer,
+
+        [XmlEnum("NO_EVENTS")]
+        NoEvents,
+
+        [XmlEnum("VOICEMAIL")]
+        Voicemail
     }
 
     public enum QueueCallType

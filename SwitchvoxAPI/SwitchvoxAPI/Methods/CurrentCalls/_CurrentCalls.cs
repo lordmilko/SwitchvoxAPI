@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 namespace SwitchvoxAPI
 {
     /// <summary>
-    /// Methods contained in the Switchvox.Extensions.Settings namespace.
+    /// Methods contained in the Switchvox.CurrentCalls namespace.
     /// </summary>
-    public partial class Settings
+    public partial class CurrentCalls
     {
         private readonly SwitchvoxRequest request;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.Settings"/> class.
+        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.CurrentCalls"/> class.
         /// </summary>
         /// <param name="request">The <see cref="T:SwitchvoxAPI.SwitchvoxRequest"/> methods will use to communicate with the phone server.</param>
-        internal Settings(SwitchvoxRequest request)
+        internal CurrentCalls(SwitchvoxRequest request)
         {
             this.request = request;
         }

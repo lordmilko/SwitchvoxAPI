@@ -60,7 +60,7 @@ namespace SwitchvoxAPI
 
             var response = request.Execute(new Switchvox.RequestMethod("switchvox.callQueueLogs.search", xml));
 
-            return response.Deserialize<CallLogs<CallQueueLog>>("calls");
+            return response.Deserialize<CallLogs<CallQueueLog>>();
         }
 
         private List<XElement> CreateAccountIdElms(string[] accountIds)

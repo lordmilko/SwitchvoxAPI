@@ -7,7 +7,6 @@ using System.Xml.Serialization;
 
 namespace SwitchvoxAPI
 {
-    [XmlRoot("extension")]
     public class Extension
     {
         [XmlAttribute("server_uuid")]

@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace SwitchvoxAPI
 {
+    [XmlRoot("extensions_settings")]
     public class ExtensionSettings
     {
         [XmlAttribute("extension_length_constraint")]

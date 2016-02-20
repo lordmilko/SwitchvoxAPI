@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace SwitchvoxAPI
 {
+    [XmlRoot("callQueue")]
     public class CallQueueStatus
     {
         [XmlAttribute("account_id")]
@@ -28,10 +29,10 @@ namespace SwitchvoxAPI
         public CallQueueStatusDetails _RawDetails { get; set; }
 
         [XmlIgnore]
-        public List<CallQueueStatusMember> Members => _RawDetails.Members.CallQueueStatusMembers;
+        public List<CallQueueUserStatusMember> Members => _RawDetails.Members.Items;
 
         [XmlIgnore]
-        public List<CallQueueStatusWaitingCall> CallsWaiting => _RawDetails.CallsWaiting.CallQueueStatusWaitingCallers;
+        public List<CallQueueStatusWaitingCall> CallsWaiting => _RawDetails.CallsWaiting.Items;
 
 
     }

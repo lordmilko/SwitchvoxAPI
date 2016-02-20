@@ -8,12 +8,15 @@ using SwitchvoxAPI;
 namespace SwitchvoxAPI
 {
     /// <summary>
-    /// Methods contained under Switchvox.Extensions
+    /// Methods contained in the Switchvox.Extensions namespace.
     /// </summary>
     public partial class Extensions
     {
         private readonly SwitchvoxRequest request;
 
+        /// <summary>
+        /// Methods contained in the Switchvox.Extensions.Settings namespace.
+        /// </summary>
         public Settings Settings;
 
         /// <summary>

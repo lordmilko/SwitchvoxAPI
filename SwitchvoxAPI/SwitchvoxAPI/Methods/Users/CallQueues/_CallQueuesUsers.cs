@@ -1,10 +1,10 @@
 ﻿namespace SwitchvoxAPI
 {
-    public partial class CallQueues
+    public partial class CallQueuesUsers
     {
         private readonly SwitchvoxRequest request;
 
-        internal CallQueues(SwitchvoxRequest request)
+        internal CallQueuesUsers(SwitchvoxRequest request)
         {
             this.request = request;
         }

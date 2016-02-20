@@ -16,10 +16,32 @@ namespace SwitchvoxAPI
     {
         //Methods
 
+        /// <summary>
+        /// Methods contained in the Switchvox.Extensions namespace.
+        /// </summary>
         public Extensions Extensions;
+
+        /// <summary>
+        /// Methods contained in the Switchvox.Users namespace.
+        /// </summary>
         public Users Users;
+
+        /// <summary>
+        /// Methods contained in the Switchvox.CallLogs namespace.
+        /// </summary>
         public CallLogs CallLogs;
+
+        /// <summary>
+        /// Methods contained in the Switchvox.CallQueueLogs namespace.
+        /// </summary>
         public CallQueueLogs CallQueueLogs;
+
+        /// <summary>
+        /// Methods contained in the Switchvox.CurrentCalls namespace.
+        /// </summary>
+        public CurrentCalls CurrentCalls;
+
+        public CallQueues CallQueues;
 
         /// <summary>
         /// The address of the phone server API requests will be made against.
@@ -31,10 +53,10 @@ namespace SwitchvoxAPI
             {
                 if (value.StartsWith("http"))
                 {
-                    if (value.StartsWith("https"))
-                    {
+                    //if (value.StartsWith("https"))
+                    //{
                         server = new UriBuilder(value).Uri;
-                    }
+                    //}
 
                     //Else we assume you know what you're doing
                 }
@@ -99,6 +121,8 @@ namespace SwitchvoxAPI
             Users = new Users(this);
             CallLogs = new CallLogs(this);
             CallQueueLogs = new CallQueueLogs(this);
+            CurrentCalls = new CurrentCalls(this);
+            CallQueues = new CallQueues(this);
         }
 
         /// <summary>
@@ -145,6 +169,7 @@ namespace SwitchvoxAPI
 
         private void IgnoreSSLCertificateProblems()
         {
+            //todo should we just have a single call in the constructor, OR should we check if its null first ORRR should we check if we have the method we want to assign first
             ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
         }
 

@@ -58,9 +58,9 @@ namespace SwitchvoxAPI
         public int _RawTalkDuration { get; set; }
 
         [XmlIgnore]
-        public List<CallLogEvent> Events => _RawEvents.CallLogEvents;
+        public List<CallLogEvent> Events => _RawEvents.Items;
 
         [XmlElement("events")]
-        public ListDeserializationLayer _RawEvents { get; set; }
+        public ListDeserializationLayers.CallLogEvents _RawEvents { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace SwitchvoxAPI
         {
             var response = request.Execute(new RequestMethod("switchvox.extensions.settings.getInfo", null));
 
-            return response.Deserialize<ExtensionSettings>("extensions_settings");
+            return response.Deserialize<ExtensionSettings>();
         }
     }
 }

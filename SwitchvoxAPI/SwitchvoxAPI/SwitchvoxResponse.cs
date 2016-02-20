@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using SwitchvoxAPI.SwitchvoxAPI;
 
 namespace SwitchvoxAPI
 {
@@ -61,23 +63,17 @@ namespace SwitchvoxAPI
             return attribs.ToArray();
         }
 
-        public T Deserialize<T>(string rootAttribute)
+        internal T Deserialize<T>() where T : new()
         {
-            var root = Xml.Descendants(rootAttribute).Single();
-            var deserializer = new XmlSerializer(typeof(T), new XmlRootAttribute(rootAttribute));
+            var root = Xml.Descendants(typeof(T).GetXmlRoot()).Single();
 
-            var a = root.ToString().IndexOf("RINGALL");
+            var deserializer = new XmlSerializer(typeof(T));
 
             var stream = GetStream(root);
 
             var result = deserializer.Deserialize(stream);
 
             return (T)result;
-        }
-
-        public ListDeserializationLayer Deserialize(string rootAttribute)
-        {
-            return Deserialize<ListDeserializationLayer>(rootAttribute);
         }
 
         private Stream GetStream(XElement root)

@@ -4,13 +4,13 @@
     {
         private readonly SwitchvoxRequest request;
 
-        public CallQueues CallQueues;
+        public CallQueuesUsers CallQueues;
 
         internal Users(SwitchvoxRequest request)
         {
             this.request = request;
 
-            CallQueues = new CallQueues(request);
+            CallQueues = new CallQueuesUsers(request);
         }
     }
 }

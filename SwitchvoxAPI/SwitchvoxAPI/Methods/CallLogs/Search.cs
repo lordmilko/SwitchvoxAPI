@@ -6,17 +6,14 @@ using SwitchvoxAPI;
 
 namespace SwitchvoxAPI
 {
-    /// <summary>
-    /// Search the call logs on the phone system.
-    /// </summary>
     public partial class CallLogs
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Switchvox.CallLogs.Search"/> class for searches where multiple search criteria can be specified.
+        /// Search the call logs on the phone system where multiple search criteria can be specified.
         /// </summary>
         /// <param name="startDate">The minimum date to search from.</param>
         /// <param name="endDate">The maximum date to search to.</param>
-        /// <param name="searchData">A <see cref="SwitchvoxAPI.CallLogMultiItemSearchData"/> value representing the type of data this request will search for.</param>
+        /// <param name="searchData">A <see cref="CallLogMultiItemSearchData"/> value representing the type of data this request will search for.</param>
         /// <param name="dataValues">An array of one or more values to search for that correspond with the type of data specified in <paramref name="searchData"/></param>
         /// <param name="sortOrder">How the response will be sorted</param>
         /// <param name="itemsPerPage">The maximum number of records to be returned by the response. An additional <paramref name="itemsPerPage"/> number of records can be retrieved by making additional requests and modifying the <paramref name="pageNumber"/></param>
@@ -32,11 +29,11 @@ namespace SwitchvoxAPI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Switchvox.CallLogs.Search"/> class for searches where a single search criterion must be specified.
+        /// Search the call logs on the phone system where a single search criterion must be specified.
         /// </summary>
         /// <param name="startDate">The minimum date to search from.</param>
         /// <param name="endDate">The maximum date to search to.</param>
-        /// <param name="searchData">A <see cref="SwitchvoxAPI.CallLogSingleItemSearchData"/> value representing the type of data this request will search for.</param>
+        /// <param name="searchData">A <see cref="CallLogSingleItemSearchData"/> value representing the type of data this request will search for.</param>
         /// <param name="data">A single value corresponding with the type of data specified in <paramref name="searchData"/></param>
         /// <param name="sortOrder">How the response will be sorted</param>
         /// <param name="itemsPerPage">The maximum number of records to be returned by the response. An additional <paramref name="itemsPerPage"/> number of records can be retrieved by making additional requests and modifying the <paramref name="pageNumber"/></param>
@@ -62,7 +59,7 @@ namespace SwitchvoxAPI
 
             var response = request.Execute(new Switchvox.RequestMethod("switchvox.callLogs.search", xml));
 
-            return response.Deserialize<CallLogs<CallLog>>("calls");
+            return response.Deserialize<CallLogs<CallLog>>();
         }
 
         private XElement GetMultiItemSearchDataElms(CallLogMultiItemSearchData searchData, string[] data)

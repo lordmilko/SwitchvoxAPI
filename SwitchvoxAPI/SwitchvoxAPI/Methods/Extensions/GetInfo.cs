@@ -30,7 +30,12 @@ namespace SwitchvoxAPI
 
             var response = request.Execute(new Switchvox.RequestMethod("switchvox.extensions.getInfo", xml));
 
-            return response.Deserialize("extensions").Extensions;
+            var extensions = response.Deserialize<ListDeserializationLayers.Extensions>().Items;
+
+            if (extensions.Count == 0)
+                throw new SwitchvoxRequestException("No results for the given Account ID or Extension could be found.");
+
+            return extensions;
         }
 
         private void SetTagTypes(ExtensionIdentifier identifier)

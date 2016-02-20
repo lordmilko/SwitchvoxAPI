@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using SwitchvoxAPI.ListDeserializationLayers;
 
 namespace SwitchvoxAPI
 {
@@ -11,9 +12,9 @@ namespace SwitchvoxAPI
     public class CallQueueStatusDetails
     {
         [XmlElement("queue_members")]
-        public ListDeserializationLayer Members { get; set; }
+        public CallQueueStatusMembers Members { get; set; }
 
         [XmlElement("waiting_callers")]
-        public ListDeserializationLayer CallsWaiting { get; set; }
+        public CallQueueStatusWaitingCallers CallsWaiting { get; set; }
     }
 }

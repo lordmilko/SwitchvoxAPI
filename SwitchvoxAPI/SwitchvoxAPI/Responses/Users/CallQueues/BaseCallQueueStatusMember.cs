@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace SwitchvoxAPI
 {
-    public class CallQueueStatusMember
+    public class BaseCallQueueStatusMember
     {
         [XmlAttribute("account_id")]
         public string AccountId { get; set; }
@@ -91,10 +91,10 @@ namespace SwitchvoxAPI
         [XmlAttribute("call_duration")]
         public string CallDuration
         {
-            get { return pausedTime; }
+            get { return callDuration; }
             set
             {
-                pausedTime = value == string.Empty ? null : value;
+                callDuration = value == string.Empty ? null : value;
             }
         }
 
