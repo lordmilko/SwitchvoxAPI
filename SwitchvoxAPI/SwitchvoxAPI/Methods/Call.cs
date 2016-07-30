@@ -8,7 +8,7 @@ namespace SwitchvoxAPI
     /// <summary>
     /// Generate a call between two numbers using the phone system.
     /// </summary>
-    public partial class SwitchvoxRequest
+    public partial class SwitchvoxClient
     {
         /// <summary>
         /// Generate a call between two numbers using the phone system.

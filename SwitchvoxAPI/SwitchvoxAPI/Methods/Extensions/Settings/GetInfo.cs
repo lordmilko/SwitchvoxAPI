@@ -9,7 +9,7 @@ namespace SwitchvoxAPI
         /// </summary>
         public ExtensionSettings GetInfo()
         {
-            var response = request.Execute(new RequestMethod("switchvox.extensions.settings.getInfo", null));
+            var response = client.Execute(new RequestMethod("switchvox.extensions.settings.getInfo", null));
 
             return response.Deserialize<ExtensionSettings>();
         }

@@ -9,7 +9,7 @@ using SwitchvoxAPI.SwitchvoxAPI;
 namespace SwitchvoxAPI
 {
     /// <summary>
-    /// Encapsulates a response from a <see cref="T:SwitchvoxAPI.SwitchvoxRequest"/>.
+    /// Encapsulates a response from a <see cref="T:SwitchvoxAPI.SwitchvoxClient"/>.
     /// </summary>
     public class SwitchvoxResponse
     {

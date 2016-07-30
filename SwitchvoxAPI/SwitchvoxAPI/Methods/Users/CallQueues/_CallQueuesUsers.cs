@@ -2,11 +2,11 @@
 {
     public partial class CallQueuesUsers
     {
-        private readonly SwitchvoxRequest request;
+        private readonly SwitchvoxClient client;
 
-        internal CallQueuesUsers(SwitchvoxRequest request)
+        internal CallQueuesUsers(SwitchvoxClient client)
         {
-            this.request = request;
+            this.client = client;
         }
     }
 }

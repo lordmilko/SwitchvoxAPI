@@ -70,7 +70,7 @@
     <Compile Include="SwitchvoxAPI\Methods\Users\CallQueues\_CallQueuesUsers.cs" />
     <Compile Include="SwitchvoxAPI\Methods\Users\_Users.cs" />
     <Compile Include="Switchvox\RequestMethod.cs" />
-    <Compile Include="SwitchvoxAPI\SwitchvoxRequest.cs" />
+    <Compile Include="SwitchvoxAPI\SwitchvoxClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Switchvox\_Unimplemented\AccessControl\Add.cs" />
     <Compile Include="Switchvox\_Unimplemented\AccessControl\GetInfo.cs" />

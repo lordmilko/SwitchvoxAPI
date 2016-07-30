@@ -28,7 +28,7 @@ namespace SwitchvoxAPI
 
             var xml = new XElement(tagGroup, valuesList);
 
-            var response = request.Execute(new Switchvox.RequestMethod("switchvox.extensions.getInfo", xml));
+            var response = client.Execute(new Switchvox.RequestMethod("switchvox.extensions.getInfo", xml));
 
             var extensions = response.Deserialize<ListDeserializationLayers.Extensions>().Items;
 

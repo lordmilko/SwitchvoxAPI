@@ -2,15 +2,15 @@
 {
     public partial class Users
     {
-        private readonly SwitchvoxRequest request;
+        private readonly SwitchvoxClient client;
 
         public CallQueuesUsers CallQueues;
 
-        internal Users(SwitchvoxRequest request)
+        internal Users(SwitchvoxClient client)
         {
-            this.request = request;
+            this.client = client;
 
-            CallQueues = new CallQueuesUsers(request);
+            CallQueues = new CallQueuesUsers(client);
         }
     }
 }

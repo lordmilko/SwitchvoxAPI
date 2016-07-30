@@ -12,7 +12,7 @@ namespace SwitchvoxAPI
     /// </summary>
     public partial class Extensions
     {
-        private readonly SwitchvoxRequest request;
+        private readonly SwitchvoxClient client;
 
         /// <summary>
         /// Methods contained in the Switchvox.Extensions.Settings namespace.
@@ -22,12 +22,12 @@ namespace SwitchvoxAPI
         /// <summary>
         /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.Extensions"/> class.
         /// </summary>
-        /// <param name="request"><see cref="T:SwitchvoxAPI.SwitchvoxRequest"/> methods will use to communicate with the phone server.</param>
-        internal Extensions(SwitchvoxRequest request)
+        /// <param name="client"><see cref="T:SwitchvoxAPI.SwitchvoxClient"/> methods will use to communicate with the phone server.</param>
+        internal Extensions(SwitchvoxClient client)
         {
-            this.request = request;
+            this.client = client;
 
-            Settings = new Settings(request);
+            Settings = new Settings(client);
         }
     }
 }

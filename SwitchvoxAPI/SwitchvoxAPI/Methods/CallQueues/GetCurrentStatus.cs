@@ -11,7 +11,7 @@ namespace SwitchvoxAPI
         /// <param name="accountId">The Account ID of a valid call queue</param>
         public object GetCurrentStatus(string accountId)
         {
-            var response = request.Execute(new RequestMethod("switchvox.callQueues.getCurrentStatus", new XElement("account_id", accountId)));
+            var response = client.Execute(new RequestMethod("switchvox.callQueues.getCurrentStatus", new XElement("account_id", accountId)));
 
             return null;
         }

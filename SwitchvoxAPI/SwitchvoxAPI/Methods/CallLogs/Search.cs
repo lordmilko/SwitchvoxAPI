@@ -57,7 +57,7 @@ namespace SwitchvoxAPI
                 new XElement("page_number", pageNumber)
             };
 
-            var response = request.Execute(new Switchvox.RequestMethod("switchvox.callLogs.search", xml));
+            var response = client.Execute(new Switchvox.RequestMethod("switchvox.callLogs.search", xml));
 
             return response.Deserialize<CallLogs<CallLog>>();
         }

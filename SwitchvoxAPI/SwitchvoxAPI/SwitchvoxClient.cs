@@ -12,7 +12,7 @@ namespace SwitchvoxAPI
     /// <summary>
     /// Makes API requests against a Digium Switchvox Phone System.
     /// </summary>
-    public partial class SwitchvoxRequest
+    public partial class SwitchvoxClient
     {
         //Methods
 
@@ -76,9 +76,9 @@ namespace SwitchvoxAPI
         readonly string password;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.SwitchvoxRequest"/> class, using the "ServerUrl", "Username" and "Password" fields of a web.config file's AppSettings.
+        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.SwitchvoxClient"/> class, using the "ServerUrl", "Username" and "Password" fields of a web.config file's AppSettings.
         /// </summary>
-        public SwitchvoxRequest()
+        public SwitchvoxClient()
         {
             var url = WebConfigurationManager.AppSettings["ServerUrl"];
             var name = WebConfigurationManager.AppSettings["Username"];
@@ -101,12 +101,12 @@ namespace SwitchvoxAPI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.SwitchvoxRequest"/> class.
+        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.SwitchvoxClient"/> class.
         /// </summary>
         /// <param name="serverUrl">URL of the Phone Server</param>
         /// <param name="username">Case sensitive username of an account with sufficient permissions to make API Requests. Username can be of an Admin (to access the Admin API) or a User (Phone Extension) (to access the User API).</param>
         /// <param name="password">Password for the username.</param>
-        public SwitchvoxRequest(string serverUrl, string username, string password)
+        public SwitchvoxClient(string serverUrl, string username, string password)
         {
             Server = serverUrl;
             Username = username;

@@ -8,11 +8,11 @@ namespace SwitchvoxAPI
 {
     public partial class CallLogs
     {
-        private readonly SwitchvoxRequest request;
+        private readonly SwitchvoxClient client;
 
-        internal CallLogs(SwitchvoxRequest request)
+        internal CallLogs(SwitchvoxClient client)
         {
-            this.request = request;
+            this.client = client;
         }
     }
 }
