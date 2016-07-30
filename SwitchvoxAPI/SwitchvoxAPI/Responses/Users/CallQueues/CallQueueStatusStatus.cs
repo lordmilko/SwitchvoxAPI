@@ -72,7 +72,6 @@ namespace SwitchvoxAPI
 
         public TimeSpan PausedTime => ConvertExtensions.ToTimeSpan(_RawPausedTime);
 
-
         [XmlAttribute("current_call_duration")]
         public string _RawCurrentCallDuration { get; set; }
 

@@ -14,10 +14,10 @@ namespace SwitchvoxAPI
         public CallQueueStatus GetTodaysStatus(string callQueueAccountId, string userAccountId)
         {
             var xml = new List<XElement>
-        {
-            new XElement("account_id", userAccountId),
-            new XElement("call_queue_account_id", callQueueAccountId)
-        };
+            {
+                new XElement("account_id", userAccountId),
+                new XElement("call_queue_account_id", callQueueAccountId)
+            };
 
             var response = request.Execute(new RequestMethod("switchvox.users.callQueues.getTodaysStatus", xml));
 

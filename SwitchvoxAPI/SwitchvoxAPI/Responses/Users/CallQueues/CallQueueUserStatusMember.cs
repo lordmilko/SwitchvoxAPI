@@ -11,6 +11,7 @@ namespace SwitchvoxAPI
     {
         private string callDuration;
 
+        //todo: why is this not a timespan
         [XmlAttribute("call_duration")]
         public string CallDuration
         {

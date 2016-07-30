@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SwitchvoxAPI
 {
-    public class ConvertExtensions
+    internal class ConvertExtensions
     {
         /// <summary>
         /// Convert a string that may be empty to an integer.
@@ -16,6 +16,11 @@ namespace SwitchvoxAPI
         public static int ToInt32(string str)
         {
             return str == string.Empty ? 0 : Convert.ToInt32(str);
+        }
+
+        public static double ToDouble(string str)
+        {
+            return str == string.Empty ? 0 : Convert.ToDouble(str);
         }
 
         public static TimeSpan ToTimeSpan(string str)

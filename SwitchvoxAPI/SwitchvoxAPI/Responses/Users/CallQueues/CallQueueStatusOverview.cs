@@ -9,35 +9,62 @@ namespace SwitchvoxAPI
 {
     public class CallQueueStatusOverview
     {
+        /// <summary>
+        /// Number of calls currently waiting to be answered.
+        /// </summary>
         [XmlAttribute("callers_waiting")]
         public int CallersWaiting { get; set; }
 
+        /// <summary>
+        /// Number of Queue Members currently in a call.
+        /// </summary>
         [XmlAttribute("members_on_call")]
         public int MembersOnCall { get; set; }
 
+        /// <summary>
+        /// Total number of Queue Members in the Call Queue.
+        /// </summary>
         [XmlAttribute("total_members")]
         public int TotalMembers { get; set; }
 
+        /// <summary>
+        /// Total number of calls that have been received by the Call Queue.
+        /// </summary>
         [XmlAttribute("total_calls")]
         public int TotalCalls { get; set; }
 
+        /// <summary>
+        /// Number of calls that were hung up before being answered.
+        /// </summary>
         [XmlAttribute("abandoned_calls")]
         public int AbandonedCalls { get; set; }
 
+        /// <summary>
+        /// Number of calls that were redirected/forwarded before being answered.
+        /// </summary>
         [XmlAttribute("redirected_calls")]
         public int RedirectedCalls { get; set; }
 
+        /// <summary>
+        /// Number of calls that have been answered today.
+        /// </summary>
         [XmlAttribute("completed_calls_today")]
         public int CallsCompletedToday { get; set; }
 
+        /// <summary>
+        /// Average talk time of calls received in the Queue.
+        /// </summary>
         public TimeSpan AverageTalkTime => ConvertExtensions.ToTimeSpan(_RawAverageTalkTime);
+
+        /// <summary>
+        /// Longest talk time of calls received in the Queue.
+        /// </summary>
         public TimeSpan MaxTalkTime => ConvertExtensions.ToTimeSpan(_RawMaxTalkTime);
 
         public TimeSpan AverageWaitTime => ConvertExtensions.ToTimeSpan(_RawAverageWaitTime);
         public TimeSpan MaxWaitTime => ConvertExtensions.ToTimeSpan(_RawMaxWaitTime);
 
-        [XmlAttribute("avg_entry_position")]
-        public int AverageEntryPosition { get; set; }
+        public double AverageEntryPosition => ConvertExtensions.ToDouble(_RawAverageEntryPosition);
 
         [XmlAttribute("longest_queue_length")]
         public int LongestQueueLength { get; set; }
@@ -62,6 +89,9 @@ namespace SwitchvoxAPI
 
         [XmlAttribute("max_wait_time")]
         public string _RawMaxWaitTime { get; set; }
+
+        [XmlAttribute("avg_entry_position")]
+        public string _RawAverageEntryPosition { get; set; }
 
         [XmlAttribute("max_wait_time_abandoned_calls")]
         public string _RawMaxWaitTimeAbandonedCalls { get; set; }
