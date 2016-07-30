@@ -9,6 +9,39 @@ using System.Xml.Serialization;
 
 namespace SwitchvoxAPI
 {
+    /// <summary>
+    /// Specifies types extensions can be.
+    /// </summary>
+    public enum ExtensionType
+    {
+        /// <summary>
+        /// Regular SIP Extension.
+        /// </summary>
+        [XmlEnum("sip")]
+        SIPExtension,
+
+        /// <summary>
+        /// Extension is a Call Queue.
+        /// </summary>
+        [XmlEnum("call_queue")]
+        CallQueue,
+
+        /// <summary>
+        /// Extension is an IVR
+        /// </summary>
+        [XmlEnum("ivr")]
+        IVR,
+
+        /// <summary>
+        /// Extension is a Virtual Extension
+        /// </summary>
+        [XmlEnum("virtual")]
+        Virtual
+    }
+
+    /// <summary>
+    /// Specifies the state an active call is in.
+    /// </summary>
     public enum CurrentCallState
     {
         [XmlEnum("agent_login")]
@@ -60,15 +93,27 @@ namespace SwitchvoxAPI
         Unknown
     }
 
+    /// <summary>
+    /// Specifies where a call originated from.
+    /// </summary>
     public enum CallOrigination
     {
+        /// <summary>
+        /// Call originated from an extension inside the phone system.
+        /// </summary>
         [XmlEnum("incoming")]
         Incoming,
 
+        /// <summary>
+        /// Call originated outside the phone system.
+        /// </summary>
         [XmlEnum("outgoing")]
         Outgoing
     }
 
+    /// <summary>
+    /// Specifies events that occur during the course of a phone call.
+    /// </summary>
     public enum CallEventType
     {
         [XmlEnum("OUTGOING")]
@@ -114,11 +159,20 @@ namespace SwitchvoxAPI
         Voicemail
     }
 
+    /// <summary>
+    /// Specifies the type of call in a Call Queue Log.
+    /// </summary>
     public enum QueueCallType
     {
+        /// <summary>
+        /// The call was successfully completed by a user hanging up.
+        /// </summary>
         [XmlEnum("completed")]
         Completed,
 
+        /// <summary>
+        /// The call was forwarded, potentially outside of the phone system.
+        /// </summary>
         [XmlEnum("redirected")]
         Redirected
     }

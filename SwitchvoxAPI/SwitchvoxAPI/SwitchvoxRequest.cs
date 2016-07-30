@@ -175,7 +175,7 @@ namespace SwitchvoxAPI
 
         private HttpWebRequest CreateHttpRequest(byte[] xmlRequestBytes)
         {
-            var request = (HttpWebRequest)WebRequest.Create(server + "/xml");
+            var request = (HttpWebRequest)WebRequest.Create(server + "xml");
             request.Proxy = null;
             request.Credentials = new NetworkCredential(Username, password);
             request.ContentType = "text/xml; encoding='utf8'";

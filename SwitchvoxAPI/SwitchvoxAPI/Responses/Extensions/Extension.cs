@@ -7,27 +7,42 @@ using System.Xml.Serialization;
 
 namespace SwitchvoxAPI
 {
+    /// <summary>
+    /// Encapsulates properties pertaining to an extension on a phone system.
+    /// </summary>
     public class Extension
     {
         [XmlAttribute("server_uuid")]
         public string ServerUUID { get; set; }
 
+        /// <summary>
+        /// The number of the extension.
+        /// </summary>
         [XmlAttribute("number")]
         public string Number { get; set; }
 
         [XmlAttribute("status")]
         public int Status { get; set; }
 
+        /// <summary>
+        /// The extension's Account ID.
+        /// </summary>
         [XmlAttribute("account_id")]
         public string AccountId { get; set; }
 
+        /// <summary>
+        /// The Display Name that has been set for the extension (if the extension belongs to a user, this is typically their name)
+        /// </summary>
         [XmlAttribute("display")]
         public string DisplayName { get; set; }
 
+        /// <summary>
+        /// Date the extension was created.
+        /// </summary>
         public DateTime DateCreated => DateTime.Parse(_RawDateCreated);
 
         [XmlAttribute("type")]
-        public string Type { get; set; }
+        public ExtensionType Type { get; set; }
 
         [XmlAttribute("type_display")]
         public string TypeDisplay { get; set; }

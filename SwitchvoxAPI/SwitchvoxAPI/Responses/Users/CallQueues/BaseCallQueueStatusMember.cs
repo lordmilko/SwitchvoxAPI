@@ -76,6 +76,7 @@ namespace SwitchvoxAPI
 
         private string pausedTime;
 
+        //todo: shouldnt this be a duration?
         [XmlAttribute("paused_time")]
         public string PausedTime
         {
@@ -88,6 +89,7 @@ namespace SwitchvoxAPI
 
         private string callDuration;
 
+        //todo: should this be a timespan, and should we check all call durations in the api
         [XmlAttribute("call_duration")]
         public string CallDuration
         {
