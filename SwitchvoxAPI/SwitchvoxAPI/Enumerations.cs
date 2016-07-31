@@ -44,9 +44,15 @@ namespace SwitchvoxAPI
     /// </summary>
     public enum CurrentCallState
     {
+        /// <summary>
+        /// <see cref="SwitchvoxAPI.ExtensionType.SIPExtension"/>  is logging into a call queue, or <see cref="SwitchvoxAPI.ExtensionType.Virtual"/> is logging into a phone.
+        /// </summary>
         [XmlEnum("agent_login")]
         AgentLogin,
 
+        /// <summary>
+        /// <see cref="SwitchvoxAPI.ExtensionType.SIPExtension"/>  is logging out of a call queue, or <see cref="SwitchvoxAPI.ExtensionType.Virtual"/> is logging out of a phone.
+        /// </summary>
         [XmlEnum("agent_logout")]
         AgentLogout,
 
@@ -74,6 +80,9 @@ namespace SwitchvoxAPI
         [XmlEnum("monitoring")]
         Monitoring,
 
+        /// <summary>
+        /// Call is currently parked (on hold), waiting to be retrieved from another phone.
+        /// </summary>
         [XmlEnum("parked")]
         Parked,
 
@@ -83,6 +92,9 @@ namespace SwitchvoxAPI
         [XmlEnum("receiving_fax")]
         ReceivingFax,
 
+        /// <summary>
+        /// Call is in the process of ringing.
+        /// </summary>
         [XmlEnum("ringing")]
         Ringing,
 

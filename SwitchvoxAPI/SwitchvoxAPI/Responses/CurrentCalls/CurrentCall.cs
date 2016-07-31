@@ -12,7 +12,7 @@ namespace SwitchvoxAPI
         [XmlAttribute("state")]
         public CurrentCallState State { get; set; }
 
-        public DateTime StartTime => DateTime.Parse(_RawStartTime);
+        public DateTime? StartTime => string.IsNullOrEmpty(_RawStartTime) ? null : (DateTime?)DateTime.Parse(_RawStartTime);
 
         public TimeSpan Duration => TimeSpan.FromSeconds(_RawDuration);
 

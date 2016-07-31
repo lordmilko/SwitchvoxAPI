@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\SwitchvoxRequestException.cs" />
+    <Compile Include="Exceptions\XmlDeserializationException.cs" />
     <Compile Include="SwitchvoxAPI\AttributeUtilities.cs" />
     <Compile Include="SwitchvoxAPI\ConvertExtensions.cs" />
     <Compile Include="SwitchvoxAPI\Methods\CallQueues\_CallQueues.cs" />
@@ -462,6 +463,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SwitchvoxAPI\Methods\IVR\GlobalVariables\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="todo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

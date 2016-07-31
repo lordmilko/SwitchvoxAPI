@@ -6,6 +6,7 @@ namespace SwitchvoxAPI
     /// <summary>
     /// The exception that is thrown when a <see cref="T:SwitchvoxAPI.SwitchvoxResponse"/> fails with a <see cref="T:System.Net.WebException"/> with StatusCode <see cref="System.Net.HttpStatusCode.Forbidden"/>/>.
     /// </summary>
+    [Serializable]
     public class UnauthorizedRequestException : Exception
     {
         /// <summary>

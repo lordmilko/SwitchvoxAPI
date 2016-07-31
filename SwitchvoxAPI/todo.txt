@@ -1,0 +1,2 @@
+﻿add xml docs
+create extensions of all phone types (directory, agent login, etc), make a call and add the missing extensiontypes

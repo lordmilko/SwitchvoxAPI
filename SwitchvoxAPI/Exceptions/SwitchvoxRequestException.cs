@@ -6,6 +6,7 @@ namespace SwitchvoxAPI
     /// <summary>
     /// The exception that is thrown when a <see cref="T:SwitchvoxAPI.SwitchvoxResponse"/> contains any error messages.
     /// </summary>
+    [Serializable]
     public class SwitchvoxRequestException : Exception
     {
         /// <summary>
@@ -37,7 +38,7 @@ namespace SwitchvoxAPI
         /// </summary>
         /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
-        public SwitchvoxRequestException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected SwitchvoxRequestException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

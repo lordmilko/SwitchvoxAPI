@@ -41,6 +41,9 @@ namespace SwitchvoxAPI
         /// </summary>
         public CurrentCalls CurrentCalls;
 
+        /// <summary>
+        /// Methods contained in the Switchvox.CallQueues namespace.
+        /// </summary>
         public CallQueues CallQueues;
 
         /// <summary>
@@ -204,7 +207,9 @@ namespace SwitchvoxAPI
                     var tempDoc = new XmlDocument();
                     tempDoc.Load(response.GetResponseStream());
 
-                    doc = XDocument.Parse(tempDoc.InnerXml);
+                    doc = XDocument.Parse(tempDoc.InnerXml, LoadOptions.SetLineInfo);
+
+                    var heghgh = doc.Descendants().Select(x => ((IXmlLineInfo)x).LineNumber).ToList();
                 }
 
             }
