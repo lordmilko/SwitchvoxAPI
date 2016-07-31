@@ -9,7 +9,7 @@ namespace SwitchvoxAPI
         /// </summary>
         public List<CurrentCall> GetList()
         {
-            var response = client.Execute(new Switchvox.RequestMethod("switchvox.currentCalls.getList", null));
+            var response = client.Execute(new RequestMethod("switchvox.currentCalls.getList", null));
 
             return response.Deserialize<ListDeserializationLayers.CurrentCalls>().Items;
         }

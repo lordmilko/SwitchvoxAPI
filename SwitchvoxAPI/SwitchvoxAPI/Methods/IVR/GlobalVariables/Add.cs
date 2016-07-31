@@ -1,19 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace Switchvox.IVR.GlobalVariables
+namespace SwitchvoxAPI
 {
-    /// <summary>
-    /// Add a Global IVR Variable to the phone system
-    /// </summary>
-    public class Add : RequestMethod
+    public partial class GlobalVariables
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Switchvox.IVR.GlobalVariables.Add"/> class.
+        /// Add a Global IVR Variable to the phone system
         /// </summary>
         /// <param name="name">The name of the Global IVR Variable to add. If a Global IVR Variable with this name already exists, this method will return the ID of the existing variable.</param>
         /// <param name="value">The initial value to assign to the Global IVR Variable. If a Global IVR Variable with the name specified in the name parameter already exists, this method set the variable to this value and return its ID.</param>
-        public Add(string name, string value = null) : base("switchvox.ivr.globalVariables.add")
+        public void Add(string name, string value = null)
         {
             var xml = new List<XElement>
             {
@@ -23,7 +20,7 @@ namespace Switchvox.IVR.GlobalVariables
             if (value != null)
                 xml.Add(new XElement("global_ivr_variable_value", value));
 
-            SetXml(xml);
+            var response = client.Execute(new RequestMethod("switchvox.ivr.globalVariables.add", xml));
         }
     }
 }

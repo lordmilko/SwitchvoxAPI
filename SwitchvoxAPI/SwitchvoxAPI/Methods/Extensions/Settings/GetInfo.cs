@@ -1,6 +1,4 @@
-﻿using Switchvox;
-
-namespace SwitchvoxAPI
+﻿namespace SwitchvoxAPI
 {
     public partial class Settings
     {

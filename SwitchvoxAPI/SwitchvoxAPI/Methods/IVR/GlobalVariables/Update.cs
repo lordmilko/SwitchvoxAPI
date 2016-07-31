@@ -1,19 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace Switchvox.IVR.GlobalVariables
+namespace SwitchvoxAPI
 {
-    /// <summary>
-    /// Update the value of a Global IVR Variable
-    /// </summary>
-    public class Update : RequestMethod
+    public partial class GlobalVariables
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Switchvox.IVR.GlobalVariables.Update"/> class.
+        /// Update the value of a Global IVR Variable
         /// </summary>
         /// <param name="id">The Global IVR Variable ID of the Global IVR Variable you wish to update</param>
         /// <param name="value">The value you wish to assign to the Global IVR Variable</param>
-        public Update(int id, string value) : base("switchvox.ivr.globalVariables.update")
+        public void Update(int id, string value)
         {
             var xml = new List<XElement>
             {
@@ -21,7 +18,7 @@ namespace Switchvox.IVR.GlobalVariables
                 new XElement("global_ivr_variable_value", value)
             };
 
-            SetXml(xml);
+            var response = client.Execute(new RequestMethod("switchvox.ivr.globalVariables.update", xml));
         }
     }
 }

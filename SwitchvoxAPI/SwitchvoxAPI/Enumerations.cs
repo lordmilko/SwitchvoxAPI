@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 //Global enumerations that can apply to a wide variety of Switchvox Request Methods
@@ -223,22 +219,22 @@ namespace SwitchvoxAPI
         /// <summary>
         /// Perform a search using a single Account ID
         /// </summary>
-        AccountIds,
+        AccountId,
 
         /// <summary>
         /// Perform a search using a single Channel Group ID
         /// </summary>
-        ChannelGroupIds,
+        ChannelGroupId,
 
         /// <summary>
         /// Perform a search using a single IAX Provider ID
         /// </summary>
-        IAXProviderIds,
+        IAXProviderId,
 
         /// <summary>
         /// Perform a search using a single SIP Provider ID
         /// </summary>
-        SIPProviderIds,
+        SIPProviderId,
 
         /// <summary>
         /// Perform a search using a single Caller ID Name

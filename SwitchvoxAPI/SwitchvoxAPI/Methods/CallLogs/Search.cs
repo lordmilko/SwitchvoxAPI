@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using SwitchvoxAPI;
 
 namespace SwitchvoxAPI
 {
@@ -57,7 +56,7 @@ namespace SwitchvoxAPI
                 new XElement("page_number", pageNumber)
             };
 
-            var response = client.Execute(new Switchvox.RequestMethod("switchvox.callLogs.search", xml));
+            var response = client.Execute(new RequestMethod("switchvox.callLogs.search", xml));
 
             return response.Deserialize<CallLogs<CallLog>>();
         }
@@ -98,22 +97,22 @@ namespace SwitchvoxAPI
 
             switch(searchData)
             {
-                case CallLogSingleItemSearchData.AccountIds:
+                case CallLogSingleItemSearchData.AccountId:
                     groupTagName = "account_ids";
                     tagName = "account_id";
                     break;
 
-                case CallLogSingleItemSearchData.ChannelGroupIds:
+                case CallLogSingleItemSearchData.ChannelGroupId:
                     groupTagName = "channel_group_ids";
                     tagName = "channel_group_id";
                     break;
 
-                case CallLogSingleItemSearchData.IAXProviderIds:
+                case CallLogSingleItemSearchData.IAXProviderId:
                     groupTagName = "iax_provider_ids";
                     tagName = "iax_provider_id";
                     break;
 
-                case CallLogSingleItemSearchData.SIPProviderIds:
+                case CallLogSingleItemSearchData.SIPProviderId:
                     groupTagName = "sip_provider_ids";
                     tagName = "sip_provider_id";
                     break;

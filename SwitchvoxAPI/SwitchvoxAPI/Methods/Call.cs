@@ -45,7 +45,7 @@ namespace SwitchvoxAPI
                 vars.Add(new XElement("variables", variableList));
             }
 
-            var response = Execute(new Switchvox.RequestMethod("switchvox.call", vars));
+            var response = Execute(new RequestMethod("switchvox.call", vars));
         }
     }
 }

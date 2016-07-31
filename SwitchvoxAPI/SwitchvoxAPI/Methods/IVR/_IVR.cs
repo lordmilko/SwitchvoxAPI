@@ -1,26 +1,26 @@
 ﻿namespace SwitchvoxAPI
 {
     /// <summary>
-    /// Methods contained in the Switchvox.Extensions namespace.
+    /// Methods contained in the Switchvox.IVR namespace.
     /// </summary>
-    public partial class Extensions
+    public partial class IVR
     {
         private readonly SwitchvoxClient client;
 
         /// <summary>
-        /// Methods contained in the Switchvox.Extensions.Settings namespace.
+        /// Methods contained in the Switchvox.IVR.GlobalVariables namespace.
         /// </summary>
-        public Settings Settings;
+        public GlobalVariables GlobalVariables;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.Extensions"/> class.
+        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.IVR"/> class.
         /// </summary>
         /// <param name="client"><see cref="T:SwitchvoxAPI.SwitchvoxClient"/> methods will use to communicate with the phone server.</param>
-        internal Extensions(SwitchvoxClient client)
+        internal IVR(SwitchvoxClient client)
         {
             this.client = client;
 
-            Settings = new Settings(client);
+            GlobalVariables = new GlobalVariables(client);
         }
     }
 }

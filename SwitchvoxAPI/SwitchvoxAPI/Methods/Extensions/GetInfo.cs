@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using SwitchvoxAPI;
 
 namespace SwitchvoxAPI
 {
@@ -28,7 +27,7 @@ namespace SwitchvoxAPI
 
             var xml = new XElement(tagGroup, valuesList);
 
-            var response = client.Execute(new Switchvox.RequestMethod("switchvox.extensions.getInfo", xml));
+            var response = client.Execute(new RequestMethod("switchvox.extensions.getInfo", xml));
 
             var extensions = response.Deserialize<ListDeserializationLayers.Extensions>().Items;
 

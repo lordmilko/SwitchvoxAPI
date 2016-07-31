@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using SwitchvoxAPI;
 
 namespace SwitchvoxAPI
 {
@@ -58,7 +57,7 @@ namespace SwitchvoxAPI
                 new XElement("page_number", pageNumber)
             };
 
-            var response = client.Execute(new Switchvox.RequestMethod("switchvox.callQueueLogs.search", xml));
+            var response = client.Execute(new RequestMethod("switchvox.callQueueLogs.search", xml));
 
             return response.Deserialize<CallLogs<CallQueueLog>>();
         }

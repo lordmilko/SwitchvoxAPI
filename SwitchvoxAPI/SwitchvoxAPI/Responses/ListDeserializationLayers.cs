@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
-using SwitchvoxAPI;
 
 namespace SwitchvoxAPI.ListDeserializationLayers
 {
-
     [XmlRoot("extensions")]
     public class Extensions
     {
@@ -41,5 +35,12 @@ namespace SwitchvoxAPI.ListDeserializationLayers
     {
         [XmlElement("current_call")]
         public List<CurrentCall> Items { get; set; }
-    }       
+    }
+
+    [XmlRoot("global_ivr_variables")]
+    public class GlobalIVRVariables
+    {
+        [XmlElement("global_ivr_variable")]
+        public List<GlobalIVRVariable> Items { get; set; }
+    }
 }
