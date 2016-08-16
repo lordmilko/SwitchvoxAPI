@@ -35,3 +35,18 @@ If you wish to implement an undefined Method, three things have to be done:
 3. Define one or more objects to deserialize the response against
 
 Existing Methods such as `SwitchvoxAPI.Extensions.GetInfo` or `SwitchvoxAPI.CurrentCalls.GetList` can also be referred to see how Methods are defined. If you do implement a Method that is not yet defined, feel free to request merging your additions with SwitchvoxAPI to bring it a little bit closer to completion!
+
+## Examples
+
+### Retrieve A Queue's Call Logs
+
+```c#
+//Get Today's Queue Status
+var queueStatus = userClient.Users.CallQueues.GetTodaysStatus("1234", "5678");
+
+//Get the account IDs of the queue
+var queueAccountIds = queueStatus.Members.Select(m => m.AccountId).ToList()
+
+//Retrieve today's call logs
+var callLogData = client.CallLogs.Search(DateTime.Today, DateTime.Today.AddDays(1), CallLogMultiItemSearchData.AccountIds, accountIds, SortOrder.Desc, 10000);
+```
