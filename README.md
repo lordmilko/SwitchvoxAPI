@@ -48,5 +48,5 @@ var queueStatus = userClient.Users.CallQueues.GetTodaysStatus("1234", "5678");
 var queueAccountIds = queueStatus.Members.Select(m => m.AccountId).ToList()
 
 //Retrieve today's call logs
-var callLogData = client.CallLogs.Search(DateTime.Today, DateTime.Today.AddDays(1), CallLogMultiItemSearchData.AccountIds, accountIds, SortOrder.Desc, 10000);
+var callLogData = client.CallLogs.Search(DateTime.Today, DateTime.Today.AddDays(1), CallLogMultiItemSearchData.AccountIds, accountIds, itemsPerPage: 10000);
 ```
