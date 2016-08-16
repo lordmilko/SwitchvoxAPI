@@ -45,7 +45,7 @@ Existing Methods such as `SwitchvoxAPI.Extensions.GetInfo` or `SwitchvoxAPI.Curr
 var queueStatus = userClient.Users.CallQueues.GetTodaysStatus("1234", "5678");
 
 //Get the account IDs of the queue
-var queueAccountIds = queueStatus.Members.Select(m => m.AccountId).ToList()
+var queueAccountIds = queueStatus.Members.Select(m => m.AccountId).ToArray()
 
 //Retrieve today's call logs
 var callLogData = client.CallLogs.Search(DateTime.Today, DateTime.Today.AddDays(1), CallLogMultiItemSearchData.AccountIds, accountIds, itemsPerPage: 10000);
