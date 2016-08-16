@@ -1,4 +1,4 @@
-﻿namespace SwitchvoxAPI
+﻿namespace SwitchvoxAPI.Methods
 {
     public partial class CallQueuesUsers
     {

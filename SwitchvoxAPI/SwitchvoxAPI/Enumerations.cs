@@ -82,6 +82,9 @@ namespace SwitchvoxAPI
         [XmlEnum("parked")]
         Parked,
 
+        /// <summary>
+        /// Call is waiting to be answered by a call queue.
+        /// </summary>
         [XmlEnum("queued")]
         Queued,
 
@@ -164,7 +167,16 @@ namespace SwitchvoxAPI
         NoEvents,
 
         [XmlEnum("VOICEMAIL")]
-        Voicemail
+        Voicemail,
+
+        [XmlEnum("PARKER")]
+        Parker,
+
+        [XmlEnum("PARKING_TIMEOUT")]
+        ParkingTimeout,
+
+        [XmlEnum("UNPARKED")]
+        Unparked
     }
 
     /// <summary>

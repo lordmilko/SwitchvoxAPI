@@ -5,6 +5,8 @@ using System.Text;
 using System.Web.Configuration;
 using System.Xml;
 using System.Xml.Linq;
+using SwitchvoxAPI.Methods;
+using Extensions = SwitchvoxAPI.Methods.Extensions;
 
 namespace SwitchvoxAPI
 {

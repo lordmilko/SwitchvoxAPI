@@ -1,4 +1,4 @@
-﻿namespace SwitchvoxAPI
+﻿namespace SwitchvoxAPI.Methods
 {
     /// <summary>
     /// Methods contained in the Switchvox.Extensions.Settings namespace.

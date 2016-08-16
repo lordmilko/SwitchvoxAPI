@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace SwitchvoxAPI
+namespace SwitchvoxAPI.Methods
 {
     public partial class GlobalVariables
     {

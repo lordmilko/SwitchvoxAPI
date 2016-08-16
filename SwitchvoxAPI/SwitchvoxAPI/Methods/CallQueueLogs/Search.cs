@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace SwitchvoxAPI
+namespace SwitchvoxAPI.Methods
 {
     /// <summary>
     /// Search the call queue logs on the phone system of one or more queues.

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SwitchvoxAPI
+namespace SwitchvoxAPI.Methods
 {
     public partial class CurrentCalls
     {
