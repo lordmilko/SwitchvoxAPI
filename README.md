@@ -36,6 +36,32 @@ If you wish to implement an undefined Method, three things have to be done:
 
 Existing Methods such as `SwitchvoxAPI.Extensions.GetInfo` or `SwitchvoxAPI.CurrentCalls.GetList` can also be referred to see how Methods are defined. If you do implement a Method that is not yet defined, feel free to request merging your additions with SwitchvoxAPI to bring it a little bit closer to completion!
 
+## Supported Methods
+* Switchvox
+  * **Call**
+  * CallLogs
+      * **Search**
+  * CallQueueLogs
+      * **Search**
+  * CallQueues
+      * **GetCurrentStatus**
+  * CurrentCalls
+      * **GetList**
+  * ExtensionGroups
+      * **GetInfo**
+      * **GetList**
+  * Extensions
+      * **GetInfo**
+  * IVR
+      * GlobalVariables
+          * **Add**
+          * **GetList**
+          * **Remove**
+          * **Update**
+  * Users
+      * CallQueues
+          * **GetTodaysStatus**
+
 ## Examples
 
 ### Retrieve A Queue's Call Logs
