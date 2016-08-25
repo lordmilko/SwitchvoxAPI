@@ -34,7 +34,7 @@ If you wish to implement an undefined Method, three things have to be done:
 2. Implement a method that constructs the XML required for the method request
 3. Define one or more objects to deserialize the response against
 
-Existing Methods such as `SwitchvoxAPI.Extensions.GetInfo` or `SwitchvoxAPI.CurrentCalls.GetList` can also be referred to see how Methods are defined. If you do implement a Method that is not yet defined, feel free to request merging your additions with SwitchvoxAPI to bring it a little bit closer to completion!
+Existing Methods such as `SwitchvoxAPI.Extensions.GetInfo` or `SwitchvoxAPI.CurrentCalls.GetList` can also be referred to to see how Methods are defined. If you do implement a Method that is not yet defined, feel free to request merging your additions with SwitchvoxAPI to bring it a little bit closer to completion!
 
 ## Supported Methods
 * Switchvox
