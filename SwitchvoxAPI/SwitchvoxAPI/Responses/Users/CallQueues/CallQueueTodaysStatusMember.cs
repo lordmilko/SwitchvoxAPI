@@ -2,7 +2,7 @@
 
 namespace SwitchvoxAPI
 {
-    public class CallQueueUserStatusMember : BaseCallQueueStatusMember
+    public class CallQueueTodaysStatusMember : BaseCallQueueStatusMember
     {
         private string callDuration;
 

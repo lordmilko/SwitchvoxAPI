@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace SwitchvoxAPI
 {
-    public class CallQueueStatusStatus
+    public class CallQueueTodaysStatusStatus
     {
         private string loginStatus;
 

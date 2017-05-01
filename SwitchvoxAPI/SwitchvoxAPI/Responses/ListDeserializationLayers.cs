@@ -10,25 +10,46 @@ namespace SwitchvoxAPI.ListDeserializationLayers
         public List<Extension> Items { get; set; }
     }
 
+    [XmlRoot("extension_groups")]
+    public class ExtensionGroupOverviews
+    {
+        [XmlElement("extension_group")]
+        public List<ExtensionGroupOverview> Items { get; set; }
+    }
+
+    [XmlRoot("members")]
+    public class ExtensionGroupMembers
+    {
+        [XmlElement("member")]
+        public List<ExtensionGroupMember> Items { get; set; }
+    }
+
+    [XmlRoot("dependents")]
+    public class ExtensionGroupDependents
+    {
+        [XmlElement("dependent")]
+        public List<ExtensionGroupDependent> Items { get; set; }
+    }
+
     [XmlRoot("queue_members")]
-    public class CallQueueStatusMembers
+    public class CallQueueStatusMembers<T>
     {
         [XmlElement("queue_member")]
-        public List<CallQueueUserStatusMember> Items { get; set; }
+        public List<T> Items { get; set; }
     }
 
     [XmlRoot("waiting_callers")]
-    public class CallQueueStatusWaitingCallers
+    public class CallQueueTodaysStatusWaitingCallers
     {
         [XmlElement("waiting_caller")]
-        public List<CallQueueStatusWaitingCall> Items { get; set; }
+        public List<CallQueueTodaysStatusWaitingCall> Items { get; set; }
     }
 
     public class CallLogEvents
     {
         [XmlElement("event")]
         public List<CallLogEvent> Items { get; set; }
-    }  
+    }
 
     [XmlRoot("current_calls")]
     public class CurrentCalls
@@ -44,3 +65,4 @@ namespace SwitchvoxAPI.ListDeserializationLayers
         public List<GlobalIVRVariable> Items { get; set; }
     }
 }
+

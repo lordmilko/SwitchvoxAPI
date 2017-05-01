@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace SwitchvoxAPI
 {
-    public class CallQueueStatusOverview
+    public class CallQueueTodaysStatusOverview
     {
         /// <summary>
         /// Number of calls currently waiting to be answered.

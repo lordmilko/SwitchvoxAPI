@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace SwitchvoxAPI
 {
-    public class BaseCallQueueStatusMember
+    public abstract class BaseCallQueueStatusMember
     {
         [XmlAttribute("account_id")]
         public string AccountId { get; set; }
@@ -17,11 +17,11 @@ namespace SwitchvoxAPI
         [XmlAttribute("order")]
         public int Order { get; set; }
 
-        [XmlAttribute("loggedin_status")]
-        public string LoggedInStatus { get; set; }
+        //[XmlAttribute("loggedin_status")]
+        //public string LoggedInStatus { get; set; }
 
         [XmlAttribute("login_type")]
-        public string LoginType { get; set; }
+        public QueueLoginType LoginType { get; set; }
 
         private string talkingToName;
 
@@ -85,7 +85,7 @@ namespace SwitchvoxAPI
 
         private string callDuration;
 
-        //todo: should this be a timespan, and should we check all call durations in the api
+        /*//todo: should this be a timespan, and should we check all call durations in the api
         [XmlAttribute("call_duration")]
         public string CallDuration
         {
@@ -94,7 +94,7 @@ namespace SwitchvoxAPI
             {
                 callDuration = value == string.Empty ? null : value;
             }
-        }
+        }*/
 
         [XmlAttribute("time_of_last_call")]
         public string _RawLastCallTime { get; set; }

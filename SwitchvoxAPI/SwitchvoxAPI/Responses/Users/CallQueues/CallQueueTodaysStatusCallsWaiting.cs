@@ -3,7 +3,8 @@ using System.Xml.Serialization;
 
 namespace SwitchvoxAPI
 {
-    public class CallQueueStatusWaitingCall
+    //todo: i dont think this has been done correctly - i think the position attribute should have a position xml attribute?
+    public class CallQueueTodaysStatusWaitingCall
     {
         [XmlAttribute("waiting_caller")]
         public int Position { get; set; }

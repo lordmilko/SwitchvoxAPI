@@ -5,6 +5,18 @@ using System.Xml.Serialization;
 
 namespace SwitchvoxAPI
 {
+    public enum QueueLoginType
+    {
+        [XmlEnum("permanent")]
+        Permanent
+    }
+
+    public enum CallQueueStrategy
+    {
+        [XmlEnum("ring_all")]
+        RingAll
+    }
+
     /// <summary>
     /// Specifies types extensions can be.
     /// </summary>
@@ -32,7 +44,49 @@ namespace SwitchvoxAPI
         /// Extension is a Virtual Extension
         /// </summary>
         [XmlEnum("virtual")]
-        Virtual
+        Virtual,
+
+        [XmlEnum("intercom")]
+        Intercom,
+
+        [XmlEnum("directory")]
+        Directory,
+
+        [XmlEnum("feature_intercom")]
+        FeatureIntercom,
+
+        [XmlEnum("feature_directed_pickup")]
+        FeatureDirectedPickup,
+
+        [XmlEnum("feature_send_to_vm")]
+        FeatureSendToVoicemail,
+
+        [XmlEnum("feature_monitor")]
+        FeatureCallMonitor,
+
+        [XmlEnum("feature_fax")]
+        FeatureSendFax,
+
+        [XmlEnum("voicemail")]
+        Voicemail,
+
+        [XmlEnum("simple_conference")]
+        SimpleConference,
+
+        [XmlEnum("conference")]
+        MeetMeConference,
+
+        [XmlEnum("agentcallbacklogin")]
+        AgentLogIn,
+
+        [XmlEnum("agentcallbacklogoff")]
+        AgentLogOff,
+
+        [XmlEnum("group_pickup")]
+        GroupPickup,
+
+        [XmlEnum("callpark")]
+        CallParking
     }
 
     /// <summary>
@@ -176,7 +230,16 @@ namespace SwitchvoxAPI
         ParkingTimeout,
 
         [XmlEnum("UNPARKED")]
-        Unparked
+        Unparked,
+
+        [XmlEnum("CASCADE")]
+        Cascade,
+
+        [XmlEnum("FORWARD")]
+        Forward,
+
+        [XmlEnum("DIRECTED_PICKUP")]
+        DirectedPickup
     }
 
     /// <summary>
@@ -194,7 +257,18 @@ namespace SwitchvoxAPI
         /// The call was forwarded, potentially outside of the phone system.
         /// </summary>
         [XmlEnum("redirected")]
-        Redirected
+        Redirected,
+
+        [XmlEnum("abandoned")]
+        Abandoned
+    }
+
+    public enum ExtensionGroupSortField
+    {
+        Name,
+        DateCreated,
+        Id,
+        MemberCount
     }
 
     /// <summary>

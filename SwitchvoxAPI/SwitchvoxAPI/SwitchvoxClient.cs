@@ -23,6 +23,11 @@ namespace SwitchvoxAPI
         public Extensions Extensions;
 
         /// <summary>
+        /// Methods contained in the Switchvox.ExtensionGroups namespace.
+        /// </summary>
+        public ExtensionGroups ExtensionGroups;
+
+        /// <summary>
         /// Methods contained in the Switchvox.Users namespace.
         /// </summary>
         public Users Users;
@@ -60,14 +65,9 @@ namespace SwitchvoxAPI
             get { return server.AbsoluteUri; }
             private set
             {
-                if (value.StartsWith("http"))
+                if (value.StartsWith("http://") || value.StartsWith("https://"))
                 {
-                    //if (value.StartsWith("https"))
-                    //{
-                        server = new UriBuilder(value).Uri;
-                    //}
-
-                    //Else we assume you know what you're doing
+                    server = new UriBuilder(value).Uri;
                 }
                 else
                 {
@@ -117,6 +117,15 @@ namespace SwitchvoxAPI
         /// <param name="password">Password for the username.</param>
         public SwitchvoxClient(string serverUrl, string username, string password)
         {
+            if (serverUrl == null)
+                throw new ArgumentNullException(nameof(serverUrl));
+
+            if (username == null)
+                throw new ArgumentNullException(nameof(username));
+
+            if (password == null)
+                throw new ArgumentNullException(nameof(password));
+
             Server = serverUrl;
             Username = username;
             this.password = password;
@@ -127,6 +136,7 @@ namespace SwitchvoxAPI
         private void InitializeMethodMembers()
         {
             Extensions = new Extensions(this);
+            ExtensionGroups = new ExtensionGroups(this);
             Users = new Users(this);
             CallLogs = new CallLogs(this);
             CallQueueLogs = new CallQueueLogs(this);

@@ -15,8 +15,7 @@ namespace SwitchvoxAPI
                 return ((XmlRootAttribute) attributes.First()).ElementName;
             }
 
-            //todo: create an exception for this
-            throw new NotImplementedException("missing an xmlroot");
+            throw new Exception($"Cannot deserialize type {type}. The type is missing an XmlRootAttribute");
         }
     }
 }
