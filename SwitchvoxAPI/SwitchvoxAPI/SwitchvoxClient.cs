@@ -78,39 +78,41 @@ namespace SwitchvoxAPI
         private Uri server;
 
         /// <summary>
-        /// Username that will be used to make API requests.
+        /// UserName that will be used to make API requests.
         /// </summary>
-        public string Username { get; }
+        public string UserName { get; }
 
         readonly string password;
 
+        private static bool ignoreInvalidSSLSet = false;
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.SwitchvoxClient"/> class, using the "ServerUrl", "Username" and "Password" fields of a web.config file's AppSettings.
+        /// Initializes a new instance of the <see cref="SwitchvoxClient"/> class, using the "ServerUrl", "Username" and "Password" fields of a web.config file's AppSettings.
         /// </summary>
         public SwitchvoxClient()
         {
             var url = WebConfigurationManager.AppSettings["ServerUrl"];
-            var name = WebConfigurationManager.AppSettings["Username"];
+            var name = WebConfigurationManager.AppSettings["UserName"];
             var pass = WebConfigurationManager.AppSettings["Password"];
 
             if(url == null)
                 throw new InvalidOperationException("Your web.config file does not have a \"ServerUrl\" property in its AppSettings");
 
             if (name == null)
-                throw new InvalidOperationException("Your web.config file does not have a \"Username\" property in its AppSettings");
+                throw new InvalidOperationException("Your web.config file does not have a \"UserName\" property in its AppSettings");
 
             if(pass == null)
                 throw new InvalidOperationException("Your web.config file does not have a \"Password\" property in its AppSettings");
 
             Server = url;
-            Username = name;
+            UserName = name;
             password = pass;
 
             InitializeMethodMembers();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.SwitchvoxClient"/> class.
+        /// Initializes a new instance of the <see cref="SwitchvoxClient"/> class.
         /// </summary>
         /// <param name="serverUrl">URL of the Phone Server</param>
         /// <param name="username">Case sensitive username of an account with sufficient permissions to make API Requests. Username can be of an Admin (to access the Admin API) or a User (Phone Extension) (to access the User API).</param>
@@ -127,7 +129,7 @@ namespace SwitchvoxAPI
                 throw new ArgumentNullException(nameof(password));
 
             Server = serverUrl;
-            Username = username;
+            UserName = username;
             this.password = password;
 
             InitializeMethodMembers();
@@ -149,7 +151,7 @@ namespace SwitchvoxAPI
         /// Execute a request against the phone system.
         /// </summary>
         /// <param name="method">The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods </param>
-        /// <returns>A <see cref="T:SwitchvoxAPI.SwitchvoxResponse"/> encapsulating the XML returned by the phone system.</returns>
+        /// <returns>A <see cref="SwitchvoxResponse"/> encapsulating the XML returned by the phone system.</returns>
         internal SwitchvoxResponse Execute(RequestMethod method)
         {
             var xmlRequestBytes = method.ToBytes();
@@ -161,7 +163,7 @@ namespace SwitchvoxAPI
         /// Execute a custom request against the phone system.
         /// </summary>
         /// <param name="xml">Custom generated XML containing a The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods </param>
-        /// <returns>A <see cref="T:SwitchvoxAPI.SwitchvoxResponse"/> encapsulating the XML returned by the phone system.</returns>
+        /// <returns>A <see cref="SwitchvoxResponse"/> encapsulating the XML returned by the phone system.</returns>
         public SwitchvoxResponse Execute(XDocument xml)
         {
             byte[] xmlRequestBytes = Encoding.ASCII.GetBytes(xml.ToString());
@@ -186,15 +188,18 @@ namespace SwitchvoxAPI
 
         private void IgnoreSSLCertificateProblems()
         {
-            //todo should we just have a single call in the constructor, OR should we check if its null first ORRR should we check if we have the method we want to assign first
-            ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+            if (!ignoreInvalidSSLSet)
+            {
+                ignoreInvalidSSLSet = true;
+                ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+            }
         }
 
         private HttpWebRequest CreateHttpRequest(byte[] xmlRequestBytes)
         {
             var request = (HttpWebRequest)WebRequest.Create(server + "xml");
             request.Proxy = null;
-            request.Credentials = new NetworkCredential(Username, password);
+            request.Credentials = new NetworkCredential(UserName, password);
             request.ContentType = "text/xml; encoding='utf8'";
             request.Method = "POST";
             request.ContentLength = (long)(xmlRequestBytes.Length);

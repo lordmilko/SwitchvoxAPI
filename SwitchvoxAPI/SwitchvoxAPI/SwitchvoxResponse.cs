@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 namespace SwitchvoxAPI
 {
     /// <summary>
-    /// Encapsulates a response from a <see cref="T:SwitchvoxAPI.SwitchvoxClient"/>.
+    /// Encapsulates a response from a <see cref="SwitchvoxClient"/>.
     /// </summary>
     public class SwitchvoxResponse
     {
@@ -20,7 +20,7 @@ namespace SwitchvoxAPI
         public XDocument Xml { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.SwitchvoxResponse"/> class.
+        /// Initializes a new instance of the <see cref="SwitchvoxResponse"/> class.
         /// </summary>
         /// <param name="xml">The XML to be contained in the response.</param>
         public SwitchvoxResponse(XDocument xml)
@@ -29,10 +29,10 @@ namespace SwitchvoxAPI
         }
 
         /// <summary>
-        /// Retrieve all elements with a specified tag name from the <see cref="T:SwitchvoxAPI.SwitchvoxResponse"/>.
+        /// Retrieve all elements with a specified tag name from the <see cref="SwitchvoxResponse"/>.
         /// </summary>
         /// <param name="name">The name of the XML tag</param>
-        /// <returns>An enumeration of <see cref="T:System.Xml.Linq.XElement"/>s with the specified name</returns>
+        /// <returns>An enumeration of <see cref="XElement"/>s with the specified name</returns>
         public IEnumerable<XElement> GetElements(string name)
         {
             return Xml.Descendants(name);

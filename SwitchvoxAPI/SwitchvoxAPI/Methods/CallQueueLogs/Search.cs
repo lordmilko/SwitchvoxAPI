@@ -5,13 +5,10 @@ using System.Xml.Linq;
 
 namespace SwitchvoxAPI.Methods
 {
-    /// <summary>
-    /// Search the call queue logs on the phone system of one or more queues.
-    /// </summary>
     public partial class CallQueueLogs
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Switchvox.CallQueueLogs.Search"/> class to be executed against a single call queue
+        /// Search for call logs against a single call queue.
         /// </summary>
         /// <param name="startDate">The minimum date to search from.</param>
         /// <param name="endDate">The maximum date to search to.</param>
@@ -28,7 +25,7 @@ namespace SwitchvoxAPI.Methods
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Switchvox.CallQueueLogs.Search"/> class to be executed against one or more call queues
+        /// Search for call logs against one or more call queues.
         /// </summary>
         /// <param name="startDate">The minimum date to search from.</param>
         /// <param name="endDate">The maximum date to search to.</param>

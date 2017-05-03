@@ -10,14 +10,14 @@ namespace SwitchvoxAPI
     public class XmlDeserializationException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.XmlDeserializationException"/> class.
+        /// Initializes a new instance of the <see cref="XmlDeserializationException"/> class.
         /// </summary>
         public XmlDeserializationException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.XmlDeserializationException"/> class with a specified error message.
+        /// Initializes a new instance of the <see cref="XmlDeserializationException"/> class with a specified error message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         public XmlDeserializationException(string message) : base(message)
@@ -25,7 +25,7 @@ namespace SwitchvoxAPI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.XmlDeserializationException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+        /// Initializes a new instance of the <see cref="XmlDeserializationException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="inner">The exception that is the cause of the current exception. If the <paramref name="inner"/> parameter is not null, the current exception is raised in a catch block that handles the inner exception.</param>
@@ -34,7 +34,7 @@ namespace SwitchvoxAPI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.XmlDeserializationException"/> class with the outer type that was being deserialized and the XML that is believed to have caused the exception.
+        /// Initializes a new instance of the <see cref="XmlDeserializationException"/> class with the outer type that was being deserialized and the XML that is believed to have caused the exception.
         /// </summary>
         /// <param name="type">The outer type that was being deserialized.</param>
         /// <param name="xml">The XML believed to have caused the exception.</param>
@@ -43,19 +43,20 @@ namespace SwitchvoxAPI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.XmlDeserializationException"/> class with the outer type that was being deserialized, the XML that is believed to have caused the exception and a reference to the inner exception that is the cause of this exception.
+        /// Initializes a new instance of the <see cref="XmlDeserializationException"/> class with the outer type that was being deserialized, the XML that is believed to have caused the exception and a reference to the inner exception that is the cause of this exception.
         /// </summary>
         /// <param name="type">The outer type that was being deserialized.</param>
+        /// <param name="xml">The XML believed to have caused the exception.</param>
         /// <param name="inner">The exception that is the cause of the current exception. If the <paramref name="inner"/> parameter is not null, the current exception is raised in a catch block that handles the inner exception.</param>
         public XmlDeserializationException(Type type, string xml, Exception inner) : base(GetMessage(type, xml, inner), inner)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.XmlDeserializationException"/> class with serialized data.
+        /// Initializes a new instance of the <see cref="XmlDeserializationException"/> class with serialized data.
         /// </summary>
-        /// <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
-        /// <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        /// <param name="info">The <see cref="SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+        /// <param name="context">The <see cref="StreamingContext"/> that contains contextual information about the source or destination.</param>
         protected XmlDeserializationException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }

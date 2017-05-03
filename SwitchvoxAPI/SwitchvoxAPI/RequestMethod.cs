@@ -19,7 +19,7 @@ namespace SwitchvoxAPI
         public string Name { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Switchvox.RequestMethod"/> class.
+        /// Initializes a new instance of the <see cref="RequestMethod"/> class.
         /// </summary>
         /// <param name="method">The name of the Switchvox API Method this class implements. For a list of valid methods please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods </param>
         /// <param name="xml">The XML to use for the request.</param>

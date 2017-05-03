@@ -9,6 +9,12 @@ namespace SwitchvoxAPI
 {
     public partial class ExtensionGroups
     {
+        /// <summary>
+        /// Retrieve a list of extension groups on the system.
+        /// </summary>
+        /// <param name="sortField">The field to sort the results by.</param>
+        /// <param name="sortOrder">The direction to sort the results by.</param>
+        /// <returns></returns>
         public List<ExtensionGroupOverview> GetList(ExtensionGroupSortField sortField = ExtensionGroupSortField.Name, SortOrder sortOrder = SortOrder.Desc)
         {
             var xml = new[]

@@ -13,9 +13,9 @@
         public Settings Settings;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.Extensions"/> class.
+        /// Initializes a new instance of the <see cref="Extensions"/> class.
         /// </summary>
-        /// <param name="client"><see cref="T:SwitchvoxAPI.SwitchvoxClient"/> methods will use to communicate with the phone server.</param>
+        /// <param name="client"><see cref="SwitchvoxClient"/> methods will use to communicate with the phone server.</param>
         internal Extensions(SwitchvoxClient client)
         {
             this.client = client;

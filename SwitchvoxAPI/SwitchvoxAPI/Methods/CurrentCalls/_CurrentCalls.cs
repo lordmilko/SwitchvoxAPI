@@ -8,9 +8,9 @@
         private readonly SwitchvoxClient client;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.CurrentCalls"/> class.
+        /// Initializes a new instance of the <see cref="CurrentCalls"/> class.
         /// </summary>
-        /// <param name="client">The <see cref="T:SwitchvoxAPI.SwitchvoxClient"/> methods will use to communicate with the phone server.</param>
+        /// <param name="client">The <see cref="SwitchvoxClient"/> methods will use to communicate with the phone server.</param>
         internal CurrentCalls(SwitchvoxClient client)
         {
             this.client = client;

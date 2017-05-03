@@ -5,7 +5,7 @@ namespace SwitchvoxAPI
     internal static class ConvertExtensions
     {
         /// <summary>
-        /// Convert a string that may be empty to an <see cref="T:System.Int32"/> .
+        /// Convert a string that may be empty to an <see cref="Int32"/> .
         /// </summary>
         /// <param name="str">The string to convert.</param>
         /// <returns></returns>
@@ -15,7 +15,7 @@ namespace SwitchvoxAPI
         }
 
         /// <summary>
-        /// Convert a string that may be empty in a <see cref="T:System.Double"/>.
+        /// Convert a string that may be empty in a <see cref="Double"/>.
         /// </summary>
         /// <param name="str">The string to convert.</param>
         /// <returns></returns>
@@ -25,7 +25,7 @@ namespace SwitchvoxAPI
         }
 
         /// <summary>
-        /// Convert a string that may be empty into a <see cref="T:System.TimeSpan"/>.
+        /// Convert a string that may be empty into a <see cref="TimeSpan"/>.
         /// </summary>
         /// <param name="str">The string to convert.</param>
         /// <returns></returns>

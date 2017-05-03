@@ -1,3 +1,9 @@
-﻿add xml docs
+﻿
+implement my custom deserializer from prtgapi
+remove all _Raw properties
+
+--
+
+add xml docs
 create extensions of all phone types (directory, agent login, etc), make a call and add the missing extensiontypes
 CallQueueStatusStatus.loginstatus can be an enum

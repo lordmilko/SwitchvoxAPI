@@ -13,9 +13,9 @@
         public GlobalVariables GlobalVariables;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:SwitchvoxAPI.IVR"/> class.
+        /// Initializes a new instance of the <see cref="IVR"/> class.
         /// </summary>
-        /// <param name="client"><see cref="T:SwitchvoxAPI.SwitchvoxClient"/> methods will use to communicate with the phone server.</param>
+        /// <param name="client"><see cref="SwitchvoxClient"/> methods will use to communicate with the phone server.</param>
         internal IVR(SwitchvoxClient client)
         {
             this.client = client;

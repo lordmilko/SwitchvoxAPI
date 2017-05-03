@@ -6,6 +6,21 @@ var client = new SwitchvoxClient("https://phones.mycoolsite.com", "username", "p
 var extensions = client.Extensions.GetInfo();
 ```
 
+If you are incorporating SwitchvoxAPI into a website, you can store your connection details in your web.config file's AppSettings tag.
+
+```xml
+<configuration>
+    <appSettings>
+	    <add key="ServerUrl" value="https://phones.mycoolsite.com"/>
+		<add key="UserName" value="username"/>
+		<add key="Password" value="password"/>
+	</appSettings>
+</configuration>
+```
+```c#
+var client = new SwitchvoxClient(); //Automatically retrieves your settings from your web.config file
+```
+
 All methods implemented by SwitchvoxAPI deserialize the XML returned by Switchvox, allowing you to interface with the phone system in pure .NET.
 
 ```c#
