@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace SwitchvoxAPI
 {
     /// <summary>
-    /// The exception that is thrown when a <see cref="SwitchvoxResponse"/> contains any error messages.
+    /// The exception that is thrown when a the response from a Switchvox Request contains any error messages.
     /// </summary>
     [Serializable]
     public class SwitchvoxRequestException : Exception

@@ -7,9 +7,9 @@
         /// </summary>
         public ExtensionSettings GetInfo()
         {
-            var response = client.Execute(new RequestMethod("switchvox.extensions.settings.getInfo", null));
+            var response = client.Execute<ExtensionSettings>(new RequestMethod("switchvox.extensions.settings.getInfo", null));
 
-            return response.Deserialize<ExtensionSettings>();
+            return response;
         }
     }
 }

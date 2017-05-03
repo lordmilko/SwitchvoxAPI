@@ -33,9 +33,9 @@ namespace SwitchvoxAPI.Methods
 
         private List<GlobalIVRVariable> GetList(XElement xml)
         {
-            var response = client.Execute(new RequestMethod("switchvox.ivr.globalVariables.getList", xml));
+            var response = client.Execute<ListDeserializationLayers.GlobalIVRVariables>(new RequestMethod("switchvox.ivr.globalVariables.getList", xml)).Items;
 
-            return response.Deserialize<ListDeserializationLayers.GlobalIVRVariables>().Items;
+            return response;
         }
     }
 }

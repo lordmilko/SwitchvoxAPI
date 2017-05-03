@@ -4,20 +4,20 @@ using System.Runtime.Serialization;
 namespace SwitchvoxAPI
 {
     /// <summary>
-    /// The exception that is thrown when a <see cref="SwitchvoxResponse"/> fails with a <see cref="System.Net.WebException"/> with StatusCode <see cref="System.Net.HttpStatusCode.Forbidden"/>/>.
+    /// The exception that is thrown when a Switchvox Request fails with a <see cref="System.Net.WebException"/> with StatusCode <see cref="System.Net.HttpStatusCode.Forbidden"/>/>.
     /// </summary>
     [Serializable]
     public class UnauthorizedRequestException : Exception
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SwitchvoxRequestException"/> class.
+        /// Initializes a new instance of the <see cref="UnauthorizedRequestException"/> class.
         /// </summary>
         public UnauthorizedRequestException()
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SwitchvoxRequestException"/> class with a specified error message.
+        /// Initializes a new instance of the <see cref="UnauthorizedRequestException"/> class with a specified error message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         public UnauthorizedRequestException(string message) : base(message)
@@ -25,7 +25,7 @@ namespace SwitchvoxAPI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SwitchvoxRequestException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+        /// Initializes a new instance of the <see cref="UnauthorizedRequestException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="inner">The exception that is the cause of the current exception. If the <paramref name="inner"/> parameter is not null, the current exception is raised in a catch block that handles the inner exception.</param>
@@ -34,7 +34,7 @@ namespace SwitchvoxAPI
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SwitchvoxRequestException"/> class with serialized data.
+        /// Initializes a new instance of the <see cref="UnauthorizedRequestException"/> class with serialized data.
         /// </summary>
         /// <param name="info">The <see cref="SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The <see cref="StreamingContext"/> that contains contextual information about the source or destination.</param>

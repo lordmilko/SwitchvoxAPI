@@ -23,9 +23,9 @@ namespace SwitchvoxAPI
                 new XElement("sort_order", sortOrder.ToString())
             };
 
-            var response = client.Execute(new RequestMethod("switchvox.extensionGroups.getList", xml));
+            var response = client.Execute<ListDeserializationLayers.ExtensionGroupOverviews>(new RequestMethod("switchvox.extensionGroups.getList", xml));
 
-            return response.Deserialize<ListDeserializationLayers.ExtensionGroupOverviews>().Items;
+            return response.Items;
         }
 
         private string GetSortField(ExtensionGroupSortField sortField)

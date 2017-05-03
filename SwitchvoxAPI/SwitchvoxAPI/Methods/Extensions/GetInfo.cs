@@ -27,9 +27,7 @@ namespace SwitchvoxAPI.Methods
 
             var xml = new XElement(tagGroup, valuesList);
 
-            var response = client.Execute(new RequestMethod("switchvox.extensions.getInfo", xml));
-
-            var extensions = response.Deserialize<ListDeserializationLayers.Extensions>().Items;
+            var extensions = client.Execute<ListDeserializationLayers.Extensions>(new RequestMethod("switchvox.extensions.getInfo", xml)).Items;
 
             if (extensions.Count == 0)
                 throw new SwitchvoxRequestException("No results for the given Account ID or Extension could be found.");

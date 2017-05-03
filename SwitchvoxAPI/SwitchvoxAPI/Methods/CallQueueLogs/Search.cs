@@ -54,9 +54,9 @@ namespace SwitchvoxAPI.Methods
                 new XElement("page_number", pageNumber)
             };
 
-            var response = client.Execute(new RequestMethod("switchvox.callQueueLogs.search", xml));
+            var response = client.Execute<CallLogs<CallQueueLog>>(new RequestMethod("switchvox.callQueueLogs.search", xml));
 
-            return response.Deserialize<CallLogs<CallQueueLog>>();
+            return response;
         }
 
         private List<XElement> CreateAccountIdElms(string[] accountIds)

@@ -16,9 +16,9 @@ namespace SwitchvoxAPI
         /// <returns></returns>
         public ExtensionGroup GetInfo(string extensionGroupId)
         {
-            var response = client.Execute(new RequestMethod("switchvox.extensionGroups.getInfo", new XElement("extension_group_id", extensionGroupId)));
+            var response = client.Execute<ExtensionGroup>(new RequestMethod("switchvox.extensionGroups.getInfo", new XElement("extension_group_id", extensionGroupId)));
 
-            return response.Deserialize<ExtensionGroup>();
+            return response;
         }
     }
 }

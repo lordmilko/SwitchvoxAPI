@@ -18,9 +18,9 @@ namespace SwitchvoxAPI.Methods
                 new XElement("call_queue_account_id", callQueueAccountId)
             };
 
-            var response = client.Execute(new RequestMethod("switchvox.users.callQueues.getTodaysStatus", xml));
+            var response = client.Execute<CallQueueTodaysStatus>(new RequestMethod("switchvox.users.callQueues.getTodaysStatus", xml));
 
-            return response.Deserialize<CallQueueTodaysStatus>();
+            return response;
         }
     }
 }

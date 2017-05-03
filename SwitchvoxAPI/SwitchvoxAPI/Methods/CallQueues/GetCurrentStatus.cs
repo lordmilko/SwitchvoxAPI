@@ -10,9 +10,9 @@ namespace SwitchvoxAPI.Methods
         /// <param name="accountId">The Account ID of a valid call queue</param>
         public CallQueueCurrentStatus GetCurrentStatus(string accountId)
         {
-            var response = client.Execute(new RequestMethod("switchvox.callQueues.getCurrentStatus", new XElement("account_id", accountId)));
+            var response = client.Execute<CallQueueCurrentStatus>(new RequestMethod("switchvox.callQueues.getCurrentStatus", new XElement("account_id", accountId)));
 
-            return response.Deserialize<CallQueueCurrentStatus>();
+            return response;
 
             //todo: i dont think the waiting callers code is implemented
         }

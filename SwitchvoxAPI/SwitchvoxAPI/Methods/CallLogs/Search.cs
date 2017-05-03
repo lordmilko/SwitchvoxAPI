@@ -56,9 +56,9 @@ namespace SwitchvoxAPI.Methods
                 new XElement("page_number", pageNumber)
             };
 
-            var response = client.Execute(new RequestMethod("switchvox.callLogs.search", xml));
+            var response = client.Execute<CallLogs<CallLog>>(new RequestMethod("switchvox.callLogs.search", xml));
 
-            return response.Deserialize<CallLogs<CallLog>>();
+            return response;
         }
 
         private XElement GetMultiItemSearchDataElms(CallLogMultiItemSearchData searchData, string[] data)
