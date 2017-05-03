@@ -6,6 +6,7 @@ using System.Web.Configuration;
 using System.Xml;
 using System.Xml.Linq;
 using SwitchvoxAPI.Methods;
+using SwitchvoxAPI.SwitchvoxAPI.Deserialization;
 using Extensions = SwitchvoxAPI.Methods.Extensions;
 
 namespace SwitchvoxAPI
@@ -146,13 +147,26 @@ namespace SwitchvoxAPI
             CallQueues = new CallQueues(this);
             IVR = new IVR(this);
         }
-        
+
+        /// <summary>
+        /// Execute and deserialize a request against the phone system.
+        /// </summary>
+        /// <typeparam name="T">The type to deserialize the XML response from the phone system to.</typeparam>
+        /// <param name="method">The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods </param>
+        /// <returns>An object representing the data returned from the phone system.</returns>
+        internal T Execute<T>(RequestMethod method) where T : new()
+        {
+            var response = Execute(method);
+
+            return Deserializer.Deserialize<T>(response);
+        }
+
         /// <summary>
         /// Execute a request against the phone system.
         /// </summary>
         /// <param name="method">The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods </param>
-        /// <returns>A <see cref="SwitchvoxResponse"/> encapsulating the XML returned by the phone system.</returns>
-        internal SwitchvoxResponse Execute(RequestMethod method)
+        /// <returns>A <see cref="XDocument"/> containing the XML returned by the phone system.</returns>
+        internal XDocument Execute(RequestMethod method)
         {
             var xmlRequestBytes = method.ToBytes();
 
@@ -163,15 +177,15 @@ namespace SwitchvoxAPI
         /// Execute a custom request against the phone system.
         /// </summary>
         /// <param name="xml">Custom generated XML containing a The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods </param>
-        /// <returns>A <see cref="SwitchvoxResponse"/> encapsulating the XML returned by the phone system.</returns>
-        public SwitchvoxResponse Execute(XDocument xml)
+        /// <returns>A <see cref="XDocument"/> containing the XML returned by the phone system.</returns>
+        public XDocument Execute(XDocument xml)
         {
             byte[] xmlRequestBytes = Encoding.ASCII.GetBytes(xml.ToString());
 
             return ExecuteRequest(xmlRequestBytes);
         }
 
-        private SwitchvoxResponse ExecuteRequest(byte[] xmlRequestBytes)
+        private XDocument ExecuteRequest(byte[] xmlRequestBytes)
         {
             IgnoreSSLCertificateProblems();
 
@@ -179,7 +193,8 @@ namespace SwitchvoxAPI
 
             SendRequest(request, xmlRequestBytes);
 
-            var response = new SwitchvoxResponse(GetResponse(request));
+            //var response = new SwitchvoxResponse(GetResponse(request));
+            var response = GetResponse(request);
 
             ValidateResponse(response);
 
@@ -245,10 +260,10 @@ namespace SwitchvoxAPI
             return doc;
         }
 
-        private void ValidateResponse(SwitchvoxResponse response)
+        private void ValidateResponse(XDocument response)
         {
-            if (response.GetElements("errors").Any())
-                throw new SwitchvoxRequestException(response.GetAttribute("error", "message"));
+            if (response.Descendants("errors").Any())
+                throw new SwitchvoxRequestException(response.Descendants("error").Single().Attribute("message").Value);
         }
     }
 }
