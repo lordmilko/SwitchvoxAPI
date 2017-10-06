@@ -10,9 +10,10 @@ namespace SwitchvoxAPI
         public string Id { get; set; }
 
         [XmlAttribute("origination")]
-        public CallOrigination Origination { get; set; }
+        public CallDirection Direction { get; set; }
 
-        public DateTime StartTime => DateTime.Parse(_RawStartTime);
+        [XmlAttribute("start_time")]
+        public DateTime StartTime { get; set; }
 
         [XmlAttribute("from")]
         public string From { get; set; }
@@ -38,26 +39,24 @@ namespace SwitchvoxAPI
         [XmlAttribute("to_number")]
         public string ToNumber { get; set; }
 
-        public TimeSpan TotalDuration => TimeSpan.FromSeconds(_RawTotalDuration);
+        [XmlAttribute("total_duration")]
+        public TimeSpan TotalDuration { get; set; }
 
-        public TimeSpan TalkDuration => TimeSpan.FromSeconds(_RawTalkDuration);
-
-        [XmlAttribute("start_time")]
-        public string _RawStartTime { get; set; }
+        [XmlAttribute("talk_duration")]
+        public TimeSpan TalkDuration { get; set; }
 
         [XmlAttribute("cdr_call_id")]
         public string CDRId { get; set; }
 
-        [XmlAttribute("total_duration")]
-        public int _RawTotalDuration { get; set; }
-
-        [XmlAttribute("talk_duration")]
-        public int _RawTalkDuration { get; set; }
-
         [XmlIgnore]
-        public List<CallLogEvent> Events => _RawEvents.Items;
+        public List<CallLogEvent> Events => events.Items;
 
         [XmlElement("events")]
-        public ListDeserializationLayers.CallLogEvents _RawEvents { get; set; }
+        protected ListDeserializationLayers.CallLogEvents events { get; set; }
+
+        public override string ToString()
+        {
+            return $"{FromName} => {ToName ?? ToNumber}";
+        }
     }
 }

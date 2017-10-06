@@ -9,7 +9,7 @@ namespace SwitchvoxAPI
         /// The time the event occurred.
         /// </summary>
         [XmlAttribute("start_time")]
-        public DateTime StartTime => DateTime.Parse(_RawStartTime);
+        public DateTime DateTime { get; set; }
 
         /// <summary>
         /// The type of event that occurred.
@@ -22,11 +22,10 @@ namespace SwitchvoxAPI
         /// </summary>
         [XmlAttribute("display")]
         public string Details { get; set; }
-        
-        /// <summary>
-        /// Raw value used by <see cref="StartTime"/>
-        /// </summary>
-        [XmlAttribute("start_time")]
-        public string _RawStartTime { get; set; }
+
+        public override string ToString()
+        {
+            return Details;
+        }
     }
 }

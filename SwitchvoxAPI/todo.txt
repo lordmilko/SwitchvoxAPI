@@ -1,6 +1,14 @@
 ﻿
-implement my custom deserializer from prtgapi
-remove all _Raw properties
+make extension.status an enum instead of an int. what are the various values we can have, and what do they mean?
+basecallqueuestatusmember - all properties with getters/setters
+also logintime/pausedtime should be a datetime or timespan?
+reimplement callduration in basecallqueuestatusmember
+    sounds like this is only part of callqueuetodaysstatusmember
+search for all todo items
+add required parameters for calling the extensions.search method
+implement t2 template versioning
+change version to 0.3
+after we do a commit, move the methods folder to under the request folder
 
 --
 

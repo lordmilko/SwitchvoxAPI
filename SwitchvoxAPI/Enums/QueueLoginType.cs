@@ -5,6 +5,9 @@ namespace SwitchvoxAPI
     public enum QueueLoginType
     {
         [XmlEnum("permanent")]
-        Permanent
+        Permanent,
+
+        [XmlEnum("login")]
+        Login
     }
 }

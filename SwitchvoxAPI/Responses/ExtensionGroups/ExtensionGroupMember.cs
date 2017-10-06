@@ -43,5 +43,10 @@ namespace SwitchvoxAPI
 
         [XmlAttribute("vm_quota")]
         public int? VmQuota { get; set; }
+
+        public override string ToString()
+        {
+            return DisplayName;
+        }
     }
 }

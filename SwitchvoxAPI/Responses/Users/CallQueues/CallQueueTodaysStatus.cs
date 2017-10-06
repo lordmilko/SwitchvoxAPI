@@ -31,14 +31,12 @@ namespace SwitchvoxAPI
         public CallQueueTodaysStatusOverview Overview { get; set; }
 
         [XmlElement("detailed_view")]
-        public CallQueueTodaysStatusDetails _RawDetails { get; set; }
+        protected CallQueueTodaysStatusDetails details { get; set; }
 
         [XmlIgnore]
-        public List<CallQueueTodaysStatusMember> Members => _RawDetails.Members.Items;
+        public List<CallQueueTodaysStatusMember> Members => details.Members.Items;
 
         [XmlIgnore]
-        public List<CallQueueTodaysStatusWaitingCall> CallsWaiting => _RawDetails.CallsWaiting.Items;
-
-
+        public List<CallQueueTodaysStatusWaitingCall> CallsWaiting => details.CallsWaiting.Items;
     }
 }

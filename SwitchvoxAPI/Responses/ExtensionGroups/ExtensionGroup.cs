@@ -11,16 +11,16 @@ namespace SwitchvoxAPI
     [XmlRoot("extension_group")]
     public class ExtensionGroup : ExtensionGroupOverview
     {
-        [XmlElement("member")]
-        public ExtensionGroupMembers _RawMembers;
+        [XmlElement("members")]
+        protected ExtensionGroupMembers members { get; set; }
 
         [XmlIgnore]
-        public List<ExtensionGroupMember> Members => _RawMembers.Items;
+        public List<ExtensionGroupMember> Members => members.Items;
 
-        [XmlElement("dependent")]
-        public ExtensionGroupDependents _RawDependents { get; set; }
+        [XmlElement("dependents")]
+        protected ExtensionGroupDependents dependents { get; set; }
 
         [XmlIgnore]
-        public List<ExtensionGroupDependent> Dependents => _RawDependents.Items;
+        public List<ExtensionGroupDependent> Dependents => dependents.Items;
     }
 }

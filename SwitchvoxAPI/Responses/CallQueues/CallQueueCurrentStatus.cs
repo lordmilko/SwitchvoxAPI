@@ -30,9 +30,9 @@ namespace SwitchvoxAPI
         public CallQueueStrategy Strategy;
 
         [XmlElement("queue_members")]
-        public CallQueueStatusMembers<CallQueueCurrentStatusMember> _RawMembers; //this will contain a list of things with attribute queue_member. should this class inherit from
+        protected CallQueueStatusMembers<CallQueueCurrentStatusMember> members { get; set; } //this will contain a list of things with attribute queue_member. should this class inherit from
 
         [XmlIgnore]
-        public List<CallQueueCurrentStatusMember> Members => _RawMembers.Items;
+        public List<CallQueueCurrentStatusMember> Members => members.Items;
     }
 }

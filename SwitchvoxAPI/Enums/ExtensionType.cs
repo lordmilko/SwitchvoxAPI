@@ -71,6 +71,15 @@ namespace SwitchvoxAPI
         GroupPickup,
 
         [XmlEnum("callpark")]
-        CallParking
+        CallParking,
+
+        [XmlEnum("zap")]
+        AnalogPhone,
+
+        [XmlEnum("parkinglog")]
+        SingleCallParkingSplot,
+
+        [XmlEnum("autodial")]
+        Dialtone
     }
 }

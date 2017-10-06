@@ -7,6 +7,8 @@ namespace SwitchvoxAPI.Methods
 {
     public partial class CallQueueLogs
     {
+        //http://developers.digium.com/switchvox/wiki/index.php/Switchvox.callQueueLogs.search
+
         /// <summary>
         /// Search for call logs against a single call queue.
         /// </summary>
@@ -17,11 +19,9 @@ namespace SwitchvoxAPI.Methods
         /// <param name="ignoreWeekends">Whether weekends should be excluded from the search results.</param>
         /// <param name="itemsPerPage">The number of results to return in this request. Additional items can be retrieved by making additional requests and incrementing the pageNumber parameter</param>
         /// <param name="pageNumber">The page of results to return in this request. Used in conjunction with the itemsPerPage parameter.</param>
-        /// <param name="sortOrder">How the search results will be sorted.</param>
-        /// <param name="sortField">The field of the search results to sort on</param>
-        public CallLogs<CallQueueLog> Search(DateTime startDate, DateTime endDate, string queueAccountId, CallTypes callTypes, bool ignoreWeekends = false, int itemsPerPage = 50, int pageNumber = 1, SortOrder sortOrder = SortOrder.Asc, CallQueueLogSortField sortField = CallQueueLogSortField.StartTime)
+        public CallLogs<CallQueueLog> Search(DateTime startDate, DateTime endDate, string queueAccountId, CallTypes callTypes = CallTypes.AllCalls, bool ignoreWeekends = false, int itemsPerPage = 50, int pageNumber = 1)
         {
-            return Search(startDate, endDate, new[] { queueAccountId }, callTypes, ignoreWeekends, itemsPerPage, pageNumber, sortOrder, sortField);
+            return Search(startDate, endDate, new[] { queueAccountId }, callTypes, ignoreWeekends, itemsPerPage, pageNumber);
         }
 
         /// <summary>
@@ -34,13 +34,38 @@ namespace SwitchvoxAPI.Methods
         /// <param name="ignoreWeekends">Whether weekends should be excluded from the search results.</param>
         /// <param name="itemsPerPage">The number of results to return in this request. Additional items can be retrieved by making additional requests and incrementing the pageNumber parameter</param>
         /// <param name="pageNumber">The page of results to return in this request. Used in conjunction with the itemsPerPage parameter.</param>
-        /// <param name="sortOrder">How the search results will be sorted.</param>
-        /// <param name="sortField">The field of the search results to sort on</param>
-        public CallLogs<CallQueueLog> Search(DateTime startDate, DateTime endDate, string[] queueAccountIds, CallTypes callTypes, bool ignoreWeekends = false, int itemsPerPage = 50, int pageNumber = 1, SortOrder sortOrder = SortOrder.Asc, CallQueueLogSortField sortField = CallQueueLogSortField.StartTime)
+        public CallLogs<CallQueueLog> Search(DateTime startDate, DateTime endDate, string[] queueAccountIds, CallTypes callTypes = CallTypes.AllCalls, bool ignoreWeekends = false, int itemsPerPage = 50, int pageNumber = 1)
         {
             if (queueAccountIds.Length == 0)
-                throw new ArgumentException();
+                throw new ArgumentException("At least one queue account ID must be specified", nameof(queueAccountIds));
 
+            var method = GetRequestMethod(startDate, endDate, ignoreWeekends, queueAccountIds, callTypes, itemsPerPage, pageNumber);
+
+            var response = client.Execute<CallLogs<CallQueueLog>>(method);
+
+            return response;
+        }
+
+        /// <summary>
+        /// Search for call logs against one or more call queues, automatically requesting additional pages as the results are enumerated.
+        /// </summary>
+        /// <param name="startDate">The minimum date to search from.</param>
+        /// <param name="endDate">The maximum date to search to.</param>
+        /// <param name="queueAccountIds">A list of Call Queue Account IDs to retrieve data for. At least 1 Account ID must be specified.</param>
+        /// <param name="callTypes">A combination of flags indicating the type of calls to include in the search results.</param>
+        /// <param name="ignoreWeekends">Whether weekends should be excluded from the search results.</param>
+        /// <param name="itemsPerPage">The number of results to return in each response. SwitchvoxAPI will automatically request additional items as required as the results are enumerated.
+        public IEnumerable<CallQueueLog> StreamSearch(DateTime startDate, DateTime endDate, string[] queueAccountIds, CallTypes callTypes = CallTypes.AllCalls, bool ignoreWeekends = false, int itemsPerPage = 50)
+        {
+            var method = GetRequestMethod(startDate, endDate, ignoreWeekends, queueAccountIds, callTypes, itemsPerPage, 1);
+
+            var response = client.Stream<CallLogs<CallQueueLog>, CallQueueLog>(method, GetTotalItems, SetNextPage, itemsPerPage, r => r.Items);
+
+            return response;
+        }
+
+        private RequestMethod GetRequestMethod(DateTime startDate, DateTime endDate, bool ignoreWeekends, string[] queueAccountIds, CallTypes callTypes, int itemsPerPage, int pageNumber)
+        {
             List<XElement> xml = new List<XElement>
             {
                 new XElement("start_date", startDate.ToString("yyyy-MM-dd HH:mm:ss")),
@@ -48,15 +73,11 @@ namespace SwitchvoxAPI.Methods
                 new XElement("ignore_weekends", Convert.ToInt32(ignoreWeekends)),
                 new XElement("queue_account_ids", CreateAccountIdElms(queueAccountIds)),
                 new XElement("call_types", CreateCallTypeElms(callTypes)),
-                new XElement("sort_field", GetSortField(sortField)),
-                new XElement("sort_order", sortOrder.ToString()),
                 new XElement("items_per_page", itemsPerPage),
                 new XElement("page_number", pageNumber)
             };
 
-            var response = client.Execute<CallLogs<CallQueueLog>>(new RequestMethod("switchvox.callQueueLogs.search", xml));
-
-            return response;
+            return new RequestMethod("switchvox.callQueueLogs.search", xml);
         }
 
         private List<XElement> CreateAccountIdElms(string[] accountIds)
@@ -84,57 +105,14 @@ namespace SwitchvoxAPI.Methods
             return xml;
         }
 
-        private string GetSortField(CallQueueLogSortField sortField)
+        private void SetNextPage(RequestMethod method, int pageNumber)
         {
-            string val = string.Empty;
+            method.Xml.Descendants("page_number").First().Value = pageNumber.ToString();
+        }
 
-            switch (sortField)
-            {
-                case CallQueueLogSortField.StartTime:
-                    val = "start_time";
-                    break;
-
-                case CallQueueLogSortField.Type:
-                    val = "type";
-                    break;
-
-                case CallQueueLogSortField.QueueAccountId:
-                    val = "queue_account_id";
-                    break;
-
-                case CallQueueLogSortField.CallerIdNumber:
-                    val = "caller_id_number";
-                    break;
-
-                case CallQueueLogSortField.WaitTime:
-                    val = "wait_time";
-                    break;
-
-                case CallQueueLogSortField.TalkTime:
-                    val = "talk_time";
-                    break;
-
-                case CallQueueLogSortField.MemberAccountId:
-                    val = "member_account_id";
-                    break;
-
-                case CallQueueLogSortField.EnterPosition:
-                    val = "enter_position";
-                    break;
-
-                case CallQueueLogSortField.ExitPosition:
-                    val = "exit_position";
-                    break;
-
-                case CallQueueLogSortField.AbandonPosition:
-                    val = "abandon_position";
-                    break;
-
-                default:
-                    throw new NotImplementedException("No handler for the value " + sortField.ToString() + " has been implemented.");
-            }
-
-            return val;
+        private string GetTotalItems(XDocument xDoc)
+        {
+            return xDoc.Descendants("calls").First().Attribute("total_items").Value;
         }
     }
 }

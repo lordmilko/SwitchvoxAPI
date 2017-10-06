@@ -5,7 +5,7 @@ namespace SwitchvoxAPI
     /// <summary>
     /// Specifies where a call originated from.
     /// </summary>
-    public enum CallOrigination
+    public enum CallDirection
     {
         /// <summary>
         /// Call originated from an extension inside the phone system.

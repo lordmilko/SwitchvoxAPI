@@ -16,27 +16,26 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\Debug\SwitchvoxAPI\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\SwitchvoxAPI.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\SwitchvoxAPI\SwitchvoxAPI.XML</DocumentationFile>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\Release\SwitchvoxAPI\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\SwitchvoxAPI\SwitchvoxAPI.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\WindowsPowerShell\3.0\System.Management.Automation.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Management.Automation" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,28 +44,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\XmlEnumGroupAttribute.cs" />
+    <Compile Include="Deserialization\XmlAttributeType.cs" />
+    <Compile Include="Deserialization\XmlMapping.cs" />
+    <Compile Include="Deserialization\XmlSerializer.cs" />
+    <Compile Include="Enums\CallLogSearchCriteria.cs" />
+    <Compile Include="Exceptions\MissingAttributeException.cs" />
     <Compile Include="PowerShell\Base\SwitchvoxCmdlet.cs" />
-    <Compile Include="PowerShell\Cmdlet\ConnectSvoxServer.cs" />
-    <Compile Include="PowerShell\Cmdlet\DisconnectSvoxServer.cs" />
-    <Compile Include="PowerShell\Cmdlet\InvokeSvoxCall.cs" />
+    <Compile Include="PowerShell\Cmdlet\Actions\DisconnectSvxCall.cs" />
+    <Compile Include="PowerShell\Cmdlet\ConnectSvxServer.cs" />
+    <Compile Include="PowerShell\Cmdlet\Data\GetSvxCall.cs" />
+    <Compile Include="PowerShell\Cmdlet\Data\GetSvxExtension.cs" />
+    <Compile Include="PowerShell\Cmdlet\DisconnectSvxServer.cs" />
+    <Compile Include="PowerShell\Cmdlet\Actions\InvokeSvxCall.cs" />
+    <Compile Include="PowerShell\Cmdlet\Data\GetSvxCallLog.cs" />
+    <Compile Include="PowerShell\Cmdlet\GetSvxClient.cs" />
+    <Compile Include="PowerShell\Cmdlet\Actions\AddSvxIVRVariable.cs" />
+    <Compile Include="PowerShell\Cmdlet\Data\GetSvxCallQueueStatus.cs" />
+    <Compile Include="PowerShell\Cmdlet\Data\GetSvxExtensionSettings.cs" />
+    <Compile Include="PowerShell\Cmdlet\Data\GetSvxCallQueueLog.cs" />
+    <Compile Include="PowerShell\Cmdlet\Data\GetSvxExtensionGroup.cs" />
+    <Compile Include="PowerShell\Cmdlet\Data\GetSvxIVRVariable.cs" />
+    <Compile Include="PowerShell\Cmdlet\Data\GetSvxUserCallQueueStatus.cs" />
+    <Compile Include="PowerShell\Cmdlet\Actions\RemoveSvxIVRVariable.cs" />
+    <Compile Include="PowerShell\Cmdlet\Actions\SetSvxIVRVariable.cs" />
     <Compile Include="PowerShell\SwitchvoxSessionState.cs" />
     <Compile Include="Deserialization\Deserializer.cs" />
     <Compile Include="Enums\CallEventType.cs" />
-    <Compile Include="Enums\CallLogMultiItemSearchData.cs" />
-    <Compile Include="Enums\CallLogSingleItemSearchData.cs" />
     <Compile Include="Enums\CallOrigination.cs" />
-    <Compile Include="Enums\CallQueueLogSortField.cs" />
     <Compile Include="Enums\CallQueueStrategy.cs" />
     <Compile Include="Enums\CurrentCallState.cs" />
-    <Compile Include="Enums\ExtensionGroupSortField.cs" />
     <Compile Include="Enums\ExtensionIdentifier.cs" />
     <Compile Include="Enums\ExtensionType.cs" />
     <Compile Include="Enums\QueueCallType.cs" />
-    <Compile Include="Enums\SortOrder.cs" />
     <Compile Include="Exceptions\SwitchvoxRequestException.cs" />
     <Compile Include="Exceptions\XmlDeserializationException.cs" />
-    <Compile Include="Request\AttributeUtilities.cs" />
-    <Compile Include="Request\ConvertExtensions.cs" />
+    <Compile Include="Helpers\AttributeUtilities.cs" />
+    <Compile Include="Helpers\ConvertExtensions.cs" />
     <Compile Include="Methods\CallQueues\_CallQueues.cs" />
     <Compile Include="Methods\ExtensionGroups\GetInfo.cs" />
     <Compile Include="Methods\ExtensionGroups\GetList.cs" />
@@ -74,6 +88,16 @@
     <Compile Include="Methods\IVR\GlobalVariables\_GlobalVariables.cs" />
     <Compile Include="Methods\IVR\_IVR.cs" />
     <Compile Include="Enums\QueueLoginType.cs" />
+    <Compile Include="Properties\AssemblyFileVersion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssemblyFileVersion.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyVersion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AssemblyVersion.tt</DependentUpon>
+    </Compile>
     <Compile Include="Responses\CallQueues\CallQueueCurrentStatus.cs" />
     <Compile Include="Responses\CallQueues\CallQueueCurrentStatusMember.cs" />
     <Compile Include="Responses\CurrentCalls\CurrentCall.cs" />
@@ -156,7 +180,7 @@
     <Compile Include="_Unimplemented\ConvergedDevices\GetList.cs" />
     <Compile Include="_Unimplemented\ConvergedDevices\Search.cs" />
     <Compile Include="Methods\CurrentCalls\GetList.cs" />
-    <Compile Include="_Unimplemented\CurrentCalls\HangUp.cs" />
+    <Compile Include="Methods\CurrentCalls\HangUp.cs" />
     <Compile Include="_Unimplemented\Debug\ACLI\Sessions\GetInfo.cs" />
     <Compile Include="_Unimplemented\Debug\ACLI\Sessions\GetList.cs" />
     <Compile Include="_Unimplemented\Debug\ACLI\Sessions\GetLog.cs" />
@@ -285,7 +309,7 @@
     <Compile Include="_Unimplemented\Extensions\Phones\Virtual\Add.cs" />
     <Compile Include="_Unimplemented\Extensions\Phones\Virtual\GetInfo.cs" />
     <Compile Include="_Unimplemented\Extensions\Phones\Virtual\Update.cs" />
-    <Compile Include="_Unimplemented\Extensions\Search.cs" />
+    <Compile Include="Methods\Extensions\Search.cs" />
     <Compile Include="_Unimplemented\Extensions\Settings\CustomSettings\Add.cs" />
     <Compile Include="_Unimplemented\Extensions\Settings\CustomSettings\GetInfo.cs" />
     <Compile Include="_Unimplemented\Extensions\Settings\CustomSettings\GetList.cs" />
@@ -494,12 +518,52 @@
     <Compile Include="Exceptions\UnauthorizedRequestException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
+    <None Include="PowerShell\Resources\SwitchvoxAPI.cmd" />
+    <None Include="PowerShell\Resources\SwitchvoxAPI.Format.ps1xml" />
+    <None Include="PowerShell\Resources\SwitchvoxAPI.GoSvox.ps1" />
+    <Content Include="PowerShell\Resources\SwitchvoxAPI.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SwitchvoxAPI.psd1</LastGenOutput>
+    </Content>
+    <None Include="PowerShell\Resources\SwitchvoxAPI.psd1">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SwitchvoxAPI.tt</DependentUpon>
+    </None>
+    <None Include="PowerShell\Resources\SwitchvoxAPI.psm1" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Properties\AssemblyFileVersion.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AssemblyFileVersion.cs</LastGenOutput>
+    </Content>
+    <Content Include="Properties\AssemblyVersion.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AssemblyVersion.cs</LastGenOutput>
+    </Content>
     <Content Include="todo.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(ProjectDir)PowerShell\Resources\*.*" "$(TargetDir)"
+del "$(TargetDir)\*.tt"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>if "$(ConfigurationName)" == "Release" goto :release
+goto :exit
+
+:release
+set textTemplatingPath="%25CommonProgramFiles(x86)%25\Microsoft Shared\TextTemplating\$(VisualStudioVersion)\texttransform.exe"
+if %25textTemplatingPath%25=="\Microsoft Shared\TextTemplating\$(VisualStudioVersion)\texttransform.exe" set textTemplatingPath="%25CommonProgramFiles%25\Microsoft Shared\TextTemplating\$(VisualStudioVersion)\texttransform.exe"
+%25textTemplatingPath%25 "$(ProjectDir)Properties\AssemblyFileVersion.tt"
+%25textTemplatingPath%25 "$(ProjectDir)Properties\AssemblyVersion.tt"
+%25textTemplatingPath%25 "$(ProjectDir)PowerShell\Resources\SwitchvoxAPI.tt"
+
+:exit</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

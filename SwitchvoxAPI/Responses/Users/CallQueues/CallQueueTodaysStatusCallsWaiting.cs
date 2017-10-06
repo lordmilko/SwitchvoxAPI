@@ -12,15 +12,13 @@ namespace SwitchvoxAPI
         [XmlAttribute("entered_position")]
         public int StartingPosiiton { get; set; }
 
-        public TimeSpan WaitingDuration => TimeSpan.FromSeconds(_RawWaitingDuration);
+        [XmlAttribute("waiting_duration")]
+        public TimeSpan WaitingDuration { get; set; }
 
         [XmlAttribute("talking_to_name")]
         public string TalkingToName { get; set; }
 
         [XmlAttribute("talking_to_number")]
-        public string TalkingToNumber { get; set; }
-
-        [XmlAttribute("waiting_duration")]
-        public int _RawWaitingDuration { get; set; }
+        public string TalkingToNumber { get; set; }        
     }
 }

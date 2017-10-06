@@ -7,7 +7,7 @@ namespace SwitchvoxAPI.ListDeserializationLayers
     public class Extensions
     {
         [XmlElement("extension")]
-        public List<Extension> Items { get; set; }
+        public List<ExtensionInfo> Items { get; set; }
     }
 
     [XmlRoot("extension_groups")]
@@ -45,6 +45,7 @@ namespace SwitchvoxAPI.ListDeserializationLayers
         public List<CallQueueTodaysStatusWaitingCall> Items { get; set; }
     }
 
+    [XmlRoot("events")]
     public class CallLogEvents
     {
         [XmlElement("event")]

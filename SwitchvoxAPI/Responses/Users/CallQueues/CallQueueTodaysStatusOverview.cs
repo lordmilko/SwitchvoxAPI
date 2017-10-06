@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 
 namespace SwitchvoxAPI
 {
+    [XmlRoot("overview")]
     public class CallQueueTodaysStatusOverview
     {
         /// <summary>
@@ -50,55 +51,40 @@ namespace SwitchvoxAPI
         /// <summary>
         /// Average talk time of calls received in the Queue.
         /// </summary>
-        public TimeSpan AverageTalkTime => ConvertExtensions.ToTimeSpan(_RawAverageTalkTime);
+        [XmlAttribute("avg_talk_time")]
+        public TimeSpan AverageTalkTime { get; set; }
 
         /// <summary>
         /// Longest talk time of calls received in the Queue.
         /// </summary>
-        public TimeSpan MaxTalkTime => ConvertExtensions.ToTimeSpan(_RawMaxTalkTime);
+        [XmlAttribute("max_talk_time")]
+        public TimeSpan MaxTalkTime { get; set; }
 
-        public TimeSpan AverageWaitTime => ConvertExtensions.ToTimeSpan(_RawAverageWaitTime);
-        public TimeSpan MaxWaitTime => ConvertExtensions.ToTimeSpan(_RawMaxWaitTime);
+        [XmlAttribute("avg_wait_time")]
+        public TimeSpan AverageWaitTime { get; set; }
 
-        public double AverageEntryPosition => ConvertExtensions.ToDouble(_RawAverageEntryPosition);
+        [XmlAttribute("max_wait_time")]
+        public TimeSpan MaxWaitTime { get; set; }
+
+        [XmlAttribute("avg_entry_position")]
+        public double AverageEntryPosition { get; set; }
 
         [XmlAttribute("longest_queue_length")]
         public int LongestQueueLength { get; set; }
-        
-        public TimeSpan MaxWaitTimeAbandonedCalls => ConvertExtensions.ToTimeSpan(_RawMaxWaitTimeAbandonedCalls);        
-        public TimeSpan AverageWaitTimeAbandonedCalls => ConvertExtensions.ToTimeSpan(_RawAverageWaitTimeAbandonedCalls);
 
-        public TimeSpan MaxWaitTimeCompletedCalls => ConvertExtensions.ToTimeSpan(_RawMaxWaitTimeCompletedCalls);
-        public TimeSpan AverageWaitTimeCompletedCalls => ConvertExtensions.ToTimeSpan(_RawAverageWaitTimeCompletedCalls);
+        [XmlAttribute("max_wait_time_abandoned_calls")]
+        public TimeSpan MaxWaitTimeAbandonedCalls { get; set; }
+
+        [XmlAttribute("avg_wait_time_abandoned_calls")]
+        public TimeSpan AverageWaitTimeAbandonedCalls { get; set; }
+
+        [XmlAttribute("max_wait_time_completed_calls")]
+        public TimeSpan MaxWaitTimeCompletedCalls { get; set; }
+
+        [XmlAttribute("avg_wait_time_completed_calls")]
+        public TimeSpan AverageWaitTimeCompletedCalls { get; set; }
 
         [XmlAttribute("logged_in_count")]
         public int LoggedInCount { get; set; }
-
-        [XmlAttribute("avg_talk_time")]
-        public string _RawAverageTalkTime { get; set; }
-
-        [XmlAttribute("max_talk_time")]
-        public string _RawMaxTalkTime { get; set; }
-
-        [XmlAttribute("avg_wait_time")]
-        public string _RawAverageWaitTime { get; set; }
-
-        [XmlAttribute("max_wait_time")]
-        public string _RawMaxWaitTime { get; set; }
-
-        [XmlAttribute("avg_entry_position")]
-        public string _RawAverageEntryPosition { get; set; }
-
-        [XmlAttribute("max_wait_time_abandoned_calls")]
-        public string _RawMaxWaitTimeAbandonedCalls { get; set; }
-
-        [XmlAttribute("avg_wait_time_abandoned_calls")]
-        public string _RawAverageWaitTimeAbandonedCalls { get; set; }
-
-        [XmlAttribute("max_wait_time_completed_calls")]
-        public string _RawMaxWaitTimeCompletedCalls { get; set; }
-
-        [XmlAttribute("avg_wait_time_completed_calls")]
-        public string _RawAverageWaitTimeCompletedCalls { get; set; }
     }
 }

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace SwitchvoxAPI.PowerShell.Cmdlet
 {
-    [Cmdlet(VerbsCommunications.Disconnect, "SvoxServer")]
-    public class DisconnectSvoxServer : PSCmdlet
+    [Cmdlet(VerbsCommon.Get, "SvxClient")]
+    public class GetSvxClient : PSCmdlet
     {
         protected override void ProcessRecord()
         {
-            SwitchvoxSessionState.Client = null;
+            WriteObject(SwitchvoxSessionState.Client);
         }
     }
 }

@@ -35,27 +35,23 @@ namespace SwitchvoxAPI
             }
         }
 
-        private string talkingToNumber;
-
         [XmlAttribute("talking_to_number")]
-        public string TalkingToNumber
-        {
-            get { return talkingToNumber; }
-            set
-            {
-                talkingToNumber = value == string.Empty ? null : value;
-            }
-        }
+        public string TalkingToNumber { get; set; }
 
-        public DateTime? LastCallTime => _RawLastCallTime == string.Empty ? (DateTime?)null : DateTime.Parse(_RawLastCallTime); //todo what happens if this is an empty string? do we still need this to be nullable anyway?
+        [XmlAttribute("time_of_last_call")]
+        public DateTime? LastCallTime { get; set; }
 
-        public int CompletedCalls => ConvertExtensions.ToInt32(_RawCompletedCalls);
+        [XmlAttribute("completed_calls")]
+        public int CompletedCalls { get; set; }
 
-        public int MissedCalls => ConvertExtensions.ToInt32(_RawMissedCalls);
+        [XmlAttribute("missed_calls")]
+        public int MissedCalls { get; set; }
 
-        public TimeSpan AverageTalkTime => TimeSpan.FromSeconds(_RawAverageTalkTime);
+        [XmlAttribute("avg_talk_time")]
+        public TimeSpan AverageTalkTime { get; set; }
 
-        public TimeSpan MaxTalkTime => TimeSpan.FromSeconds(_RawMaxTalkTime);
+        [XmlAttribute("max_talk_time")]
+        public TimeSpan MaxTalkTime { get; set; }
 
         //todo: what data format should this be
         private string loginTime;
@@ -95,20 +91,5 @@ namespace SwitchvoxAPI
                 callDuration = value == string.Empty ? null : value;
             }
         }*/
-
-        [XmlAttribute("time_of_last_call")]
-        public string _RawLastCallTime { get; set; }
-
-        [XmlAttribute("completed_calls")]
-        public string _RawCompletedCalls { get; set; }
-
-        [XmlAttribute("missed_calls")]
-        public string _RawMissedCalls { get; set; }
-
-        [XmlAttribute("avg_talk_time")]
-        public int _RawAverageTalkTime { get; set; }
-
-        [XmlAttribute("max_talk_time")]
-        public int _RawMaxTalkTime { get; set; }
     }
 }

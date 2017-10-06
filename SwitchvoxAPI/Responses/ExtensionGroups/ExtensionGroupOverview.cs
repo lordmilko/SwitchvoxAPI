@@ -16,20 +16,20 @@ namespace SwitchvoxAPI
         public string Name { get; set; }
 
         [XmlAttribute("date_created")]
-        public string _RawDateCreated { get; set; }
-
-        [XmlIgnore]
-        public DateTime DateCreated => DateTime.Parse(_RawDateCreated);
+        public DateTime DateCreated { get; set; }
 
         [XmlAttribute("vm_quota")]
-        public string _RawVmQuota { get; set; }
-
-        public int? VmQuota => string.IsNullOrEmpty(_RawVmQuota) ? null : (int?)Convert.ToInt32(_RawVmQuota);
+        public int? VmQuota { get; set; }
 
         [XmlAttribute("editable")]
         public bool Editable { get; set; }
 
         [XmlAttribute("user_viewable")]
         public bool UserViewable { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

@@ -5,7 +5,8 @@ namespace SwitchvoxAPI
 {
     public class CallQueueLog
     {
-        public DateTime StartTime => DateTime.Parse(_RawStartTime);
+        [XmlAttribute("start_time")]
+        public DateTime StartTime { get; set; }
 
         [XmlAttribute("type")]
         public QueueCallType Type { get; set; }
@@ -26,14 +27,16 @@ namespace SwitchvoxAPI
         public string CallerIdName { get; set; }
 
         [XmlAttribute("origination")]
-        public CallOrigination Origination { get; set; }
+        public CallDirection Direction { get; set; }
 
-        public TimeSpan WaitTime => TimeSpan.FromSeconds(_RawWaitTime);
+        [XmlAttribute("wait_time")]
+        public TimeSpan WaitTime { get; set; }
 
         [XmlAttribute("enter_position")]
         public int StartPosition { get; set; }
 
-        public TimeSpan TalkTime => TimeSpan.FromSeconds(_RawTalkTime);
+        [XmlAttribute("talk_time")]
+        public TimeSpan TalkTime { get; set; }
 
         [XmlAttribute("member_account_id")]
         public string MemberAccountId { get; set; }
@@ -52,14 +55,5 @@ namespace SwitchvoxAPI
 
         [XmlAttribute("result_type")]
         public string ResultType { get; set; }
-
-        [XmlAttribute("start_time")]
-        public string _RawStartTime { get; set; }
-
-        [XmlAttribute("wait_time")]
-        public int _RawWaitTime { get; set; }
-
-        [XmlAttribute("talk_time")]
-        public int _RawTalkTime { get; set; }
     }
 }

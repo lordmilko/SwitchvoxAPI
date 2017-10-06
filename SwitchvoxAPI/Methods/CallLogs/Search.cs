@@ -2,154 +2,101 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using System.Xml.Serialization;
+using SwitchvoxAPI.Attributes;
 
 namespace SwitchvoxAPI.Methods
 {
+    //http://developers.digium.com/switchvox/wiki/index.php/Switchvox.callLogs.search
+
     public partial class CallLogs
     {
         /// <summary>
-        /// Search the call logs on the phone system where multiple search criteria can be specified.
+        /// Search the call logs of a Switchvox Phone System.
         /// </summary>
-        /// <param name="startDate">The minimum date to search from.</param>
-        /// <param name="endDate">The maximum date to search to.</param>
-        /// <param name="searchData">A <see cref="CallLogMultiItemSearchData"/> value representing the type of data this request will search for.</param>
-        /// <param name="dataValues">An array of one or more values to search for that correspond with the type of data specified in <paramref name="searchData"/></param>
-        /// <param name="sortOrder">How the response will be sorted</param>
-        /// <param name="itemsPerPage">The maximum number of records to be returned by the response. An additional <paramref name="itemsPerPage"/> number of records can be retrieved by making additional requests and modifying the <paramref name="pageNumber"/></param>
-        /// <param name="pageNumber">The page number of call record results to return.</param>
-        public CallLogs<CallLog> Search(DateTime startDate, DateTime endDate, CallLogMultiItemSearchData searchData, string[] dataValues, SortOrder sortOrder = SortOrder.Desc, int itemsPerPage = 50, int pageNumber = 1)
+        /// <param name="startDate">The start date/time to search from.</param>
+        /// <param name="endDate">The end date/time to search to.</param>
+        /// <param name="itemsPerPage">The number of items to return in the response. Additional records can be retrieved by increasing the <paramref name="pageNumber"/> and re-calling this method.</param>
+        /// <param name="pageNumber">The page of the response to return. Increasing this value allows the caller to retrieve additional records from the system that exceeded the <paramref name="itemsPerPage"/> of previous requests.</param>
+        /// <param name="searchCriteria">An optional search criteria type used to filter the results</param>
+        /// <param name="searchValues">The search criterion used to filter the results. If the <paramref name="searchCriteria"/> specified does not support multiple values this value must contain a single value.</param>
+        /// <returns></returns>
+        public CallLogs<CallLog> Search(DateTime startDate, DateTime endDate, int itemsPerPage = 50, int pageNumber = 1, CallLogSearchCriteria? searchCriteria = null, params string[] searchValues)
         {
-            if (dataValues.Length == 0)
-                throw new ArgumentException("At least one value must be specified");
+            var method = GetRequestMethod(startDate, endDate, itemsPerPage, pageNumber, searchCriteria, searchValues);
 
-            var searchDataElms = GetMultiItemSearchDataElms(searchData, dataValues);
-            
-            return ConstructXml(startDate, endDate, searchDataElms, sortOrder, itemsPerPage, pageNumber);
-        }
-
-        /// <summary>
-        /// Search the call logs on the phone system where a single search criterion must be specified.
-        /// </summary>
-        /// <param name="startDate">The minimum date to search from.</param>
-        /// <param name="endDate">The maximum date to search to.</param>
-        /// <param name="searchData">A <see cref="CallLogSingleItemSearchData"/> value representing the type of data this request will search for.</param>
-        /// <param name="data">A single value corresponding with the type of data specified in <paramref name="searchData"/></param>
-        /// <param name="sortOrder">How the response will be sorted</param>
-        /// <param name="itemsPerPage">The maximum number of records to be returned by the response. An additional <paramref name="itemsPerPage"/> number of records can be retrieved by making additional requests and modifying the <paramref name="pageNumber"/></param>
-        /// <param name="pageNumber">The page number of call record results to return.</param>
-        public CallLogs<CallLog> Search(DateTime startDate, DateTime endDate, CallLogSingleItemSearchData searchData, string data, SortOrder sortOrder = SortOrder.Desc, int itemsPerPage = 50, int pageNumber = 1)
-        {
-            var searchDataElms = GetSingleItemSearchDataElms(searchData, data);
-
-            return ConstructXml(startDate, endDate, searchDataElms, sortOrder, itemsPerPage, pageNumber);
-        }
-
-        private CallLogs<CallLog> ConstructXml(DateTime startDate, DateTime endDate, XElement searchDataElms, SortOrder sortOrder, int itemsPerPage, int pageNumber)
-        {
-            var xml = new List<XElement>
-            {
-                new XElement("start_date", startDate.ToString("yyyy-MM-dd HH:mm:ss")),
-                new XElement("end_date",  endDate.ToString("yyyy-MM-dd HH:mm:ss")),
-                searchDataElms,
-                new XElement("sort_order", sortOrder.ToString()),
-                new XElement("items_per_page", itemsPerPage),
-                new XElement("page_number", pageNumber)
-            };
-
-            var response = client.Execute<CallLogs<CallLog>>(new RequestMethod("switchvox.callLogs.search", xml));
+            var response = client.Execute<CallLogs<CallLog>>(method);
 
             return response;
         }
 
-        private XElement GetMultiItemSearchDataElms(CallLogMultiItemSearchData searchData, string[] data)
+        /// <summary>
+        /// Search the call logs of a Switchvox Phone System, automatically requesting additional pages as the results are enumerated.
+        /// </summary>
+        /// <param name="startDate">The start date/time to search from.</param>
+        /// <param name="endDate">The end date/time to search to.</param>
+        /// <param name="itemsPerPage">The number of items to return in each response. SwitchvoxAPI will automatically request additional items as required as the results are enumerated.
+        /// <param name="searchCriteria">An optional search criteria type used to filter the results</param>
+        /// <param name="searchValues">The search criterion used to filter the results. If the <paramref name="searchCriteria"/> specified does not support multiple values this value must contain a single value.</param>
+        /// <returns></returns>
+        public IEnumerable<CallLog> StreamSearch(DateTime startDate, DateTime endDate, int itemsPerPage = 50, CallLogSearchCriteria? searchCriteria = null, params string[] searchValues)
         {
-            XElement xml;
+            var method = GetRequestMethod(startDate, endDate, itemsPerPage, 1, searchCriteria, searchValues);
 
-            switch(searchData)
-            {
-                case CallLogMultiItemSearchData.AccountIds:
-                    xml = GetElmsForGroup("account_ids", "account_id", data);
-                    break;
+            var response = client.Stream<CallLogs<CallLog>, CallLog>(method, GetTotalItems, SetNextPage, itemsPerPage, r => r.Items);
 
-                case CallLogMultiItemSearchData.ChannelGroupIds:
-                    xml = GetElmsForGroup("channel_group_ids", "channel_group_id", data);
-                    break;
-
-                case CallLogMultiItemSearchData.IAXProviderIds:
-                    xml = GetElmsForGroup("iax_provider_ids", "iax_provider_id", data);
-                    break;
-
-                case CallLogMultiItemSearchData.SIPProviderIds:
-                    xml = GetElmsForGroup("sip_provider_ids", "sip_provider_id", data);
-                    break;
-
-                default:
-                    throw new NotImplementedException("No handler for the value " + searchData.ToString() + " has been implemented.");
-            }
-
-            return xml;
+            return response;
         }
 
-        private XElement GetSingleItemSearchDataElms(CallLogSingleItemSearchData searchData, string data)
+        private RequestMethod GetRequestMethod(DateTime startDate, DateTime endDate, int itemsPerPage, int pageNumber, CallLogSearchCriteria? searchCriteria, params string[] searchValues)
         {
-            string tagName;
-            string groupTagName = null;
+            var data = GetData(searchCriteria, searchValues);
 
-            switch(searchData)
+            var xml = new List<XElement>
             {
-                case CallLogSingleItemSearchData.AccountId:
-                    groupTagName = "account_ids";
-                    tagName = "account_id";
-                    break;
+                new XElement("start_date", startDate.ToString("yyyy-MM-dd HH:mm:ss")),
+                new XElement("end_date",  endDate.ToString("yyyy-MM-dd HH:mm:ss")),
+                data,
+                new XElement("items_per_page", itemsPerPage),
+                new XElement("page_number", pageNumber)
+            };
 
-                case CallLogSingleItemSearchData.ChannelGroupId:
-                    groupTagName = "channel_group_ids";
-                    tagName = "channel_group_id";
-                    break;
-
-                case CallLogSingleItemSearchData.IAXProviderId:
-                    groupTagName = "iax_provider_ids";
-                    tagName = "iax_provider_id";
-                    break;
-
-                case CallLogSingleItemSearchData.SIPProviderId:
-                    groupTagName = "sip_provider_ids";
-                    tagName = "sip_provider_id";
-                    break;
-
-                case CallLogSingleItemSearchData.CallerIdName:
-                    tagName = "caller_id_name";
-                    break;
-
-                case CallLogSingleItemSearchData.CallerIdNumber:
-                    tagName = "caller_id_number";
-                    break;
-
-                case CallLogSingleItemSearchData.IncomingDID:
-                    tagName = "incoming_did";
-                    break;
-
-                default:
-                    throw new NotImplementedException("No handler for the value " + searchData.ToString() + " has been implemented.");
-            }
-
-            XElement xml;
-
-            if (groupTagName == null)
-                xml = new XElement(tagName, data);
-            else
-                xml = new XElement(groupTagName, new XElement(tagName, data));
-
-            return xml;
+            return new RequestMethod("switchvox.callLogs.search", xml);
         }
 
-        private XElement GetElmsForGroup(string groupTag, string instanceTag, string[] data)
+        private void SetNextPage(RequestMethod method, int pageNumber)
         {
-            var children = data.Select(value => new XElement(instanceTag, value)).ToList();
+            method.Xml.Descendants("page_number").First().Value = pageNumber.ToString();
+        }
 
-            var xml = new XElement(groupTag, children);
+        private string GetTotalItems(XDocument xDoc)
+        {
+            return xDoc.Descendants("calls").First().Attribute("total_items").Value;
+        }
 
-            return xml;
+        private XElement GetData(CallLogSearchCriteria? searchCriteria, params string[] searchValues)
+        {
+            if (searchCriteria != null)
+            {
+                if (!(searchValues?.Length > 0))
+                {
+                    throw new ArgumentException("At least one value for searchValues must be specified", nameof(searchValues));
+                }
+
+                var groupAttribute = searchCriteria.GetEnumAttribute<XmlEnumGroupAttribute>()?.Name;
+
+                if (groupAttribute == null && searchValues.Length > 1)
+                    throw new ArgumentException($"Search criteria '{searchCriteria}' only accepts a single value, however '{searchValues.Length}' criterion were specified");
+
+                var elementAttribute = searchCriteria.GetEnumAttribute<XmlEnumAttribute>(true).Name;
+
+                if (groupAttribute == null)
+                    return new XElement(elementAttribute, searchValues.Single());
+
+                return new XElement(groupAttribute, searchValues.Select(v => new XElement(elementAttribute, v)));
+            }
+
+            return null;
         }
     }
 }

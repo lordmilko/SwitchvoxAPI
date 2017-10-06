@@ -6,7 +6,7 @@ namespace SwitchvoxAPI
     /// <summary>
     /// Encapsulates properties pertaining to an extension on a phone system.
     /// </summary>
-    public class Extension
+    public class ExtensionInfo
     {
         [XmlAttribute("server_uuid")]
         public string ServerUUID { get; set; }
@@ -15,7 +15,7 @@ namespace SwitchvoxAPI
         /// The number of the extension.
         /// </summary>
         [XmlAttribute("number")]
-        public string Number { get; set; }
+        public string Extension { get; set; }
 
         [XmlAttribute("status")]
         public int Status { get; set; }
@@ -35,7 +35,8 @@ namespace SwitchvoxAPI
         /// <summary>
         /// Date the extension was created.
         /// </summary>
-        public DateTime DateCreated => DateTime.Parse(_RawDateCreated);
+        [XmlAttribute("date_created")]
+        public DateTime DateCreated { get; set; }
 
         [XmlAttribute("type")]
         public ExtensionType Type { get; set; }
@@ -97,7 +98,9 @@ namespace SwitchvoxAPI
         [XmlAttribute("profile_image_link")]
         public string ProfileImageUrl { get; set; }
 
-        [XmlAttribute("date_created")]
-        public string _RawDateCreated { get; set; }
+        public override string ToString()
+        {
+            return $"{DisplayName} ({Extension})";
+        }
     }
 }

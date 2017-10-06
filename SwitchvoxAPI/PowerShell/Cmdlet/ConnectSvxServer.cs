@@ -8,8 +8,8 @@ using SwitchvoxAPI.PowerShell.Base;
 
 namespace SwitchvoxAPI.PowerShell.Cmdlet
 {
-    [Cmdlet(VerbsCommunications.Connect, "SvoxServer")]
-    public class ConnectSvoxServer : SwitchvoxCmdlet
+    [Cmdlet(VerbsCommunications.Connect, "SvxServer")]
+    public class ConnectSvxServer : PSCmdlet
     {
         [Parameter(Mandatory = true, Position = 0, HelpMessage = "The address of the Switchvox Server to connect to. If the server does not use HTTPS, http:// must be specified.")]
         public string Server { get; set; }

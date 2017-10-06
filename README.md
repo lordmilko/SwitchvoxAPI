@@ -62,11 +62,13 @@ Existing Methods such as `SwitchvoxAPI.Extensions.GetInfo` or `SwitchvoxAPI.Curr
       * **GetCurrentStatus**
   * CurrentCalls
       * **GetList**
+	  * **HangUp**
   * ExtensionGroups
       * **GetInfo**
       * **GetList**
   * Extensions
       * **GetInfo**
+      * **Search**
   * IVR
       * GlobalVariables
           * **Add**
@@ -89,5 +91,52 @@ var queueStatus = userClient.Users.CallQueues.GetTodaysStatus("1234", "5678");
 var queueAccountIds = queueStatus.Members.Select(m => m.AccountId).ToArray()
 
 //Retrieve today's call logs
-var callLogData = client.CallLogs.Search(DateTime.Today, DateTime.Today.AddDays(1), CallLogMultiItemSearchData.AccountIds, accountIds, itemsPerPage: 10000);
+var callLogData = client.CallLogs.Search(DateTime.Today, DateTime.Today.AddDays(1), CallLogSearchCriteria.AccountId, accountIds, itemsPerPage: 10000);
 ```
+
+**Note: due to what appears to be a bug in the Switchvox system, filtering by caller ID name may not return all results. If you observe executing a search with no filter returns more results that match a specified name, you may want to use LINQ to filter the results instead of filtering the request server side**
+
+## PowerShell
+
+_For entertainment purposes only_
+
+All cmdlets can be invoked with either a Svx or Svox noun prefix.
+
+If you are attempting to use these seriously, please open an issue for any troubles you may have.
+
+
+The following cmdlets are currently supported. A basic usage example is included for each cmdlet. To view additional details about supported parameters, run `Get-Help <cmdlet>`
+
+Session
+
+| Cmdlet                     | Method                           | Example                                                |
+| -------------------------- | -------------------------------- | ------------------------------------------------------ |
+| Connect-SvxServer          | N/A                              | Connect-SvxServer phones.mycoolsite.com                |
+| Disconnect-SvxServer       | N/A                              | Disconnect-SvxServer                                   |
+| Get-SvxClient              | N/A                              | Get-SvxClient                                          |
+
+Actions
+
+| Cmdlet                     | Method                           | Example                                                |
+| -------------------------- | -------------------------------- | ------------------------------------------------------ |
+| Add-SvxIVRVariable         | ivr.globalVariables.add          | Add-SvxIVRVariable newVariable 10                      |
+| Disconnect-SvxCall         | currentCalls.hangUp              | Get-SvxCall &#124; Disconnect-SvxCall # XD             |
+| Invoke-SvxCall             | call                             | Get-SvxExtension 1000 &#124; Invoke-SvxCall 1234       |
+| Remove-SvxIVRVariable      | ivr.globalVariables.getList      | Get-SvxIVRVariable *blah* &#124; Remove-SvxIVRVariable |
+| Set-SvxIVRVariable         | ivr.globalVariables.update       | Get-SvxIVRVariable *blah* &#124; Set-SvxIVRVariable 3  |
+
+Data
+
+| Cmdlet                     | Method                           | Example |
+| -------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Get-SvxCall                | currentCalls.getList             | Get-SvxCall<br>Get-SvxCall *bob*<br>Get-SvxCall *1234*                                                                                                        |
+| Get-SvxCallLog             | callLogs.search                  | Get-SvxCallLog<br>Get-SvxCallLog *bob*                                                                                                                        |
+| Get-SvxCallQueueLog        | callQueueLogs.search             | Get-SvxCallQueueLog -QueueAccountID 1234<br>Get-SvxExtension -Type CallQueue &#124; Get-SvxCallQueueLog                                                       |
+| Get-SvxCallQueueStatus     | callQueues.getCurrentStatus      | Get-SvxCallQueueStatus -QueueAccountID 1234<br>Get-SvxExtension -Type CallQueue &#124; Get-SvxCallQueueStatus                                                 |
+| Get-SvxUserCallQueueStatus | users.callQueues.getTodaysStatus | Get-SvxUserCallQueueStatus -QueueAccountId 1234 -UserAccountId 5678<br>Get-SvxExtension -Type CallQueue &#124; Get-SvxUserCallQueueStatus -UserAccountId 5678 |
+| Get-SvxExtension           | extensions.search                | Get-SvxExtension *bob*<br>Get-SvxExtension 1000                                                                                                               |
+| Get-SvxExtensionGroup      | extensionGroups.getInfo          | Get-SvxExtensionGroup *blah*                                                                                                                                  |
+| Get-SvxExtensionSettings   | extensions.settings.getInfo      | Get-SvxExtensionSettings                                                                                                                                      |
+| Get-SvxIVRVariable         | ivr.globalVariables.getList      | Get-SvxIVRVariable *blah*                                                                                                                                     |
+
+SwitchvoxAPI also supports GoSvox, a method of storing encrypted credentials in your PowerShell session for seamless switching between one or more severs. For more information on GoSvox, see the [equivalent documentation under PrtgAPI](https://github.com/lordmilko/PrtgAPI/wiki/Store-Credentials)

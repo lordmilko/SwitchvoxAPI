@@ -10,7 +10,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace SwitchvoxAPI.SwitchvoxAPI.Deserialization
+namespace SwitchvoxAPI.Deserialization
 {
     static class Deserializer
     {
@@ -18,14 +18,12 @@ namespace SwitchvoxAPI.SwitchvoxAPI.Deserialization
         {
             var root = xml.Descendants(typeof(T).GetXmlRoot()).Single();
 
-            var deserializer = new XmlSerializer(typeof(T));
-
-            var stream = GetStream(root);
-
             try
             {
-                var result = deserializer.Deserialize(stream);
-                return (T)result;
+                var deserializer = new XmlSerializer(typeof (T));
+                var obj = deserializer.Deserialize(root);
+
+                return (T) obj;
             }
             catch (InvalidOperationException ex)
             {

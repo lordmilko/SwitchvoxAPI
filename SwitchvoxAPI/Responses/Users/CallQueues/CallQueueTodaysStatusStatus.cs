@@ -3,90 +3,41 @@ using System.Xml.Serialization;
 
 namespace SwitchvoxAPI
 {
+    [XmlRoot("my_status")]
     public class CallQueueTodaysStatusStatus
     {
-        private string loginStatus;
-
         [XmlAttribute("login_status")]
-        public string LoginStatus
-        {
-            get { return loginStatus; }
-            set
-            {
-                loginStatus = value == string.Empty ? null : value;
-            }
-        }
-
-        public int CurrentCallDuration => ConvertExtensions.ToInt32(_RawCurrentCallDuration);
-
-        private string currentCallerIdName;
-
-        [XmlAttribute("current_caller_id_name")]
-        public string CurrentCallerIdName
-        {
-            get { return currentCallerIdName; }
-            set
-            {
-                currentCallerIdName = value == string.Empty ? null : value;
-            }
-        }
-
-        private string currentCallerIdNumber;
-
-        [XmlAttribute("current_caller_id_number")]
-        public string CurrentCallerIdNumber
-        {
-            get { return currentCallerIdNumber; }
-            set
-            {
-                currentCallerIdNumber = value == string.Empty ? null : value;
-            }
-        }
-
-        public int CallsTaken => ConvertExtensions.ToInt32(_RawCallsTaken);
-        
-        private string loginTime;
-
-        //todo what data format should this be
-        [XmlAttribute("login_time")]
-        public string LoginTime
-        {
-            get { return loginTime; }
-            set
-            {
-                loginTime = value == string.Empty ? null : value;
-            }
-        }
-
-        public DateTime? LastCallTime => _RawLastCallTime == string.Empty ? (DateTime?)null : DateTime.Parse(_RawLastCallTime);
-
-        public TimeSpan TotalTalkTime => ConvertExtensions.ToTimeSpan(_RawTotalTalkTime);
-
-        public TimeSpan AverageTalkTime => ConvertExtensions.ToTimeSpan(_RawAverageTalkTime);
-
-        public TimeSpan MaxTalkTime => ConvertExtensions.ToTimeSpan(_RawMaxTalkTime);
-
-        public TimeSpan PausedTime => ConvertExtensions.ToTimeSpan(_RawPausedTime);
+        public string LoginStatus { get; set; }
 
         [XmlAttribute("current_call_duration")]
-        public string _RawCurrentCallDuration { get; set; }
+        public int CurrentCallDuration { get; set; }
+
+        [XmlAttribute("current_caller_id_name")]
+        public string CurrentCallerIdName { get; set; }
+
+        [XmlAttribute("current_caller_id_number")]
+        public string CurrentCallerIdNumber { get; set; }
 
         [XmlAttribute("calls_taken")]
-        public string _RawCallsTaken { get; set; }
+        public int CallsTaken { get; set; }
+        
+        //todo what data format should this be
+        [XmlAttribute("login_time")]
+        public string LoginTime { get; set; }
 
         [XmlAttribute("time_of_last_call")]
-        public string _RawLastCallTime { get; set; }
+        public DateTime? LastCallTime { get; set; }
 
         [XmlAttribute("total_talk_time")]
-        public string _RawTotalTalkTime { get; set; }
+        public TimeSpan TotalTalkTime { get; set; }
 
         [XmlAttribute("avg_talk_time")]
-        public string _RawAverageTalkTime { get; set; }
+        public TimeSpan AverageTalkTime { get; set; }
 
         [XmlAttribute("max_talk_time")]
-        public string _RawMaxTalkTime { get; set; }
+        public TimeSpan MaxTalkTime { get; set; }
 
         [XmlAttribute("paused_time")]
-        public string _RawPausedTime { get; set; }
+        public TimeSpan PausedTime { get; set; }
     }
 }

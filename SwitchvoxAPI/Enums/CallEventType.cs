@@ -65,6 +65,9 @@ namespace SwitchvoxAPI
         Forward,
 
         [XmlEnum("DIRECTED_PICKUP")]
-        DirectedPickup
+        DirectedPickup,
+
+        [XmlEnum("MEETME")]
+        MeetMeConference
     }
 }

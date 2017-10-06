@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web.Configuration;
 using System.Xml;
 using System.Xml.Linq;
+using SwitchvoxAPI.Deserialization;
 using SwitchvoxAPI.Methods;
-using SwitchvoxAPI.SwitchvoxAPI.Deserialization;
 using Extensions = SwitchvoxAPI.Methods.Extensions;
 
 namespace SwitchvoxAPI
@@ -83,7 +84,7 @@ namespace SwitchvoxAPI
         /// </summary>
         public string UserName { get; }
 
-        readonly string password;
+        public string Password { get; }
 
         private static bool ignoreInvalidSSLSet = false;
 
@@ -107,7 +108,7 @@ namespace SwitchvoxAPI
 
             Server = url;
             UserName = name;
-            password = pass;
+            Password = pass;
 
             InitializeMethodMembers();
         }
@@ -131,7 +132,7 @@ namespace SwitchvoxAPI
 
             Server = serverUrl;
             UserName = username;
-            this.password = password;
+            Password = password;
 
             InitializeMethodMembers();
         }
@@ -152,7 +153,7 @@ namespace SwitchvoxAPI
         /// Execute and deserialize a request against the phone system.
         /// </summary>
         /// <typeparam name="T">The type to deserialize the XML response from the phone system to.</typeparam>
-        /// <param name="method">The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods </param>
+        /// <param name="method">The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods</param>
         /// <returns>An object representing the data returned from the phone system.</returns>
         internal T Execute<T>(RequestMethod method) where T : new()
         {
@@ -161,10 +162,39 @@ namespace SwitchvoxAPI
             return Deserializer.Deserialize<T>(response);
         }
 
+        internal IEnumerable<T2> Stream<T1, T2>(RequestMethod method, Func<XDocument, string> getTotalItems, Action<RequestMethod, int> setNextPage, int itemsPerPage, Func<T1, List<T2>> getItems) where T1 : new()
+        {
+            int? totalItems = null;
+
+            var count = itemsPerPage;
+            var page = 1;
+
+            for (int i = 0; i < totalItems || totalItems == null;)
+            {
+                var response = Execute(method);
+
+                var result = Deserializer.Deserialize<T1>(response);
+
+                foreach (var item in getItems(result))
+                    yield return item;
+
+                if (totalItems == null)
+                    totalItems = Convert.ToInt32(getTotalItems(response));
+
+                i = i + count;
+                page++;
+
+                if (totalItems - i < count)
+                    count = totalItems.Value - i;
+
+                setNextPage(method, page);
+            }
+        }
+
         /// <summary>
         /// Execute a request against the phone system.
         /// </summary>
-        /// <param name="method">The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods </param>
+        /// <param name="method">The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods</param>
         /// <returns>A <see cref="XDocument"/> containing the XML returned by the phone system.</returns>
         internal XDocument Execute(RequestMethod method)
         {
@@ -176,7 +206,7 @@ namespace SwitchvoxAPI
         /// <summary>
         /// Execute a custom request against the phone system.
         /// </summary>
-        /// <param name="xml">Custom generated XML containing a The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods </param>
+        /// <param name="xml">Custom generated XML containing a The Switchvox XML API Method to execute. For more information, please see http://developers.digium.com/switchvox/wiki/index.php/WebService_methods</param>
         /// <returns>A <see cref="XDocument"/> containing the XML returned by the phone system.</returns>
         public XDocument Execute(XDocument xml)
         {
@@ -214,8 +244,8 @@ namespace SwitchvoxAPI
         {
             var request = (HttpWebRequest)WebRequest.Create(server + "xml");
             request.Proxy = null;
-            request.Credentials = new NetworkCredential(UserName, password);
-            request.ContentType = "text/xml; encoding='utf8'";
+            request.Credentials = new NetworkCredential(UserName, Password);
+            request.ContentType = "application/xml; encoding='utf8'";
             request.Method = "POST";
             request.ContentLength = (long)(xmlRequestBytes.Length);
 
@@ -230,10 +260,16 @@ namespace SwitchvoxAPI
             }
         }
 
+        private async void SendRequestAsync(HttpWebRequest request, byte[] xmlRequestBytes)
+        {
+            using (var requestStream = await request.GetRequestStreamAsync())
+            {
+                await requestStream.WriteAsync(xmlRequestBytes, 0, xmlRequestBytes.Length);
+            }
+        }
+
         private XDocument GetResponse(HttpWebRequest request)
         {
-            XDocument doc;
-
             try
             {
                 using (var response = (HttpWebResponse) request.GetResponse())
@@ -241,9 +277,9 @@ namespace SwitchvoxAPI
                     var tempDoc = new XmlDocument();
                     tempDoc.Load(response.GetResponseStream());
 
-                    doc = XDocument.Parse(tempDoc.InnerXml, LoadOptions.SetLineInfo);
+                    var doc = XDocument.Parse(tempDoc.InnerXml, LoadOptions.SetLineInfo);
 
-                    var heghgh = doc.Descendants().Select(x => ((IXmlLineInfo)x).LineNumber).ToList();
+                    return doc;
                 }
 
             }
@@ -256,9 +292,24 @@ namespace SwitchvoxAPI
                     throw;
                 }
             }
-
-            return doc;
         }
+
+        /*private async XDocument GetResponseAsync(HttpWebRequest request)
+        {
+            try
+            {
+                using (var response = (HttpWebResponse) await request.GetResponseAsync())
+                {
+                    return GetResponseXml(response);
+
+                    //i have a unit test for testing aggregate exceptions are handled properly with prtgapi
+                    //we should implement the same thing for normal and aggregate exceptions here
+
+                    var tempDoc = new XmlDocument();
+                    tempDoc.Load(await response.GetResponseStream())
+                }
+            }
+        }*/
 
         private void ValidateResponse(XDocument response)
         {
