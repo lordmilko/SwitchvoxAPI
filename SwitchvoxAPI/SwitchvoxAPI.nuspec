@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>SwitchvoxAPI</title>
+    <authors>lordmilko</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://github.com/lordmilko/SwitchvoxAPI</projectUrl>
+    <!--<iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>-->
+    <licenseUrl>https://raw.githubusercontent.com/lordmilko/SwitchvoxAPI/master/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>SwitchvoxAPI is a C#/PowerShell library that abstracts away the complexity of interfacing with the Digium Switchvox XML API.
+
+PrtgAPI implements a collection of methods and enumerations that help create and execute the varying HTTP POST requests required to interface with Switchvox. All responses from Switchvox are automatically deserialized by SwitchvoxAPI.
+
+For more information and usage examples, please see the Project Site.</releaseNotes>
+    <copyright>(c) 2015 lordmilko. All rights reserved.</copyright>
+    <tags>PSModule</tags>
+  </metadata>
+  <files>
+	<file src="bin\$configuration$\SwitchvoxAPI\**\*.*" exclude="**\SwitchvoxAPI.xml;**\*.dll;**\*.pdb;**\*.cmd" />
+  </files>
+</package>

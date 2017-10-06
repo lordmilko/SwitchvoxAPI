@@ -109,7 +109,7 @@ function Connect-GoSvoxServer
 			}
 			else
 			{
-				Write-ColorOutput "`nCould not find server that matches name or alias '$Server'`n" -ForegroundColor Red
+				Write-ColorOutput "`nCould not find a server that matches the name or alias '$Server'`n" -ForegroundColor Red
 			}
 		}	
 	}
