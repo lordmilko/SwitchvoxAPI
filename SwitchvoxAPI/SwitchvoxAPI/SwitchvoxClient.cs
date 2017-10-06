@@ -195,7 +195,7 @@ namespace SwitchvoxAPI
             var request = (HttpWebRequest)WebRequest.Create(server + "xml");
             request.Proxy = null;
             request.Credentials = new NetworkCredential(Username, password);
-            request.ContentType = "text/xml; encoding='utf8'";
+            request.ContentType = "application/xml; encoding='utf8'";
             request.Method = "POST";
             request.ContentLength = (long)(xmlRequestBytes.Length);
 
