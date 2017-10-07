@@ -1,5 +1,27 @@
 # SwitchvoxAPI
+
+[![Build status](https://img.shields.io/appveyor/ci/lordmilko/switchvoxapi.svg)](https://ci.appveyor.com/project/lordmilko/switchvoxapi)
+[![NuGet](https://img.shields.io/nuget/v/SwitchvoxAPI.svg)](https://www.nuget.org/packages/SwitchvoxAPI/)
+
 SwitchvoxAPI is a C# library that abstracts away the complexity of interfacing with the Digium Switchvox XML API.
+
+## Installation
+
+### NuGet
+
+```powershell
+Install-Package SwitchvoxAPI
+```
+
+### Manual
+
+1. Download the [latest build](https://ci.appveyor.com/api/projects/lordmilko/switchvoxapi/artifacts/SwitchvoxAPI/bin/Release/SwitchvoxAPI.zip)
+2. Right click **SwitchvoxAPI.zip** -> **Properties**
+3. On the *General* tab, under *Security* select **Unblock**
+4. Unzip the file
+5. Add a reference to *SwitchvoxAPI.dll* to your project, or import the *SwitchvoxAPI* module into PowerShell. Alternatively, you can run the included **SwitchvoxAPI.cmd** file to open a prompt and import the SwitchvoxAPI module for you.
+
+## Usage
 
 ```c#
 var client = new SwitchvoxClient("https://phones.mycoolsite.com", "username", "password");
