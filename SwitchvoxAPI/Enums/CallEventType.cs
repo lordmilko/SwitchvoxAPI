@@ -48,6 +48,9 @@ namespace SwitchvoxAPI
 
         [XmlEnum("VOICEMAIL")]
         Voicemail,
+        
+        [XmlEnum("VOICEMAIL_PICKUP")]
+        VoicemailPickup,
 
         [XmlEnum("PARKER")]
         Parker,
