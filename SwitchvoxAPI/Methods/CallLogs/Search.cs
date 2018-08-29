@@ -35,7 +35,7 @@ namespace SwitchvoxAPI.Methods
         /// </summary>
         /// <param name="startDate">The start date/time to search from.</param>
         /// <param name="endDate">The end date/time to search to.</param>
-        /// <param name="itemsPerPage">The number of items to return in each response. SwitchvoxAPI will automatically request additional items as required as the results are enumerated.
+        /// <param name="itemsPerPage">The number of items to return in each response. SwitchvoxAPI will automatically request additional items as required as the results are enumerated.</param>
         /// <param name="searchCriteria">An optional search criteria type used to filter the results</param>
         /// <param name="searchValues">The search criterion used to filter the results. If the <paramref name="searchCriteria"/> specified does not support multiple values this value must contain a single value.</param>
         /// <returns></returns>

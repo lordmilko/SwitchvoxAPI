@@ -54,7 +54,7 @@ namespace SwitchvoxAPI.Methods
         /// <param name="queueAccountIds">A list of Call Queue Account IDs to retrieve data for. At least 1 Account ID must be specified.</param>
         /// <param name="callTypes">A combination of flags indicating the type of calls to include in the search results.</param>
         /// <param name="ignoreWeekends">Whether weekends should be excluded from the search results.</param>
-        /// <param name="itemsPerPage">The number of results to return in each response. SwitchvoxAPI will automatically request additional items as required as the results are enumerated.
+        /// <param name="itemsPerPage">The number of results to return in each response. SwitchvoxAPI will automatically request additional items as required as the results are enumerated.</param>
         public IEnumerable<CallQueueLog> StreamSearch(DateTime startDate, DateTime endDate, string[] queueAccountIds, CallTypes callTypes = CallTypes.AllCalls, bool ignoreWeekends = false, int itemsPerPage = 50)
         {
             var method = GetRequestMethod(startDate, endDate, ignoreWeekends, queueAccountIds, callTypes, itemsPerPage, 1);

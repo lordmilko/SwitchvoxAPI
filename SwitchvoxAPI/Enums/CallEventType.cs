@@ -10,8 +10,17 @@ namespace SwitchvoxAPI
         [XmlEnum("OUTGOING")]
         Outgoing,
 
+        [XmlEnum("INCOMING")]
+        Incoming,
+
         [XmlEnum("PROVIDER")]
         Provider,
+
+        [XmlEnum("INTERNAL")]
+        Internal,
+
+        [XmlEnum("CASCADE")]
+        Cascade,
 
         [XmlEnum("TALKING")]
         Talking,
@@ -25,52 +34,73 @@ namespace SwitchvoxAPI
         [XmlEnum("INCOMING_PROVIDER")]
         IncomingProvider,
 
-        [XmlEnum("INCOMING")]
-        Incoming,
+        [XmlEnum("DIRECTED_PICKUP")]
+        DirectedPickup,
 
-        [XmlEnum("QUEUE_EXIT")]
-        QueueExit,
+        [XmlEnum("ONHOLD")]
+        OnHold,
 
-        [XmlEnum("INTERNAL")]
-        Internal,
-
-        [XmlEnum("ASSISTED_TRANSFEREE")]
-        AssistedTransferee,
-
-        [XmlEnum("STATUS")]
-        Status,
-
-        [XmlEnum("BLIND_TRANSFERER")]
-        BlindTransferer,
-
-        [XmlEnum("NO_EVENTS")]
-        NoEvents,
-
-        [XmlEnum("VOICEMAIL")]
-        Voicemail,
-        
-        [XmlEnum("VOICEMAIL_PICKUP")]
-        VoicemailPickup,
+        [XmlEnum("OFFHOLD")]
+        OffHold,
 
         [XmlEnum("PARKER")]
-        Parker,
-
-        [XmlEnum("PARKING_TIMEOUT")]
-        ParkingTimeout,
+        Parked,
 
         [XmlEnum("UNPARKED")]
         Unparked,
 
-        [XmlEnum("CASCADE")]
-        Cascade,
-
         [XmlEnum("FORWARD")]
         Forward,
 
-        [XmlEnum("DIRECTED_PICKUP")]
-        DirectedPickup,
+        [XmlEnum("PARKING_TIMEOUT")]
+        ParkingTimeout,
+
+        [XmlEnum("ASSISTED_TRANSFEREE")]
+        AssistedTransferee,
+
+        [XmlEnum("BLIND_TRANSFER")]
+        BlindTransfer,
+
+        [XmlEnum("BLIND_TRANSFERER")]
+        BlindTransferer,
+
+        [XmlEnum("BLIND_RECIPIENT")]
+        BlindRecipient,
+
+        [XmlEnum("FAX_RECEIVE_IN")]
+        FaxReceiveIn,
+
+        [XmlEnum("FAX_RECEIVE_OUT")]
+        FaxReceiveOut,
+
+        [XmlEnum("FAX_SENT")]
+        FaxSent,
+
+        [XmlEnum("FAX_RECEIVE_ERROR")]
+        FaxReceiveError,
 
         [XmlEnum("MEETME")]
-        MeetMeConference
+        MeetMeConference,
+
+        [XmlEnum("QUEUE_EXIT")]
+        QueueExit,
+
+        [XmlEnum("STATUS")]
+        Status,
+
+        [XmlEnum("VOICEMAIL")]
+        Voicemail,
+
+        [XmlEnum("VOICEMAIL_PICKUP")]
+        VoicemailPickup,
+
+        [XmlEnum("PEER_VOICEMAIL")]
+        VoicemailPeer,
+
+        [XmlEnum("NO_EVENTS")]
+        NoEvents,
+
+        //TC_ASSISTED_TRANSFER
+        //TC_BLIND_TRANSFER
     }
 }

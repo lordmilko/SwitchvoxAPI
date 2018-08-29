@@ -33,9 +33,9 @@ If you are incorporating SwitchvoxAPI into a website, you can store your connect
 ```xml
 <configuration>
     <appSettings>
-	    <add key="ServerUrl" value="https://phones.mycoolsite.com"/>
-	    <add key="UserName" value="username"/>
-	    <add key="Password" value="password"/>
+        <add key="ServerUrl" value="https://phones.mycoolsite.com"/>
+        <add key="UserName" value="username"/>
+        <add key="Password" value="password"/>
     </appSettings>
 </configuration>
 ```
