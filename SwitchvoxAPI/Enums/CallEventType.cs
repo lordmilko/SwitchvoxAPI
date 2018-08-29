@@ -71,6 +71,9 @@ namespace SwitchvoxAPI
         DirectedPickup,
 
         [XmlEnum("MEETME")]
-        MeetMeConference
+        MeetMeConference,
+        
+        [XmlEnum("FAX_RECEIVE_IN")]
+        FaxReceiveIn
     }
 }
