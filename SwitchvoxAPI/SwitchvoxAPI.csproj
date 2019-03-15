@@ -50,6 +50,8 @@
     <Compile Include="Deserialization\XmlSerializer.cs" />
     <Compile Include="Enums\CallLogSearchCriteria.cs" />
     <Compile Include="Exceptions\MissingAttributeException.cs" />
+    <Compile Include="Methods\Users\Call.cs" />
+    <Compile Include="Methods\Users\GetMyInfo.cs" />
     <Compile Include="PowerShell\Base\SwitchvoxCmdlet.cs" />
     <Compile Include="PowerShell\Cmdlet\Actions\DisconnectSvxCall.cs" />
     <Compile Include="PowerShell\Cmdlet\ConnectSvxServer.cs" />
