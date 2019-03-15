@@ -15,7 +15,7 @@ namespace SwitchvoxAPI.Methods
         /// </summary>
         /// <param name="identifier">A <see cref="ExtensionIdentifier"/> value indicating whether Extension numbers or Account IDs will be used to get info for the extensions on your system</param>
         /// <param name="values">A list of Extension Account IDs or Extension Numbers to get information for.</param>
-        /// <returns></returns>
+        /// <returns>All extensions that match the specified search criteria.</returns>
         public List<ExtensionInfo> GetInfo(ExtensionIdentifier identifier, params string[] values)
         {
             if (values.Length == 0)

@@ -6,6 +6,7 @@ namespace SwitchvoxAPI
     /// <summary>
     /// Encapsulates properties pertaining to an extension on a phone system.
     /// </summary>
+    [XmlRoot("extension")]
     public class ExtensionInfo
     {
         [XmlAttribute("server_uuid")]
