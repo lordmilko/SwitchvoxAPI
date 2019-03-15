@@ -13,7 +13,7 @@
     <description>$description$</description>
     <releaseNotes>SwitchvoxAPI is a C#/PowerShell library that abstracts away the complexity of interfacing with the Digium Switchvox XML API.
 
-PrtgAPI implements a collection of methods and enumerations that help create and execute the varying HTTP POST requests required to interface with Switchvox. All responses from Switchvox are automatically deserialized by SwitchvoxAPI.
+SwitchvoxAPI implements a collection of methods and enumerations that help create and execute the varying HTTP POST requests required to interface with Switchvox. All responses from Switchvox are automatically deserialized by SwitchvoxAPI.
 
 For more information and usage examples, please see the Project Site.</releaseNotes>
     <copyright>(c) 2015 lordmilko. All rights reserved.</copyright>
