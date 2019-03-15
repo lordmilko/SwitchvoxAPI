@@ -23,14 +23,14 @@ namespace SwitchvoxAPI.Methods
         /// <param name="variables">A dictionary of variables to update in your IVR. The key is the variable name and the value is the value to set it to.</param>
         public void Call(string dialFirst, string dialSecond, string accountId = null, bool ignoreUserApiSettings = false, string callerIdName = "PBX", bool ignoreUserCallRules = false, int timeout = 30, Dictionary<string, string> variables = null)
         {
-            if (accountId == null || accountId == "")
+            if (string.IsNullOrEmpty(accountId))
             {
-                ExtensionInfo extInfo = GetMyInfo();
+                ExtensionInfo info = GetMyInfo();
 
-                if (extInfo == null || extInfo.AccountId == "")
+                if (info == null || info.AccountId == string.Empty)
                     throw new ArgumentException("Account ID must be specified.");
 
-                accountId = extInfo.AccountId;
+                accountId = info.AccountId;
             }
 
             List<XElement> vars = new List<XElement>
