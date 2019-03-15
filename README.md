@@ -98,6 +98,8 @@ Existing Methods such as `SwitchvoxAPI.Extensions.GetInfo` or `SwitchvoxAPI.Curr
           * **Remove**
           * **Update**
   * Users
+      * **Call**
+      * **GetMyInfo**
       * CallQueues
           * **GetTodaysStatus**
 
