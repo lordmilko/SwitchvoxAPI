@@ -51,6 +51,12 @@ var names = client.Extensions.GetInfo().Select(e => e.DisplayName);
 
 All [Methods](http://developers.digium.com/switchvox/wiki/index.php/WebService_methods) supported by Switchvox are represented as methods in an object hierarchy similar to the method name, with `SwitchvoxClient` as the root level node. e.g. `client.Extensions.GetInfo()` for [`switchvox.extensions.getInfo`](http://developers.digium.com/switchvox/wiki/index.php/Switchvox.extensions.getInfo), `client.Call()` for [`switchvox.call`](http://developers.digium.com/switchvox/wiki/index.php/Switchvox.call), etc. This makes it easy to cross reference between existing documentation and SwitchvoxAPI.
 
+**Note: From Switchvox 6.7.1, TLS 1.0 and 1.1 are disabled. If you are running a version of the .NET Framework that does not support TLS 1.2 by default, you must manually specify to use TLS 1.2**
+
+```c#
+ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+```
+
 If you wish to access the [User API](http://developers.digium.com/switchvox/wiki/index.php/WebService_methods#User_Section), you will need to pass a user's extension details to `SwitchvoxClient`. Otherwise, enter a set of admin credentials (with API Access Permissions).
 
 Methods that contain a number of optional parameters (such as [`switchvox.call`](http://developers.digium.com/switchvox/wiki/index.php/Switchvox.call)) can also be invoked with as many or few arguments as you like:
