@@ -15,7 +15,7 @@ Install-Package SwitchvoxAPI
 
 ### Manual
 
-1. Download the [latest build](https://ci.appveyor.com/api/projects/lordmilko/switchvoxapi/artifacts/SwitchvoxAPI/bin/Release/SwitchvoxAPI.zip)
+1. Download the [latest build](https://github.com/lordmilko/SwitchvoxAPI/releases/latest)
 2. Right click **SwitchvoxAPI.zip** -> **Properties**
 3. On the *General* tab, under *Security* select **Unblock**
 4. Unzip the file
