@@ -15,7 +15,7 @@ Install-Package SwitchvoxAPI
 
 ### Manual
 
-1. Download the [latest build](https://ci.appveyor.com/api/projects/lordmilko/switchvoxapi/artifacts/SwitchvoxAPI/bin/Release/SwitchvoxAPI.zip)
+1. Download the [latest build](https://github.com/lordmilko/SwitchvoxAPI/releases/latest)
 2. Right click **SwitchvoxAPI.zip** -> **Properties**
 3. On the *General* tab, under *Security* select **Unblock**
 4. Unzip the file
@@ -50,6 +50,12 @@ var names = client.Extensions.GetInfo().Select(e => e.DisplayName);
 ```
 
 All [Methods](http://developers.digium.com/switchvox/wiki/index.php/WebService_methods) supported by Switchvox are represented as methods in an object hierarchy similar to the method name, with `SwitchvoxClient` as the root level node. e.g. `client.Extensions.GetInfo()` for [`switchvox.extensions.getInfo`](http://developers.digium.com/switchvox/wiki/index.php/Switchvox.extensions.getInfo), `client.Call()` for [`switchvox.call`](http://developers.digium.com/switchvox/wiki/index.php/Switchvox.call), etc. This makes it easy to cross reference between existing documentation and SwitchvoxAPI.
+
+**Note: From Switchvox 6.7.1, TLS 1.0 and 1.1 are disabled. If you are running a version of the .NET Framework that does not support TLS 1.2 by default, you must manually specify to use TLS 1.2**
+
+```c#
+ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+```
 
 If you wish to access the [User API](http://developers.digium.com/switchvox/wiki/index.php/WebService_methods#User_Section), you will need to pass a user's extension details to `SwitchvoxClient`. Otherwise, enter a set of admin credentials (with API Access Permissions).
 
@@ -98,8 +104,10 @@ Existing Methods such as `SwitchvoxAPI.Extensions.GetInfo` or `SwitchvoxAPI.Curr
           * **Remove**
           * **Update**
   * Users
+      * **Call**
       * CallQueues
           * **GetTodaysStatus**
+      * **GetMyInfo**
 
 ## Examples
 
